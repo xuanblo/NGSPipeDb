@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% load static %}
+{% block title %}
+{{ config.title }} | Help
+{% endblock %}
+{% block content %}
+
+<h1>Download</h1>
+<table class="table">
+    <caption>release at 2012-3-20</caption>
+    <thead>
+        <tr>
+            <td>Description</td>
+            <td>Name</td>
+            <td>Size</td>
+            <td>Md5</td>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr class="success">
+            <td>Genome sequence (fasta)</td>
+            <td><a href={% static 'gbrowse/annotation/annotation.sorted.bgzip' %}>chr19.fa</a></td>
+            <td>20Mb</td>
+            <td>ahsya</td>
+        </tr>
+        <tr class="error">
+            <td>Genome annotation (GFF/GTF)</td>
+            <td><a href={% static 'gbrowse/annotation/annotation.sorted.bgzip' %}>GRCm38.83.chr19.gtf</a></td>
+            <td>20Mb</td>
+            <td>ahsya</td>
+        </tr>
+        <tr class="warning">
+            <td>Gene expression matrix (FPKM)</td>
+            <td><a href={% static 'gbrowse/annotation/annotation.sorted.bgzip' %}>gene_fpkm_all_samples.tsv</a></td>
+            <td>20Mb</td>
+            <td>ahsya</td>
+        </tr>
+    </tbody>
+    
+</table>
+
+{% endblock %}

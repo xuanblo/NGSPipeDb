@@ -1,0 +1,22 @@
+channels:
+  - bioconda
+  - conda-forge
+  - r
+dependencies:
+  - r =3.5.1
+  - bioconductor-deseq2 =1.22.1
+  - trinity =2.8.5
+  - bioconductor-qvalue =2.16.0
+  - express =1.5.1 
+  - rsem =1.3.2
+  - r-fastcluster =1.1.25
+  - bioconductor-biobase =2.42.0
+  - r-gplots =3.0.1.1
+  - r-ape =5.3
+  - r-biocmanager =1.30.4
+  - bioconductor-edger =3.26.0
+  - bioconductor-limma =3.40.0
+  - bioconductor-ctc =1.58.0
+  - bioconductor-genomeinfodb =1.18.1
+  - bioconductor-genomeinfodbdata =1.2.1
+  - piper =piper-0.11.3

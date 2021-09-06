@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: ngspipedb
+Version: 0.0.2
+Summary: UNKNOWN
+Home-page: http://www.liu-lab.com
+Author: Xuan Zhang
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/pypa/sampleproject/issues
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# NGSPipeDb
+
+This is a simple example test for ngspipedb. You can read
+[pipeline](https://xuanblo.github.io/NGSPipeDb/)
+to know more about it.
+
+## Install
+
+1. `pip install -i https://test.pypi.org/simple/ ngspipedb`
+2. `conda install ngspipedb -c bioconda`
+
+## update
+
+- we can do argparse right now!
+

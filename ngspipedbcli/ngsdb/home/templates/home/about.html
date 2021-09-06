@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% load static %}
+{% block title %}
+{{ config.title }} | Help
+{% endblock %}
+{% block content %}
+
+<div class="top">
+    <ul id="top">
+        <li>
+            <a href="#index1">1. How to search?</a>
+        </li>
+        <li>
+            <a href="#index2">2. How to use Blast?</a>
+        </li>
+        <li>
+            <a href="#index3">3. How to use genome browse?</a>
+        </li>
+    </ul>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>
+            <a href="#index1" name="index1">1. How to search?</a>
+        </strong>
+        <a href="#top">
+            <i class="fa fa-arrow-up pull-right">Top</i>
+        </a>
+    </div>
+    <div class="panel-body">
+        <p>You can use 'Search' to find feature which have name/alias of gene and gene annotation information that related to the search term entered.</p>
+
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>
+            <a href="#index2" name="index2">2. How to use Blast?</a>
+        </strong>
+        <a href="#top">
+            <i class="fa fa-arrow-up pull-right">Top</i>
+        </a>
+    </div>
+    <div class="panel-body">
+        <p>BLAST service is based on the Django app <a target="_blank" href="https://github.com/michal-stuglik/django-blastplus">django-blastplus</a> (A simple Django app to conduct web-based blast+ local alignment search). For more details about BLAST programs and parameters, please visit <a href="https://www.ncbi.nlm.nih.gov/books/NBK279675/" target="_blank">https://www.ncbi.nlm.nih.gov/books/NBK279675/</a>.</p>
+
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong><a href="#index3" name="index3">3. How to use genome browse?</a></strong>
+        <a href="#top"><i class="fa fa-arrow-up pull-right">Top</i></a>
+    </div>
+    <div class="panel-body">
+        <p>Genome browser service is based on the IGV, which is a fast, interactive, genome visualization tool that's easy to embed in web pages and applications. For more details about Biodalliance, please visit here: https://github.com/igvteam/igv.js/.</p>
+
+    </div>
+</div>
+
+
+{% endblock %}

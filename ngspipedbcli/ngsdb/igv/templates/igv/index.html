@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ config.title }} | Home {% endblock %}
+
+
+
+{% block content %}
+<h1>genome browse</h1>
+<div class="row-fluid">
+    <div id="igv-div"></div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'igv/igv.min.js' %}"></script>
+<script>
+    var igvDiv = document.getElementById("igv-div");
+    var options =
+    {
+        // genome: "hg19", # this is test genome
+        locus: "chr19:3278807-3280996",
+        reference: {
+            id: "hg19",
+            fastaURL: "{% static 'gbrowse/annotation/genome.fa' %}",
+            cytobandURL: "https://s3.amazonaws.com/igv.broadinstitute.org/genomes/seq/b37/b37_cytoband.txt"
+        },
+        tracks: [
+            {
+                name: "mm chr 16 (gtf)",
+                type: "annotation",
+                format: "gtf",
+                sourceType: "file",
+                url: "{% static 'gbrowse/annotation/annotation.sorted.bgzip' %}",
+                indexURL: "{% static 'gbrowse/annotation/annotation.sorted.bgzip.tbi' %}",
+                displayMode: "EXPANDED",
+                visibilityWindow: 10000000
+            },
+        ]
+    };
+
+    igv.createBrowser(igvDiv, options)
+        .then(function (browser) {
+            console.log("Created IGV browser");
+        })
+</script>
+{% endblock %}

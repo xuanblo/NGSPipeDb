@@ -1,0 +1,5 @@
+name: htseq_1
+channels:
+  - bioconda
+dependencies:
+  - htseq

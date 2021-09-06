@@ -1,0 +1,6 @@
+name: hisat2_1
+channels:
+  - bioconda
+dependencies:
+  - hisat2
+  - samtools

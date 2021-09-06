@@ -1,0 +1,13 @@
+name: null
+channels:
+  - bioconda
+  - conda-forge
+  - default
+dependencies:
+  - python=3.8
+  - django=3
+  - biopython=1.76
+  - blast
+  - seaborn
+  - pandas=0.25.3
+  - wooey=pip

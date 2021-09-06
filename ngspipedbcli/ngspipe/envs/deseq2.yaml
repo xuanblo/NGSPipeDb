@@ -1,0 +1,5 @@
+name: deseq2_1
+channels:
+  - bioconda
+dependencies:
+  - bioconductor-deseq2

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{ config.title }} | Browse results
+{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static "css/jquery.dataTables.min.css" %}">
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static "js/jquery.dataTables.min.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+<div>
+    <table id="queryResult" class="table table-condensed table-responsive table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Gene ID</th>
+                <th>Gene loci</th>
+                <th>Strand</th>
+                <th>Feature type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feature in genes %}
+            <tr>
+                <td>
+                    <a href="/detail/{{ feature.id }}">{{ feature.id }}</a>
+                </td>
+                <td>
+                    {{ feature.seqid }} : {{ feature.start }} - {{ feature.end }}
+                </td>
+                <td>
+                    {{ feature.strand }}
+                </td>
+                <td>
+                    {{ feature.featuretype }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if genes.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ genes.previous_page_number }}">previouse</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ genes.number }} of {{ genes.paginator.num_pages }}.
+        </span>
+
+        {% if genes.has_next %}
+            <a href="?page={{ genes.next_page_number }}">next</a>
+            <a href="?page={{ genes.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

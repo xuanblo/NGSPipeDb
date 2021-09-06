@@ -1,0 +1,9 @@
+name: download
+channels:
+  - bioconda
+  - hcc
+  - conda-forge
+dependencies:
+  - sra-tools=2.10.1
+  - aspera-cli=3.9.1
+  - python=3.9.2

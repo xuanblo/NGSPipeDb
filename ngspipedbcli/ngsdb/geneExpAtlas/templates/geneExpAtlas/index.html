@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{ config.title }} | geneExpAtlas
+{% endblock %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block content %}
+<h2>Gene expression atlas</h2>
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="{% url 'geneExpAtlas:index' %}">expression matrix</a></li>
+  <li role="presentation"><a href="{% url 'geneExpAtlas:heatmap' %}">expression heatmap</a></li>
+</ul>
+
+
+<table id="demotable" class="table table-striped table-condensed dataTable">
+  <thead>
+    <tr></tr>
+  </thead>
+</table>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+<!--
+<script>
+  $(document).ready(function () {
+    $('#myTable').DataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": "{% url 'geneExpAtlas:exp_json' %}",
+      "columns": [
+        { "data": "pk" },
+        { "data": "fields.control_0" },
+        { "data": "fields.control_1" },
+        { "data": "fields.control_2" },
+        { "data": "fields.treated_0" },
+        { "data": "fields.treated_1" },
+        { "data": "fields.treated_2" },
+      ]
+    });
+  });
+</script>
+-->
+
+<script>
+  var data,
+    tableName = '#demotable',
+    columns,
+    str,
+    jqxhr = $.ajax('exp_json')
+      .done(function () {
+        data = JSON.parse(jqxhr.responseText);
+
+        // Iterate each column and print table headers for Datatables
+        //console.log(data.columns_fields)
+        $.each(data.columns, function (k, v) {
+          str = '<th>' + v + '</th>';
+          $(str).appendTo(tableName + '>thead>tr');
+        });
+
+        $(tableName).dataTable({
+          "data": data.data,
+          "columns": data.columns_fields,
+          "processing": true,
+          "serverSide": true,
+          "ajax": "{% url 'geneExpAtlas:exp_json' %}",
+          "fnInitComplete": function () {
+            // Event handler to be fired when rendering is complete (Turn off Loading gif for example)
+            console.log('Datatable rendering complete');
+          }
+        });
+      })
+      .fail(function (jqXHR, exception) {
+        var msg = '';
+        if (jqXHR.status === 0) {
+          msg = 'Not connect.\n Verify Network.';
+        } else if (jqXHR.status == 404) {
+          msg = 'Requested page not found. [404]';
+        } else if (jqXHR.status == 500) {
+          msg = 'Internal Server Error [500].';
+        } else if (exception === 'parsererror') {
+          msg = 'Requested JSON parse failed.';
+        } else if (exception === 'timeout') {
+          msg = 'Time out error.';
+        } else if (exception === 'abort') {
+          msg = 'Ajax request aborted.';
+        } else {
+          msg = 'Uncaught Error.\n' + jqXHR.responseText;
+        }
+        console.log(msg);
+      });
+</script>
+
+{% endblock %}

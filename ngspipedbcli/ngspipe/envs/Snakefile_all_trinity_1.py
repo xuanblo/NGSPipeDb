@@ -1,0 +1,109 @@
+import os
+import sys
+import pandas as pd
+
+configfile: "config.yaml"
+
+smpList = pd.read_csv(config["sampleListFile"], index_col=0, header=None)
+SAMPLES = list(smpList.index)
+
+###############
+# jatropha curcas project
+############
+
+rule all:
+    input:
+        trinityout = config["resultfolder"] + "/trinity/run_trinity_out",
+
+'''
+rule subsample:
+    input:
+        fwd = config["datafolder"] + "/{sample}_1.clean.fq.gz",
+        rev = config["datafolder"] + "/{sample}_2.clean.fq.gz"
+    output:
+        fwd = config["resultfolder"] + "/test_data/{sample}_1.clean.fq.gz",
+        rev = config["resultfolder"] + "/test_data/{sample}_2.clean.fq.gz"
+    conda: "env/rRNA.yaml"
+    shell:
+        "seqtk sample -s 100 {input.fwd} 10000 >{output.fwd};"
+        "seqtk sample -s 100 {input.rev} 10000 >{output.rev}"
+'''
+
+rule RemoveRibosomalRNA:
+    input:
+        # test data
+        #fwd = config["resultfolder"] + "/test_data/{sample}_1.clean.fq.gz",
+        #rev = config["resultfolder"] + "/test_data/{sample}_2.clean.fq.gz"
+        # all data
+        fwd = config["datafolder"] + "/{sample}_1.clean.fq.gz",
+        rev = config["datafolder"] + "/{sample}_2.clean.fq.gz"
+    output:
+        fwd = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}.1.non_rRNA.fq",
+        rev = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}.2.non_rRNA.fq",
+        interleave = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}.reads_interleaved.fq",
+        rRNA = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}.reads_rRNA.fq",
+        nonrRNA = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}.reads_non_rRNA.fq",
+        pe = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}.reads_non_rRNA.fq.pe",
+    params:
+        mergedFile = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}.reads_interleaved.fq",
+        index = config["rRNAIndex"][0] + "," + config["rRNAIndex"][1],
+        name = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}."
+    log:
+        mergeReads = config["resultfolder"] + "/rRNARemoved/{sample}/step1.mergeReads.log",
+        sortmerna = config["resultfolder"] + "/rRNARemoved/{sample}/step2.sortmerna.log",
+        extractPairedReads = config["resultfolder"] + "/rRNARemoved/{sample}/step3.extractPairedReads.log",
+        unmergeReads = config["resultfolder"] + "/rRNARemoved/{sample}/step4.unmergeReads.log"
+    conda: "env/rRNA.yaml"
+    threads: 5
+    shell:
+        "seqtk mergepe {input.fwd} {input.rev} >{params.mergedFile} 2>{log.mergeReads};"
+        "sortmerna --ref {params.index} --reads {params.mergedFile} --fastx --aligned {params.name}reads_rRNA --other {params.name}reads_non_rRNA --log -a {threads} -v 1>{log.sortmerna} 2>&1;"
+        "seqtk dropse {params.name}reads_non_rRNA.fq >{params.name}reads_non_rRNA.fq.pe;"
+        "unmerge-paired-reads.sh {params.name}reads_non_rRNA.fq.pe {params.name}1.non_rRNA.fq {params.name}2.non_rRNA.fq 1>{log.unmergeReads} 2>&1"
+
+rule QC:
+    input:
+        fwd = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}.1.non_rRNA.fq",
+        rev = config["resultfolder"] + "/rRNARemoved/{sample}/{sample}.2.non_rRNA.fq"
+    output:
+        config["resultfolder"] + "/qc/{sample}/{sample}.1.non_rRNA_val_1.fq",
+        config["resultfolder"] + "/qc/{sample}/{sample}.2.non_rRNA_val_2.fq"
+    params:
+        outfolder = config["resultfolder"] + "/qc/{sample}"
+    log: config["resultfolder"] + "/qc/{sample}/qc.log"
+    conda: "env/qc.yaml"
+    threads: 5
+    shell:
+        "trim_galore -j {threads} --fastqc --paired {input.fwd} {input.rev} -o {params.outfolder} 1>{log} 2>&1"
+
+rule genomeIndex:
+    input: config["genome"]
+    output:
+        touch(config["resultfolder"] + "/genomeIndex/index.ok")
+    conda: "env/mapping.yaml"
+    log: config["resultfolder"] + "/genomeIndex/index.log"
+    params:
+        outfolder = config["resultfolder"] + "/genomeIndex"
+    shell:
+        "hisat2-build {input} {params.outfolder}/genome 1>{log} 2>&1"
+
+rule trinity:
+    input:
+        qcfq1 = expand(config["resultfolder"] + "/qc/{sample}/{sample}.1.non_rRNA_val_1.fq", sample=SAMPLES),
+        qcfq2 = expand(config["resultfolder"] + "/qc/{sample}/{sample}.2.non_rRNA_val_2.fq", sample=SAMPLES),
+    output:
+        trinitysample = config["resultfolder"] + "/trinity/trinitysample.txt",
+        trinityout = directory(config["resultfolder"] + "/trinity/run_trinity_out")
+    params:
+        qcfolder = config["resultfolder"] + "/qc/",
+        mem = '1300G',
+        piper_name = "run_tiniry_default",
+        trinitylog = config["resultfolder"] + "/trinity/trinity.log",
+    conda: "env/trinity.yaml"
+    threads: 40
+    log:
+        config["resultfolder"] + "/trinity/run_piper_trinity.log",
+    shell:
+        "python script/sample4trinity.py {params.qcfolder} >{output.trinitysample};"
+        "python script/runTrinityPiper.py --pipename {params.piper_name} --memmory {params.mem} --output-dir {output.trinityout} --sample {output.trinitysample} --cpu {threads} --log {params.trinitylog} >{log} 2>&1"
+

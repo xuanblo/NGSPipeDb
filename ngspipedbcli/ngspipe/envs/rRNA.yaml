@@ -1,0 +1,7 @@
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - sortmerna =2.1b
+  - khmer =3.0.0a2
+  - seqtk =1.3

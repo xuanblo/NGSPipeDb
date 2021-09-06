@@ -1,0 +1,58 @@
+# Project information
+site_name: NGSPipeDb Document
+site_url: https://xuanblo.github.io/NGSPipeDb/
+site_author: Xuan Zhang
+site_description: NGSPipeDb is a pipeline
+
+# Repository
+repo_url: https://github.com/xuanblo/NGSPipeDb/
+edit_uri: 'edit/master/mkdocs/markdowns/'
+docs_dir: markdowns
+site_dir: docs
+
+# Copyright
+copyright: Bioinformatics Group, XTBG, 2021
+
+plugins:
+    - search
+
+# Navigation
+nav:
+    - Getting start: index.md
+    - NGSPipeDb Tutorial: NGSPipeDb.md
+    - NGSPipe RNA-seq: NGSPipe-RNA-seq.md
+    - NGSPipe ChIP-seq: NGSPipe-ChIP-seq.md
+    - NGSPipe resequecing: NGSPipe-resequecing.md
+    - NGSDb: NGSDb.md
+    - Linux & shell basic: linux.md
+    - NGS analysis: ngs.md
+
+# Theme
+theme:
+    name: ivory
+    highlightjs: true
+    hljs_languages:
+        - reStr
+        - shell
+    nav_style: dark
+    prev_next_buttons_location: both
+
+extra:
+    version: 1.0
+
+markdown_extensions:
+#    - pymdownx.tabbed
+    - admonition # note info
+#    - pymdownx.details
+#    - pymdownx.superfences
+#    - def_list
+    - pymdownx.tasklist:
+        clickable_checkbox: true
+#    - smarty
+    - toc:
+        permalink: true
+#    - pymdownx.mark
+    - pymdownx.inlinehilite
+    - pymdownx.highlight:
+        use_pygments: true
+#    - attr_list

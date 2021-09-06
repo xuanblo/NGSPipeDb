@@ -1,0 +1,90 @@
+# Project information
+site_name: NGSPipeDb Document
+site_url: https://xuanblo.github.io/NGSPipeDb/
+site_author: Xuan Zhang
+site_description: NGSPipeDb is a pipeline
+
+# Repository
+repo_url: https://github.com/xuanblo/NGSPipeDb/
+edit_uri: 'edit/master/mkdocs/markdowns/'
+docs_dir: markdowns
+site_dir: docs
+
+# Copyright
+copyright: Copyright © 2020 - 2021 Xuan Zhang
+
+google_analytics:
+  - UA-117843700-2
+  - auto
+
+plugins:
+    - search:
+#    - mkdocs-versioning:
+#        version: 0.3.0
+#    - mkdocs_pymdownx_material_extras:
+
+# Navigation
+nav:
+- Home:
+    - Getting start: index.md
+    - NGSPipeDb Tutorial: NGSPipeDb.md
+- Pipelines:
+    - NGSPipe Reference-based RNA-seq: Reference-based-NGSPipe-RNA-seq.md
+    - NGSPipe Denovo RNA-seq: Reference-free-NGSPipe-RNA-seq.md
+    - NGSPipe ChIP-seq: NGSPipe-ChIP-seq.md
+    - NGSPipe resequecing: NGSPipe-resequecing.md
+- Databases:
+    - NGSDb with genome: NGSDb.md
+    - NGSDb without genome: NGSDb.md
+    - NGSDb with multi genomes: NGSDb.md
+#- Learning materials:
+#    - Linux & shell basic: linux.md
+#    - NGS analysis: ngs.md
+#    - Conda: conda.md
+- Change logs: changelog.md
+- Todo: todo.md
+
+# Theme
+# octopus
+# https://www.freelogodesign.org/
+theme:
+    name: material
+    palette:
+        scheme: dracula
+        primary: deep purple
+        accent: deep purple
+    font:
+        text: Roboto
+        code: Roboto Mono
+    features:
+        - navigation.tabs
+        - search.highlight
+    favicon: imgs/favicon.png
+    logo: imgs/logo.png
+    custom_dir: overrides
+        
+
+extra_css:
+  - stylesheets/extra-aa7dff8003.css
+extra_javascript:
+  - javascripts/material-extra-theme-7c147bb7.js
+  - javascripts/extra-uml-51b11a9a.js
+
+markdown_extensions:
+    - pymdownx.tabbed:
+    - pymdownx.highlight:
+    - pymdownx.inlinehilite:
+    - pymdownx.superfences:
+    - admonition: # note info
+    - pymdownx.details:
+    - pymdownx.saneheaders:
+    - markdown.extensions.smarty:
+        smart_quotes: false
+    - pymdownx.tasklist:
+        custom_checkbox: true
+        clickable_checkbox: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/xuanblo

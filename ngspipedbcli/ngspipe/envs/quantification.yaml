@@ -1,0 +1,8 @@
+channels:
+  - bioconda
+  - conda-forge
+  - r
+dependencies:
+  - r
+  - bioconductor-ballgown
+  - bioconductor-GenomeInfoDbData

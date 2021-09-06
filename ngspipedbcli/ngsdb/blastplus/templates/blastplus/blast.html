@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ config.title }} | {{ program|upper }} {% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'blastplus/style.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <p><a href="/blastplus/blastn/"><strong>BLASTN</strong></a> search DNA sequence(s) using a nucleotide query.</p>
+    <p><a href="/blastplus/blastp/"><strong>BLASTP</strong></a> search protein sequence(s) using protein query.</p>
+    <p><a href="/blastplus/tblastn/"><strong>TBLASTN</strong></a> search translated DNA sequence(s) using a protein
+        query.</p>
+
+</div>
+
+<table style="width:100%; margin:0 auto;" cellpadding="5px">
+    <tr>
+        <td align="center">
+            <h2>{{ program|upper }}</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <button type="button" id="loadSampleData" data-loading-text="Loading..." autocomplete="off">
+                    Use sample sequence
+                </button>
+                
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+
+            <div>
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    Please correct errors: {{ form.errors }}
+                </div>
+                {% endif %}
+                <form action="" method="post" size="100">
+                    {% csrf_token %}
+                    <p>{{ form.sequence_in_form }}</p>
+                    <p>
+                        <strong>Database:</strong> {{ form.blast_db_in_form }}</p>
+                    <p>
+                        <strong>E-value:</strong> {{ form.evalue_in_form }}</p>
+                    {% if form.matrix_in_form %}
+                    <p>
+                        <strong>Matrix:</strong> {{ form.matrix_in_form }}</p>
+                    <!--<p><strong>{{form.matrix_in_form.label}}</strong> {{form.matrix_in_form}}</p>-->
+                    {% endif %}
+                    <p>
+                        <strong>Word size:</strong> {{ form.word_size_in_form }}</p>
+                    <p>
+                        <strong>Sensitivity:</strong> {{ form.search_sensitivity_in_form }}</p>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+        </td>
+    </tr>
+
+
+</table>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $('#loadSampleData').on('click', function () {
+        var $btn = $(this).button('loading');
+
+        $("#id_sequence_in_form").val('{{ sequence_sample_in_fasta|escapejs }}');
+
+        $btn.button('reset');
+    });
+</script>
+{% endblock %}

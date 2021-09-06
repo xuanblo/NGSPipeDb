@@ -1,0 +1,6 @@
+name: bam2bigwig_1
+channels:
+  - bioconda
+dependencies:
+  - jvarkit-bam2wig
+  - samtools

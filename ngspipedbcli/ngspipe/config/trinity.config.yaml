@@ -1,0 +1,15 @@
+# path relative to where you run snakemake
+
+
+resultsDir: "results/result/trinity"
+reportsDir: "results/report"
+
+# sample list file
+samplesList: "testdata/samples_chipseq.xls"
+# sample file directory
+samplesDir: "testdata"
+# fastq suffix, read1
+read1Suffix: "_R1.fq.gz"
+read2Suffix: "_R2.fq.gz"
+
+email_addr: 'nobody'

@@ -1,0 +1,1 @@
+#!/usr/bin/env python3# -*- coding: utf-8 -*-"""Created on Tue Aug 17 17:15:08 2021@author: zhangxuan"""from rich import printfrom rich.console import Consoleprint("Hello, [bold magenta]World[/bold magenta]", ":vamire:", locals())console = Console()console.print("Hello", "World", style='bold red')

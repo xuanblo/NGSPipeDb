@@ -1,0 +1,20 @@
+name: null
+channels:
+  - bioconda
+  - conda-forge
+  - default
+  - r
+dependencies:
+  - seqkit=0.14.0
+  - trim-galore=0.6.6
+  - hisat2=2.2.1
+  - samtools=1.11
+  - stringtie=2.1.4
+  - rseqc=4.0.0
+  - matplotlib
+  - seaborn
+  - blast
+  - gffread
+  - gffutils
+  - agat
+  - r-getopt

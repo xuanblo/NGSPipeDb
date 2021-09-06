@@ -1,0 +1,1 @@
+# http://girke.bioinformatics.ucr.edu/GEN242/pages/mydoc/systemPipeRNAseq.html#3_read_preprocessing

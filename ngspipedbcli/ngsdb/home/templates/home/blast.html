@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+ 
+{% block title %}blast page.{% endblock %}
+ 
+{% block content %}
+
+<p>nucleotide -> nucleotide<a href="/blastplus/blastn/"> Nucleotide BLAST</a></p>
+<p>protein -> protein<a href="/blastplus/blastp/"> Protein BLAST</a></p>
+<p>translated nucleotide -> protein<a href="/blastplus/blastx/"> blastx</a></p>
+<p>protein -> translated nucleotide<a href="/blastplus/tblastn/"> tblastn</a></p>
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+name: null
+channels:
+  - bioconda
+  - conda-forge
+  - default
+dependencies:
+  - python=3.8
+  - snakemake=5.30.2
+  - django=3.1.4
+  - biopython=1.76
+  - pandas==0.25.3
+  - blast
+  - gffread
+  - gffutils
+#  - agat
+  - bedtools
+  - tabix
+  - samtools
+  - pip
+  - pip:
+    - SimpleSQLite
+    - wooey
+    - clustergrammer
+    - sklearn
+    - django-ajax-datatable

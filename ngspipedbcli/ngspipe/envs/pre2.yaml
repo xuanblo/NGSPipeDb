@@ -1,0 +1,7 @@
+name: seurat
+channels:
+- bioconda
+- conda-forge
+- default
+dependencies:
+- python =2.7

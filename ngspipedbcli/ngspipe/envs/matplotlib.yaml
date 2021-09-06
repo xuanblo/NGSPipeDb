@@ -1,0 +1,9 @@
+channels:
+  - bioconda
+  - conda-forge
+  - default
+dependencies:
+  - matplotlib
+  - pandas
+  - matplotlib-venn
+  - gffutils

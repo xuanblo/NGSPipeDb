@@ -1,0 +1,12 @@
+name: trinity
+channels:
+  - bioconda
+  - conda-forge
+  - default
+dependencies:
+  - trinity
+  - snakemake
+  - seqkit=0.14.0
+  - trim-galore=0.6.6
+  - markdown
+  - bs4

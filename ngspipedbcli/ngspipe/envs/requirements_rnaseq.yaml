@@ -1,0 +1,36 @@
+name: ngspipe-rnaseq-basic
+channels:
+  - bioconda
+  - conda-forge
+  - default
+  - r
+dependencies:
+  - snakemake=5.30.2
+  - python=3.8
+  - seqkit=0.14.0
+  - trim-galore=0.6.6
+  - hisat2=2.2.1
+  - samtools=1.11
+  - stringtie=2.1.4
+  - rseqc=4.0.0
+  - matplotlib
+  - seaborn
+  - gffread
+  - gffutils
+  - r-base=3.6.3
+  - bioconductor-genomeinfodbdata=1.2.1
+  - bioconductor-genomeinfodb=1.22.0
+  - r-getopt=1.20.3
+  - bioconductor-deseq2=1.26.0
+  - bioconductor-pcatools=1.2.0
+  - r-pheatmap=1.0.12
+  - bioconductor-enhancedvolcano=1.4.0
+  - openblas=0.3.7
+  - r-ggplot2=3.3.3
+  - r-biocmanager=1.30.10
+  - markdown=3.3.4
+  - bs4=4.9.3
+  - eggnog-mapper
+  - pip
+  - pip:
+    - rich

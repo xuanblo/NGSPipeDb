@@ -1,0 +1,18 @@
+#---------------------------
+# ngsdb
+#---------------------------
+
+## 1.reference ##
+genomeAnno_path: genome/GRCm38.83.chr19.gtf   # gene annotation file, can be gtf or gff format
+genomeFasta_path: genome/chr19.fa   # genome sequence, fasta format
+
+# 2. expression matrix
+exp_path: rawdata/gene_fpkm_all_samples.tsv
+
+## 3.output directory ##
+results_name: result_Sep-04-2021
+
+## 4.notice ##
+# if the string is 'nobody', ngspipe will not send email
+# modify 'noboby' to 'xxx@qq.com' or 'xxx@qq.com,yyy@qq.com' to send email
+email_addr: nobody

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ config.title }} | Gene detail
+{% endblock %}
+
+{% block content %}
+<h3>Gene ID: </h3>
+<ul>
+    <li>{{ gene.id }}</li>
+</ul>
+
+{# this won't be rendered #}
+
+<h3>Transcript ID</h3>
+<ul>
+    {% for key1, value1 in exons.items %}
+        <li>{{ key1 }} | Type: {{ value1.transcriptObjs.featuretype }}</li>
+    <!-- 
+        {% for i in value1.exonObjs %}
+        <p>{{ i.id }}: {{ i.start }} - {{ i.end }}</p>
+        {% endfor %}
+    -->
+    {% endfor %}
+</ul>
+
+<h4>Sequence links:</h4>
+<ul>
+    <li>
+        <a href="/sequence/{{ gene.id }}">{{ gene.id }}</a>
+    </li>
+</ul>
+
+<h4>Annotation</h4>
+<ul>
+    <li>
+        go_annotation: {{ anno.go_annotation}}
+    </li>
+    <li>
+        kegg_annotation: {{ anno.kegg_annotation}}
+    </li>
+    <li>
+        kog_class: {{ anno.kog_class}}
+    </li>
+    <li>
+        kog_class_annotation: {{ anno.kog_class_annotation}}
+    </li>
+    <li>
+        trembl_annotation: {{ anno.trembl_annotation}}
+    </li>
+    <li>
+        nr_annotation: {{ anno.nr_annotation}}
+    </li>
+</ul>
+{% endblock %}

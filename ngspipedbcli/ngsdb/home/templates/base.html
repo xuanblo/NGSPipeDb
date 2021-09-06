@@ -1,0 +1,78 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>NGSPipeDb {% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'home/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    {% block stylesheets %} {% endblock %}
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-4">
+                <h1><a href="/" class="logo"> NGSPipeDb <span> An example of mouse genomic database </span></a></h1>
+
+                {% include 'menu.html' %}
+
+                <div class="mb-1">
+                    <h3 class="h6 mb-3">Quick Search</h3>
+                    {% include 'search.html' %}
+                </div>
+                
+                <div class="footer">
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="icon-heart" aria-hidden="true"></i> by <a
+                            href="https://www.github.com/xuanblo/NGSPipeDb" target="_blank">NGSPipeDb</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                    
+                </div>
+                <script type="text/javascript" src="http://rf.revolvermaps.com/0/0/8.js?i=51qyyc2gimx&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static "home/js/popper.js" %}"></script>
+    <script src="{% static "home/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "home/js/main.js" %}"></script>
+    <script>
+        $(function () {
+            $("#quick_search").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    //alert('ssss');
+                    var url = "http://jquery4u.com";    
+                    //$(location).attr('href',url);
+
+                    //$(window).attr('location',url);
+
+                    $(location).prop('href', url);
+                    console.log('done')
+                }
+            });
+        });
+    </script>
+    {% block javascript %} {% endblock %}
+</body>
+
+</html>

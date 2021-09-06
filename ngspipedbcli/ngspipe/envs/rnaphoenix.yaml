@@ -1,0 +1,14 @@
+name: rnaphoenix_1
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - python =3.6
+  - snakemake
+  - pandas
+  - numpy
+  - r
+  - biopython
+  - django
+  - git
+  - blast

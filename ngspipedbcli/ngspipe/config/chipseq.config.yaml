@@ -1,0 +1,21 @@
+#---------------------------
+# chipseq
+#---------------------------
+
+## 1.reference ##
+genomeAnno_path: "genome/GRCm38.83.chr19.gtf" # gene annotation file, can be gtf or gff format
+genomeFasta_path: "genome/chr19.fa" # genome sequence, fasta format
+
+## 2.raw reads data ##
+sample_path: "rawdata/sample.csv" # sample file
+rawreads_dir: "rawdata" # sample file directory
+read1Suffix: "_R1.fq.gz" # fastq suffix, read1
+read2Suffix: "_R2.fq.gz"
+
+## 3.output directory ##
+results_name: "results"
+
+## 4.notice ##
+# if the string is 'nobody', ngspipe will not send email
+# modify 'noboby' to 'xxx@qq.com' or 'xxx@qq.com,yyy@qq.com' to send email
+email_addr: 'nobody'

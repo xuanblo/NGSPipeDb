@@ -1,0 +1,6 @@
+name: rseqc_1
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - rseqc =3.0.1

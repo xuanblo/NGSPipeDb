@@ -1,0 +1,4 @@
+- mkdocs
+- mkdocs_pymdownx_material_extras
+#- mkdocs-versioning
+#- mike

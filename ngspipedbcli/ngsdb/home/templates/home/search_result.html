@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{ config.title }} | Search results
+{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static "css/jquery.dataTables.min.css" %}">
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static "js/jquery.dataTables.min.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+<div>
+    <table id="queryResult" class="table table-condensed table-responsive table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feature in queryResult %}
+            <tr>
+                <td>
+                    <a href="/detail/{{ feature.id }}{{ feature.geneid }}">{{ feature.id }}{{ feature.geneid }}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+    <script>
+        $(document).ready(function() {
+            $('#queryResult').DataTable({
+                "scrollY": false,
+                "scrollX": false
+            });
+        });
+    </script>
+</div>
+{% endblock %}

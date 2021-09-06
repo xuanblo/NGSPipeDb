@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ config.title }} | Home {% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="embed-responsive embed-responsive-1by1" style="height: 100%">
+            <iframe class="embed-responsive-item" src="{% url 'wooey:wooey_home' %}"></iframe>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

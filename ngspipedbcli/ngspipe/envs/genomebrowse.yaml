@@ -1,0 +1,10 @@
+name: genomebrowse_1
+channels:
+  - bioconda
+dependencies:
+  - ucsc-fasize
+  - ucsc-fatotwobit
+  - ucsc-gff3togenepred
+  - ucsc-genepredtobed
+  - ucsc-bedsort
+  - ucsc-bedtobigbed

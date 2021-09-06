@@ -1,0 +1,17 @@
+name: null
+channels:
+  - bioconda
+  - conda-forge
+  - default
+dependencies:
+  - snakemake=5.30.2
+  - python=3.8
+  - trim-galore=0.6.6
+  - bwa
+  - snakemake=5.30.2
+  - samtools=1.11
+  - picard
+  - macs2
+  - bowtie2
+  - rseqc=4.0.0
+  - seqkit=0.14.0

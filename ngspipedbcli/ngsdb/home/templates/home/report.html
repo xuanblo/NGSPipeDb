@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ config.title }} | Home {% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <h3>Welcone to PVDB</h3>
+    <p class="leed">dsadsadsadsada</p>
+    <div class="row">
+
+        <div class="embed-responsive embed-responsive-1by1" style="height: 100%">
+            <iframe class="embed-responsive-item" src="{% static 'report/report.html' %}"></iframe>
+        </div>
+        
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

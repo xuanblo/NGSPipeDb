@@ -1,0 +1,6 @@
+name: blast_1
+channels:
+  - bioconda
+dependencies:
+  - blast
+  - gffread
