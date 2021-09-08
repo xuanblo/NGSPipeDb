@@ -37,7 +37,7 @@ pipes_dict = {
         'configfile': os.path.join(ngspipe_dir, 'config/rnaseq.config.yaml'),
         'env_path': os.path.join(ngspipe_dir, 'envs/requirements_rnaseq.yaml'),
         'env_name': 'ngspipe-rnaseq-basic',
-        'testdata': 'testdata-ngspipe-rnaseq-basic.zip',
+        'testdata': 'testdata-ngspipe-rnaseq-basic.tar.gz',
         'database': ['eggnog.tar.gz', 'kegg.tar.gz'],
         'packenv': ['ngspipe-rnaseq-basic_linux.tar.gz', 'ngspipe-rnaseq-basic_osx.tar.gz'],
     }, 

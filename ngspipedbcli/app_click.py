@@ -308,7 +308,7 @@ def configure_info_group(args=None):
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
-@click.version_option(version='0.0.12b')
+@click.version_option(version='0.0.15')
 @click.pass_context
 def cli(ctx, args=None):
     """

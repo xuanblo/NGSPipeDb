@@ -1,0 +1,4 @@
+rich>10
+click
+conda-pack
+ruamel.yaml

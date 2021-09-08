@@ -5,6 +5,7 @@ tags:
   - Markdown
   - rnaseq
 categories: module
+identification of novel transcripts, identification of expressed, alternative splicing, and for the detection of gene fusion events.
 
 ---
 

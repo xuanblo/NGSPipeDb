@@ -1,3 +1,21 @@
+Metadata-Version: 2.1
+Name: ngspipedb
+Version: 0.0.15
+Summary: NGSPipeDb is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation.
+Home-page: https://xuanblo.github.io/NGSPipeDb/
+Author: Xuan Zhang
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/pypa/sampleproject/issues
+Keywords: pipeline,workflow,snakemake,bioinformatics,RNA-Seq,Chip-Seq,resequencing,database,website,Django
+Platform: Linux
+Platform: Mac OS X
+Platform: Windows
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # NGSPipeDb: NGS Pipelines & Databases
 
 __NGSPipeDb__ is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation using [snakemake workflow](https://snakemake.readthedocs.io/en/stable/index.html) which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users.
@@ -76,3 +94,4 @@ Some demos:
 
 - *[2021-9-3]* update to v0.0.13a
 - *[2021-9-3]* update to v0.0.13
+

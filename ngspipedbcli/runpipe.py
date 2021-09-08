@@ -219,7 +219,10 @@ conda_env_name: {}
     
     # step3 generate database
     if args['database']:
-        run_ngsdb_rnaseq_basic_command = 'python -m ngspipedbcli rundb build {projectname} -d {directory} --resultdirname {resultname} -exp {exp_path} --genomeFasta {genomeFasta} --genomeAnno {genomeAnno} --snaketype {snaketype}'.format(projectname=args['projectname'], directory=args['directory'], resultname=args['resultdirname'], exp_path=join(workding_directory, args['resultdirname'], 'ngspipe_result', 'quantify/quantify_by_stringtie/gene_fpkm_all_samples.tsv'), snaketype=args['snaketype'], genomeFasta=args['genomefasta'], genomeAnno=args['genomeanno'])
+        if args['directory']:
+            run_ngsdb_rnaseq_basic_command = 'python -m ngspipedbcli rundb build {projectname} -d {directory} --resultdirname {resultname} -exp {exp_path} --genomeFasta {genomeFasta} --genomeAnno {genomeAnno} --snaketype {snaketype}'.format(projectname=args['projectname'], directory=args['directory'], resultname=args['resultdirname'], exp_path=join(workding_directory, args['resultdirname'], 'ngspipe_result', 'quantify/quantify_by_stringtie/gene_fpkm_all_samples.tsv'), snaketype=args['snaketype'], genomeFasta=args['genomefasta'], genomeAnno=args['genomeanno'])
+        else:
+            run_ngsdb_rnaseq_basic_command = 'python -m ngspipedbcli rundb build {projectname} --resultdirname {resultname} -exp {exp_path} --genomeFasta {genomeFasta} --genomeAnno {genomeAnno} --snaketype {snaketype}'.format(projectname=args['projectname'], directory=args['directory'], resultname=args['resultdirname'], exp_path=join(workding_directory, args['resultdirname'], 'ngspipe_result', 'quantify/quantify_by_stringtie/gene_fpkm_all_samples.tsv'), snaketype=args['snaketype'], genomeFasta=args['genomefasta'], genomeAnno=args['genomeanno'])
         if args['printshell']:
             ngspipedb_print_command('build database', run_ngsdb_rnaseq_basic_command)
         else:

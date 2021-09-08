@@ -30,7 +30,7 @@ def modify_config_yaml(args, ngspipedb_configfile, new_configfile):
     if 'reads_prefix' in args.keys():
         modify_dict['read1Suffix'] = args['reads_prefix'].format('1')
         modify_dict['read2Suffix'] = args['reads_prefix'].format('2')
-    print(modify_dict)
+    #print(modify_dict)
     yaml = YAML()
     ngspipedb_configfile_path = pathlib.Path(ngspipedb_configfile)
     doc = yaml.load(ngspipedb_configfile_path)
@@ -50,5 +50,5 @@ if __name__ == '__main__':
     for i in sys.argv[3:]:
         k,v = i.split('=')
         args[k] = v
-    print(args)
+    #print(args)
     modify_config_yaml(args, ngspipedb_configfile, new_configfile) 
