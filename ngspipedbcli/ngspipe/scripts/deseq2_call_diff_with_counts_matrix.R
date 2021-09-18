@@ -75,7 +75,7 @@ if(!all(rownames(coldata) %in% colnames(countData)))
 }
 
 # 创建deseq2对象
-dds <- DESeqDataSetFromMatrix(countData = countData,
+dds <- DESeqDataSetFromMatrix(countData = round(countData),
                               colData = coldata,
                               design = ~ Sample)
 dds

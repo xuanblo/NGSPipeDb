@@ -37,6 +37,9 @@ rule differential_expression_analysis_by_deseq2:
         Rscript {snake_dir}/scripts/plot_deseq2_enhance_volcano.R --deseq2RData {diff_outdir}/deseq2.RData --outdir {diff_outdir}/volcano 1>>{log} 2>&1;
         '''
 
+if not "genomeAnno" in config.keys():
+    config["genomeAnno"] = ''
+
 rule diff_gene_add_note:
     message:
         '''

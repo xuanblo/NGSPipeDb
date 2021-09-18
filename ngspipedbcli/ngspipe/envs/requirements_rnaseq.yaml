@@ -30,7 +30,12 @@ dependencies:
   - r-biocmanager=1.30.10
   - markdown=3.3.4
   - bs4=4.9.3
-  - eggnog-mapper
+  - eggnog-mapper=2.1.5
+  - bioconductor-clusterprofiler=3.14.0
+  - r-dplyr=0.8.5
+  - gffcompare
+  - feelnc=0.2
+  - bedtools
   - pip
   - pip:
     - rich

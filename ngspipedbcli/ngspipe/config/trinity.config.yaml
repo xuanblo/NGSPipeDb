@@ -1,15 +1,23 @@
-# path relative to where you run snakemake
+#---------------------------
+# denovo trinity ranseq
+#---------------------------
 
-
-resultsDir: "results/result/trinity"
-reportsDir: "results/report"
-
-# sample list file
-samplesList: "testdata/samples_chipseq.xls"
-# sample file directory
-samplesDir: "testdata"
-# fastq suffix, read1
-read1Suffix: "_R1.fq.gz"
+## 1.raw reads data ##
+sample_path: "../rawdata/sample.csv" # sample file
+rawreads_dir: "../rawdata" # sample file directory
+read1Suffix: "_R1.fq.gz" # fastq suffix, read1
 read2Suffix: "_R2.fq.gz"
 
+## 2.condition for differential expression by deseq2 ##
+condition_path: "../rawdata/condition.csv"
+
+## 3.output directory ##
+results_name: "results_trinity"
+
+## 5.notice ##
+# if the string is 'nobody', ngspipe will not send email
+# modify 'noboby' to 'xxx@qq.com' or 'xxx@qq.com,yyy@qq.com' to send email
 email_addr: 'nobody'
+
+# database
+database_eggnog: "../database/eggnog"

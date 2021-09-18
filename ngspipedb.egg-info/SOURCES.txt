@@ -9,10 +9,10 @@ mkdocs/markdowns/.DS_Store
 mkdocs/markdowns/NGSDb.md
 mkdocs/markdowns/NGSPipe-ChIP-seq.md
 mkdocs/markdowns/NGSPipe-resequecing.md
-mkdocs/markdowns/NGSPipe-trinity.md
 mkdocs/markdowns/NGSPipeDb.md
 mkdocs/markdowns/Reference-based-NGSPipe-RNA-seq.md
 mkdocs/markdowns/Reference-free-NGSPipe-RNA-seq.md
+mkdocs/markdowns/Rference-based-NGSPipe-lncRNA-analysis.md
 mkdocs/markdowns/changelog.md
 mkdocs/markdowns/conda.md
 mkdocs/markdowns/download_sra.md
@@ -714,6 +714,7 @@ ngspipedbcli/ngspipe/2.1.resequencing_analysis.Snakefile.py
 ngspipedbcli/ngspipe/3.1.chipseq.Snakefile.py
 ngspipedbcli/ngspipe/db_generate.Snakefile.py
 ngspipedbcli/ngspipe/config/chipseq.config.yaml
+ngspipedbcli/ngspipe/config/lncRNA.config.yaml
 ngspipedbcli/ngspipe/config/ngsdb.config.yaml
 ngspipedbcli/ngspipe/config/resequencing.config.yaml
 ngspipedbcli/ngspipe/config/rnaseq.config.yaml
@@ -824,7 +825,8 @@ ngspipedbcli/ngspipe/rules/align.snakefile
 ngspipedbcli/ngspipe/rules/align.star_stringtie.Snakefile.py
 ngspipedbcli/ngspipe/rules/align.subread_stringtie.Snakefile.py
 ngspipedbcli/ngspipe/rules/align.tophat_cufflinks.Snakefile.py
-ngspipedbcli/ngspipe/rules/annotation.eggnog.Snakefile.py
+ngspipedbcli/ngspipe/rules/annotation_protein_by_eggnog.Snakefile.py
+ngspipedbcli/ngspipe/rules/annotation_protein_by_interproscan.Snakefile.py
 ngspipedbcli/ngspipe/rules/assembly.trinity.Snakefile.py
 ngspipedbcli/ngspipe/rules/call_peak_by_macs2.Snakefile.py
 ngspipedbcli/ngspipe/rules/classify_lncRNA.feelnc.Snakefile.py
@@ -838,7 +840,6 @@ ngspipedbcli/ngspipe/rules/download.sra.Snakefile.py
 ngspipedbcli/ngspipe/rules/download_ncbi_sra_by_grabseqs.Snakefile.py
 ngspipedbcli/ngspipe/rules/gffrepaire.py
 ngspipedbcli/ngspipe/rules/identify.lncRNA.Snakefile.py
-ngspipedbcli/ngspipe/rules/protein_annotation_by_eggnog.Snakefile.py
 ngspipedbcli/ngspipe/rules/quant.HtSeqCount.Snakefile.py
 ngspipedbcli/ngspipe/rules/quant.featureCounts.Snakefile.py
 ngspipedbcli/ngspipe/rules/ref.py
@@ -860,6 +861,8 @@ ngspipedbcli/ngspipe/scripts/.Rhistory
 ngspipedbcli/ngspipe/scripts/GSE49712_HTSeq.txt.gz
 ngspipedbcli/ngspipe/scripts/TissueEnrich.R
 ngspipedbcli/ngspipe/scripts/add_anno2diff_result.py
+ngspipedbcli/ngspipe/scripts/add_go_ontology_name.py
+ngspipedbcli/ngspipe/scripts/add_kegg_ontology_name.R
 ngspipedbcli/ngspipe/scripts/addanno2sqlite3.py
 ngspipedbcli/ngspipe/scripts/bam_stat_merge.py
 ngspipedbcli/ngspipe/scripts/bedanno.py
@@ -875,10 +878,15 @@ ngspipedbcli/ngspipe/scripts/deseq2_call_diff_with_salmon_output.R
 ngspipedbcli/ngspipe/scripts/download_testdata.sh
 ngspipedbcli/ngspipe/scripts/draw_pca.R
 ngspipedbcli/ngspipe/scripts/edgeR.R
+ngspipedbcli/ngspipe/scripts/eggnog2go_kegg.py
 ngspipedbcli/ngspipe/scripts/exp2sqlite3.py
 ngspipedbcli/ngspipe/scripts/exp_matirx_normalization.R
 ngspipedbcli/ngspipe/scripts/exp_matrix_visulation.R
 ngspipedbcli/ngspipe/scripts/fastarename.py
+ngspipedbcli/ngspipe/scripts/filter_exon_step1.py
+ngspipedbcli/ngspipe/scripts/filter_low_expression_transcript_step3.py
+ngspipedbcli/ngspipe/scripts/filter_transcript_length_step2.py
+ngspipedbcli/ngspipe/scripts/fish_gtf_by_tid.pl
 ngspipedbcli/ngspipe/scripts/gene_counts2tpm.py
 ngspipedbcli/ngspipe/scripts/gene_exp_boxplot.py
 ngspipedbcli/ngspipe/scripts/generate_replicat.py
@@ -908,6 +916,7 @@ ngspipedbcli/ngspipe/scripts/remove_script_in_wooey_db.py
 ngspipedbcli/ngspipe/scripts/runTrinityPiper.py
 ngspipedbcli/ngspipe/scripts/run_one_step_test.py
 ngspipedbcli/ngspipe/scripts/sample4trinity.py
+ngspipedbcli/ngspipe/scripts/sample4trinity_read_condition.py
 ngspipedbcli/ngspipe/scripts/sendmail.py
 ngspipedbcli/ngspipe/scripts/stat.py
 ngspipedbcli/ngspipe/scripts/stringtie_expression_matrix.py
@@ -916,7 +925,11 @@ ngspipedbcli/ngspipe/scripts/update_sampling.py
 ngspipedbcli/ngspipe/scripts/wgcna.R
 ngspipedbcli/ngspipe/scripts/work.sh
 ngspipedbcli/ngspipe/scripts/__pycache__/bioinfokit.cpython-38.pyc
+ngspipedbcli/ngspipe/scripts/__pycache__/check_ngspipedb_update.cpython-37.pyc
 ngspipedbcli/ngspipe/scripts/__pycache__/check_ngspipedb_update.cpython-38.pyc
+ngspipedbcli/ngspipe/scripts/__pycache__/check_ngspipedb_update.cpython-39.pyc
 ngspipedbcli/ngspipe/utils/message.py
 ngspipedbcli/ngspipe/utils/ngspipedb.py
+ngspipedbcli/ngspipe/utils/__pycache__/message.cpython-37.pyc
 ngspipedbcli/ngspipe/utils/__pycache__/message.cpython-38.pyc
+ngspipedbcli/ngspipe/utils/__pycache__/message.cpython-39.pyc

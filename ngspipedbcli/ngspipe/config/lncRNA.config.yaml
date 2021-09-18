@@ -1,19 +1,19 @@
 #---------------------------
-# rnaseq-basic
+# rnaseq-lncRNA
 #---------------------------
 
 ## 1.reference ##
-genomeAnno_path: "genome/GRCm38.83.chr19.gtf" # gene annotation file, can be gtf or gff format
-genomeFasta_path: "genome/chr19.fa" # genome sequence, fasta format
+genomeAnno_path: "../genome/GRCm38.83.chr19.gtf" # gene annotation file, can be gtf or gff format
+genomeFasta_path: "../genome/chr19.fa" # genome sequence, fasta format
 
 ## 2.raw reads data ##
-sample_path: "rawdata/sample.csv" # sample file
-rawreads_dir: "rawdata" # sample file directory
+sample_path: "../rawdata/sample.csv" # sample file
+rawreads_dir: "../rawdata" # sample file directory
 read1Suffix: "_R1.fq.gz" # fastq suffix, read1
 read2Suffix: "_R2.fq.gz"
 
 ## 3.condition for differential expression by deseq2 ##
-condition_path: "rawdata/condition.csv"
+condition_path: "../rawdata/condition.csv"
 
 ## 4.output directory ##
 results_name: "results"

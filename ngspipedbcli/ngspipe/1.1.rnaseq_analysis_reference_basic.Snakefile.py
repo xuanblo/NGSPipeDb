@@ -89,6 +89,11 @@ stat_outdir = join(config["resultsDir"], "statistic")
 diff_outdir = join(config["resultsDir"], "diff", "diff_by_{}".format('deseq2'))
 diff_anno_outdir = join(config["resultsDir"], "diff", "diff_by_{}".format('deseq2'), "add_gene_note")
 
+
+# 8. protein annotation
+anno_method = 'eggnog' # eggnog or interproscan
+protein_anno_outdir = join(config["resultsDir"], "protein_anno", "anno_by_{}".format('eggnog'))
+
 #report: "report/workflow.rst"
 report_outdir = join(config["reportsDir"], "report.html")
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
@@ -118,8 +123,12 @@ rule all:
         #
         # 7. differential expression
         diff_outputok                      = join(diff_anno_outdir, "diff.ok"),
-    output:
-        touch(join(working_dir, '.ngspipedb', 'run_all.runned'))
+        #
+        # 8. protein annotation
+        protein_anno                       = join(protein_anno_outdir, 'ngspipe_eggnog.emapper.annotations'),
+        eggnog_k = join(protein_anno_outdir, 'eggnog.K'),
+        eggnog_go_addname = join(protein_anno_outdir, 'eggnog.go.addname.txt'),
+        eggnog_kegg_addname = join(protein_anno_outdir, 'eggnog.kegg.addname.txt'),
 
 
 onsuccess:
@@ -139,3 +148,4 @@ include: join("rules", "6.statistic_data_of_rawReads.Snakefile.py")
 include: join("rules", "6.statistic_data_of_cleanReads.Snakefile.py")
 include: join("rules", "7.report_rnaseq_basic.Snakefile.py")
 include: join("rules", "9.differential_expression.deseq2.Snakefile.py")
+include: join("rules", "annotation_protein_by_{}.Snakefile.py".format(anno_method))

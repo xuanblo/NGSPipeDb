@@ -1,28 +1,17 @@
----
-title: 
-date: 2021-03-07 09:51:19
-tags:
-  - Markdown
-  - rnaseq
-categories: module
-identification of novel transcripts, identification of expressed, alternative splicing, and for the detection of gene fusion events.
-
----
-
-# Reference-free RNA-seq analysis use NGSPipe
-
-#### 
+# Reference-base lncRNA analysis
 
 !!! Info inline end
     If this is your first time using NGSPipe, then we strongly recommend that you start by running test data. If you already have experience with NGSPipe, we suggest you can go straight to the custom data section.
 
-Reference genome-free - no genome assembly for the species of interest is available. In this case one would need to assemble the reads into transcripts using de novo approaches. This type of RNAseq is as much of an art as well as science because assembly is heavily parameter-dependent and difficult to do well.
-In this lesson we will focus on the Reference genome-based type of RNA seq.
+Reference genome-based - an assembled genome exists for a species for which an RNAseq experiment is performed. It allows reads to be aligned against the reference genome and significantly improves our ability to reconstruct transcripts. 
+
+A basic RNA-Seq analysis is ploy(A) selected RNA-Seq. This pipeline can be used for traditional transcriptome profiling, differential expression, and GO and KEGG annotation.
 
 ---
 
 ??? note "A typical flow of transcriptome analysis with reference is shown in the figure below"
     ![img](../imgs/RNA-seq-analysis-flow-chart-An-example-RNA-seq-analysis-workflow-is-depicted-for-a_W640.jpeg)
+
 
 ## NGSPipeDb runpipe command line interface
 
@@ -68,7 +57,7 @@ Options:
   -h, --help                      Show this message and exit.
 ```
 
-## Reference-free RNA-Seq analysis on test data <a name="QuickStarted"></a>
+## RNA-Seq basic analysis on test data <a name="QuickStarted"></a>
 
 ### 1. Download test files <a name="Testdata"></a>
 
@@ -136,35 +125,36 @@ Make sure you have the following directory structure by command `tree testdata-n
     -h, --help                      Show this message and exit.
     ```
 
-### 2. Run RNA-seq analysis on test data <a name="RunTest"></a>
+### 2. Run lncRNA analysis on test data <a name="RunTest"></a>
 
-We provied a basic reference-free RNA-seq workflow for users to take a glance of ngspipe-rnaseq-trinity. This workflow contains 7 steps:
+We provied a basic reference-based RNA-seq workflow for users to take a glance of ngspipe-rnaseq-basic. This workflow contains 7 steps:
 
     1. sampling data (choose part of your data)
     2. raw reads qc
     3. junction align to genome
-    4. transcript assembly by trinity
-    5. gene quantification
-    6. statistic
-    7. differential gene analysis
+    4. transcript assembly
+    5. lncRNA identification
+    6. gene quantification
+    7. statistic
+    8. differential gene analysis
 
 You can do RNA-seq analysis by just one simply command:
 
 ```shell
-python -m ngspipedbcli runpipe mouse_rnaseq_trinity_analysis -d ../test_pipeline -n ngspipe-rnaseq-trinity --resultdirname result_Sep-18-2021 --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --conditionfile ../testdata_ngspipe-rnaseq-basic/rawdata/condition.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --snaketype p
+python -m ngspipedbcli runpipe ngspipe-rnaseq-lncRNA -d ../test_pipeline -n ngspipe-rnaseq-lncRNA --resultdirname result_Sep-18-2021 --genomeFasta ../testdata_ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --conditionfile ../testdata_ngspipe-rnaseq-basic/rawdata/condition.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --snaketype p
 ```
 
-- `mouse_rnaseq_trinity_analysis` your project name
-- `-n ngspipe-rnaseq-trinity` pipeline name
+- `ngspipe-rnaseq-lncRNA` your project name
+- `-n ngspipe-rnaseq-lncRNA` pipeline name
+- `--genomeFasta testdata_ngspipe-rnaseq-basic/genome/chr19.fa` give a genome fasta file path, see file format [fasta](https://en.wikipedia.org/wiki/FASTA_format)
+- `--genomeAnno testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf` give a genome annotaion file path [gtf](https://genome.ucsc.edu/FAQ/FAQformat.html#format4)/[gff](https://genome.ucsc.edu/FAQ/FAQformat.html#format3)
 - `--samplefile testdata_ngspipe-rnaseq-basic/rawdata/sample.csv` give a sample file path, which has one column
-- `--conditionfile ../testdata_ngspipe-rnaseq-basic/rawdata/condition.csv` this file is for differential expression
-- `--rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata` raw reads directory
 
-The final data files are put in the folder `test_pipeline/ngspipe-rnaseq-basic`. Please check you result file `tree -d -L 2 test_pipeline/ngspipe-rnaseq-basic`, it may like this:
+The final data files are put in the folder `test_pipeline/ngspipe-rnaseq-lncRNA`. Please check you result file `tree -d -L 2 test_pipeline/ngspipe-rnaseq-lncRNA`, it may like this:
 
     todo
 
-    x directories
+    xx directories
 
 !!! Note
     If you encounter any problem in this step, please turn to `TroubleShooting` for help.
@@ -176,7 +166,7 @@ The final data files are put in the folder `test_pipeline/ngspipe-rnaseq-basic`.
 Create a directory structure and copy configfile:
 
 ```shell
-ngspipedb startproject custom_rnaseq_analysis -n ngspipe-rnaseq-trinity
+ngspipedb startproject custom_rnaseq_analysis -n ngspipe-rnaseq-lncRNA
 ```
 
 Make sure you have the following directory structure by command `tree custom_rnaseq_analysis`:
@@ -218,35 +208,35 @@ rnaseq pipeline need 'reference' and 'raw reads data' in `custom_rnaseq_analysis
 
 ```yaml
 #---------------------------
-# denovo trinity ranseq
+# rnaseq-lncRNA
 #---------------------------
 
-## 1.raw reads data ##
-sample_path: "../rawdata/sample.csv" # sample file
-rawreads_dir: "../rawdata" # sample file directory
+## 1.reference ##
+genomeAnno_path: "genome/GRCm38.83.chr19.gtf" # gene annotation file, can be gtf or gff format
+genomeFasta_path: "genome/chr19.fa" # genome sequence, fasta format
+
+## 2.raw reads data ##
+sample_path: "rawdata/sample.csv" # sample file
+rawreads_dir: "rawdata" # sample file directory
 read1Suffix: "_R1.fq.gz" # fastq suffix, read1
 read2Suffix: "_R2.fq.gz"
 
-## 2.condition for differential expression by deseq2 ##
-condition_path: "../rawdata/condition.csv"
+## 3.condition for differential expression by deseq2 ##
+condition_path: "rawdata/condition.csv"
 
-## 3.output directory ##
-results_name: "results_trinity"
+## 4.output directory ##
+results_name: "results"
 
 ## 5.notice ##
 # if the string is 'nobody', ngspipe will not send email
 # modify 'noboby' to 'xxx@qq.com' or 'xxx@qq.com,yyy@qq.com' to send email
-email_addr: 'nobody'
-
-# database
-database_eggnog: "../database/eggnog"
 ```
 
 !!! Warning
     You cannot mix Paired-end and Single-end samples within the same NGSPipe run as this will cause an ERROR. NGSPipe only support Paired-end samples.
 
 !!! Note
-    The input, output file paths are relative to the working directory (currently, working directory is `custom_rnaseq_analysis`). If you have used `-d` parameter, for example, `-d run_pipeline_rnaseq_trinity` is given, working directory will be `run_pipeline_rnaseq_trinity/custom_rnaseq_analysis`. Or you can just use absolute path (start from root `/`).
+    The input, output file paths are relative to the working directory (currently, working directory is `custom_rnaseq_analysis`). If you have used `-d` parameter, for example, `-d run_pipeline_rnaseq_lncRNA` is given, working directory will be `run_pipeline_rnaseq_lncRNA/custom_rnaseq_analysis`. Or you can just use absolute path (start from root `/`).
 
 ### 3. modify samplefile
 
@@ -274,10 +264,11 @@ control-2,control,
 treated-0,treated,
 treated-1,treated,
 treated-2,treated,
+
 ```
 
 ### 5. run
 
 ```
-ngspipedb 
+ngspipedb
 ```

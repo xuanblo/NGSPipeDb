@@ -10,3 +10,19 @@ dependencies:
   - trim-galore=0.6.6
   - markdown
   - bs4
+  - samtools
+  - bowtie
+  - rsem
+  - salmon
+  - kallisto
+  - bioconductor-genomeinfodbdata=1.2.1
+  - r-base=3.6.3
+  - bioconductor-genomeinfodb=1.22.0
+  - r-getopt=1.20.3
+  - bioconductor-deseq2=1.26.0
+  - bioconductor-pcatools=1.2.0
+  - r-pheatmap=1.0.12
+  - bioconductor-enhancedvolcano=1.4.0
+  - openblas=0.3.7
+  - r-ggplot2=3.3.3
+  - r-biocmanager=1.30.10
