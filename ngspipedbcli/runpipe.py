@@ -18,6 +18,10 @@ def make_parmas_flat(args):
         flat_params_list.append('rawreads_dir={}'.format(abspath(args['rawreadsdir'])))
     if 'conditionfile' in args.keys() and args['conditionfile']:
         flat_params_list.append('condition_path={}'.format(abspath(args['conditionfile'])))
+    if 'eggnogdir' in args.keys() and args['eggnogdir']:
+        flat_params_list.append('database_eggnog_dir={}'.format(abspath(args['eggnogdir'])))
+    if 'ontologyfile' in args.keys() and args['ontologyfile']:
+        flat_params_list.append('database_gene_ontology_path={}'.format(abspath(args['ontologyfile'])))
     if 'email_addr' in args.keys() and args['email_addr']:
         flat_params_list.append('email_addr={}'.format(args['email_addr']))
     if 'resultdirname' in args.keys() and args['resultdirname']:
@@ -39,10 +43,9 @@ def check_config_paths(workding_directory, configfile):
     doc = yaml.load(ngspipedb_configfile_path, )
 
     for k,v in doc.items():
-        # check path exists and empty
-        v_abs = join(workding_directory, v)
-
         if k.endswith('_path'):
+            # check path exists and empty
+            v_abs = join(workding_directory, v)
             #print(k, v)
             # chech if v is a abs path
             if not v.startswith('/'):
@@ -55,6 +58,8 @@ def check_config_paths(workding_directory, configfile):
                 sys.exit(-1)
         # check dir exists and empty
         if k.endswith('_dir'):
+            # check path exists and empty
+            v_abs = join(workding_directory, v)
             #print(k, v)
             # chech if v is a abs path
             if not v.startswith('/'):
@@ -68,6 +73,7 @@ def check_config_paths(workding_directory, configfile):
             else:
                 sys.stderr.write('param: {k} is required, however its dir: {v} is not exists\n'.format(k=k, v=v))
                 sys.exit(-1)
+    return doc['target']
 
 def save_command(workshpath):
     '''
@@ -138,9 +144,20 @@ pipe_name: {}
 project_name: {}
 workding_directory: {}
 conda_env_name: {}
-required_software: {}
+required_softwares: {}
+pipeline_snakefile: {}
+template configfile: {}
 #-------------------------------------------#
-    '''.format(args['pipename'], project_name, workding_directory, conda_env, pipe_dict['env_path'])
+    '''.format(
+        args['pipename'],
+        project_name,
+        workding_directory,
+        conda_env,
+        pipe_dict['env_path'],
+        pipe_dict['snakefile'],
+        pipe_dict['configfile'],
+    )
+    
     ngspipedb_print_rich_stdout(run_info)
 
     # check environment
@@ -155,15 +172,15 @@ required_software: {}
     ngspipedb_configfile = '{working_dir}/ngspipe_config.yaml'.format(working_dir=workding_directory)
 
     # create directory
-    if not args['directory']:
+    if exists(join(workding_directory, '.ngspipedb')) and exists(ngspipedb_configfile):
+        print('use a project directory pre-created')
+    elif not args['directory']:
         print('using current directory')
         create_project_command = 'python -m ngspipedbcli startproject {projectname} -n {pipe_name}'.format(projectname=args['projectname'], pipe_name=args['pipename'])
         if args['printshell']:
             ngspipedb_print_command('create a rnaseq-basic project directory structure', create_project_command)
         else:
             run_status_create_project_command = subprocess.run(create_project_command, shell=True, encoding='utf-8')
-    #elif exists(join(workding_directory, '.ngspipedb')) and exists(ngspipedb_configfile):
-    #    print('use a project directory pre-created')
     else:
         print('use a giving directory')
         create_project_command = 'python -m ngspipedbcli startproject {projectname} -n {pipe_name} -d {project_dir}'.format(projectname=args['projectname'], pipe_name=args['pipename'], project_dir=args['directory'])
@@ -178,10 +195,11 @@ required_software: {}
     else:
         print('using custom configfile')
         configfile = abspath(args['configfile'])
+        ngspipedb_print_rich_stdout('current configfile is: {}'.format(configfile))
 
     # reference based or reference free
-    is_ref_based = args['genomefasta'] or args['genomeanno'] or args['email_addr'] or args['reads_prefix'] or args['resultdirname'] or args['rawreadsdir']
-    is_ref_free = args['email_addr'] or args['reads_prefix'] or args['resultdirname'] or args['rawreadsdir']
+    is_ref_based = args['genomefasta'] or args['genomeanno'] or args['email_addr'] or args['reads_prefix'] or args['rawreadsdir'] or args['resultdirname'] or args['eggnogdir'] or args['ontologyfile']
+    is_ref_free = args['email_addr'] or args['reads_prefix'] or args['rawreadsdir'] or args['resultdirname'] or args['eggnogdir'] or args['ontologyfile']
     ref_free_bool = True if args['pipename'] == "ngspipe-rnaseq-trinity" else False
     check_pipe_params = is_ref_free if args['pipename'] == "ngspipe-rnaseq-trinity" else is_ref_based
 
@@ -197,20 +215,27 @@ required_software: {}
 
         move_comfigfile_command = 'mv {tmp_configfile} {ngspipedb_configfile}'.format(tmp_configfile=tmp_configfile.name, ngspipedb_configfile=ngspipedb_configfile)
 
-        run_ngspipe_rnaseq_basic_command = 'source activate {env_name} && snakemake -s {snakefile} --configfile {config} --directory {working_dir} --rerun-incomplete --scheduler greedy --nolock --jobs {cores} -{snaketype} {otherparams} && conda deactivate'.format(env_name=conda_env, snakefile = pipe_dict['snakefile'], config=ngspipedb_configfile, working_dir=workding_directory, cores=args['jobs'], snaketype=args['snaketype'], otherparams=args['otherparams'])
-
-        # step1 runpipe
         if args['printshell']:
             ngspipedb_print_command('modify configfile', modify_configfile_command)
             ngspipedb_print_command('update configfile', move_comfigfile_command)
-            ngspipedb_print_command('run pipeline', run_ngspipe_rnaseq_basic_command)
         else:
+            ngspipedb_print_command('modify configfile', modify_configfile_command)
+            ngspipedb_print_command('update configfile', move_comfigfile_command)
             call_status_modify_configfile_command = subprocess.call(modify_configfile_command, shell=True, encoding='utf-8')
             call_status_move_comfigfile_command = subprocess.call(move_comfigfile_command, shell=True, encoding='utf-8')
-            # check configfile
-            check_config_paths(workding_directory, ngspipedb_configfile)
-            print('run {pipeline} analysis'.format(pipeline=args['pipename']))
-            call_status_activate_conda_env_command = subprocess.call(run_ngspipe_rnaseq_basic_command, shell=True, encoding='utf-8')
+    
+    # check configfile
+    target = check_config_paths(workding_directory, ngspipedb_configfile)
+    otherparams = '{target} {otherparams}'.format(target=target, otherparams=args['otherparams'])
+    # step1 runpipe
+    run_ngspipe_rnaseq_basic_command = 'source activate {env_name} && snakemake -s {snakefile} --configfile {config} --directory {working_dir} --rerun-incomplete --scheduler greedy --nolock --jobs {cores} -{snaketype} {otherparams} && conda deactivate'.format(env_name=conda_env, snakefile = pipe_dict['snakefile'], config=ngspipedb_configfile, working_dir=workding_directory, cores=args['jobs'], snaketype=args['snaketype'], otherparams=otherparams)
+
+    if args['printshell']:
+        ngspipedb_print_command('run pipeline', run_ngspipe_rnaseq_basic_command)
+    else:
+        
+        print('run {pipeline} analysis'.format(pipeline=args['pipename']))
+        call_status_activate_conda_env_command = subprocess.call(run_ngspipe_rnaseq_basic_command, shell=True, encoding='utf-8')
             
 
     # step2 ngspipe rnaseq basic report

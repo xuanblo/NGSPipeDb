@@ -23,6 +23,8 @@ else:
 
 with open(gtf_file, 'r') as f:
     for line in f:
+        if line.startswith('#'):
+            continue
         line = line.rstrip()
         items = line.split('\t')
         matObj = gtf_transcript_pat.match(items[8])

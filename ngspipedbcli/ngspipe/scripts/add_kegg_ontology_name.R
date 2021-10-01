@@ -54,7 +54,7 @@ kegg <- merge(x, y, by.x='Path', by.y='ko')
 
 anno_finnal <- merge(k, kegg, by.k='V2', by.kegg='kegg')
 
-write.table(anno_finnal[c('V1', 'Path', 'name')], file=args$output, col.names = FALSE, sep='\t', quote = FALSE)
+write.table(unique(anno_finnal[c('V1', 'Path', 'name')]), file=args$output, col.names = FALSE, sep='\t', quote = FALSE, row.names = FALSE)
 
 
 

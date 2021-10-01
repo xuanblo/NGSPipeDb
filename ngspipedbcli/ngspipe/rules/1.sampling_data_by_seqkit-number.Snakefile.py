@@ -23,7 +23,7 @@ rule sampling_data_by_seqkit_number:
     conda:
         "envs/seqkit.yaml"
     params:
-        number = 1000
+        number = config['sampling_value']
     shell:
         '''
         gunzip -c {input.read1} | seqkit sample -n {params.number} -j {threads} -o {output.read1} 1>{log} 2>&1;

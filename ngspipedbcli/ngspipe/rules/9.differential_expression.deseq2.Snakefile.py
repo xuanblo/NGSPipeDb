@@ -17,6 +17,7 @@ rule differential_expression_analysis_by_deseq2:
         sample_heatmap_pdf = join(diff_outdir, 'sample_heatmap.pdf'),
         sig_gene_exp_pdf = join(diff_outdir, 'sig_gene_exp.pdf'),
         volcano_dir = directory(join(diff_outdir, 'volcano')),
+        normalized_counts = join(diff_outdir, 'normalized.counts.csv'),
     conda:
         '../envs/requirements_exp_r_env.yaml'
     benchmark:

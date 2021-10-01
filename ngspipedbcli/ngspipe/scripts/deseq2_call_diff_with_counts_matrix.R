@@ -49,7 +49,7 @@ library('DESeq2')
 
 # 读表达量矩阵
 # args$countsMatrix="/Users/zhangxuan/Work/Current_work2020-6-21/databasetool/mouse_transcriptome_analysis/results/result/quantify/quantify_by_stringtie/gene.csv"
-cts <- read.csv(args$countsMatrix, sep=",", row.names="gene_id", check.names=FALSE)
+cts <- read.csv(args$countsMatrix, sep=",", row.names=1, check.names=FALSE)
 colnames(cts) <- sub("\\.", "-", colnames(cts))
 
 countData <- as.matrix(cts)

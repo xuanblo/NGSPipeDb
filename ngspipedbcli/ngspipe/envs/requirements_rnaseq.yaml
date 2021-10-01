@@ -9,6 +9,7 @@ dependencies:
   - python=3.8
   - seqkit=0.14.0
   - trim-galore=0.6.6
+  - trimmomatic=0.39
   - hisat2=2.2.1
   - samtools=1.11
   - stringtie=2.1.4
@@ -36,6 +37,13 @@ dependencies:
   - gffcompare
   - feelnc=0.2
   - bedtools
+  - gcen
+  - star=2.7.9a
+  - mashmap=2.0
+  - salmon
+  - bioconductor-tximport
+  - subread
+  - htseq
   - pip
   - pip:
     - rich

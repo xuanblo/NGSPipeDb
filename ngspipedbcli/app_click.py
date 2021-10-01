@@ -146,6 +146,8 @@ def configure_ngspipe_group(args=None):
     @click.option('--samplefile', help="samplefile", default='')
     @click.option('--conditionfile', help="conditionfile", default='')
     @click.option('--rawreadsdir', help="raw reads directory", default='')
+    @click.option('--eggnogdir', help="eggnog database directory", default='')
+    @click.option('--ontologyfile', help="gene ontology database file (obo)", default='')
     @click.option('-e', '--email_addr', help="result directory name (under project directory)", default='')
     @click.option('--reads_prefix', help="reads prefix (Example: _R{}.fq.gz )", default='')
     @click.option('--resultdirname', help="result directory name under proect name directory", default='{name}_{date}'.format(name='result', date=current_date(4)))
@@ -308,7 +310,7 @@ def configure_info_group(args=None):
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
-@click.version_option(version='0.0.15')
+@click.version_option(version='0.0.17')
 @click.pass_context
 def cli(ctx, args=None):
     """

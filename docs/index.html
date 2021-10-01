@@ -375,6 +375,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#0-required" class="md-nav__link">
+    0. required
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     Installation
   </a>
@@ -389,8 +396,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#usage-example-run-rna-seq-analysis-generate-report-and-build-rna-seq-database" class="md-nav__link">
-    Usage example: run RNA-Seq analysis, generate report, and build RNA-Seq database
+  <a href="#usage-example" class="md-nav__link">
+    Usage example
   </a>
   
 </li>
@@ -629,6 +636,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#0-required" class="md-nav__link">
+    0. required
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     Installation
   </a>
@@ -643,8 +657,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#usage-example-run-rna-seq-analysis-generate-report-and-build-rna-seq-database" class="md-nav__link">
-    Usage example: run RNA-Seq analysis, generate report, and build RNA-Seq database
+  <a href="#usage-example" class="md-nav__link">
+    Usage example
   </a>
   
 </li>
@@ -689,10 +703,64 @@
                 <h1 id="ngspipedb-ngs-pipelines-databases">NGSPipeDb: NGS Pipelines &amp; Databases</h1>
 <p><strong>NGSPipeDb</strong> is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation using <a href="https://snakemake.readthedocs.io/en/stable/index.html">snakemake workflow</a> which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users.</p>
 <h2 id="quick-start">Quick start</h2>
+<h3 id="0-required">0. required</h3>
+<p>Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the <a href="https://en.wikipedia.org/wiki/Command-line_interface">nix command line interface</a>. Also, it would be better if the user has basic knowledge about <a href="https://snakemake.readthedocs.io/en/stable/">snakemake</a>, <a href="https://docs.conda.io/en/latest/">conda</a> and <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8">best practice RNA sequence analysis</a>, but it is not required. You can also find some easy-to-learn matierals in our "Learning materials" page, for example <a href="../linux">linux &amp; shell</a> and <a href="../ngs#rnaseq">RNASeq background</a> for beginers.</p>
+<p><strong>Install wget and git</strong> <a name="BasicLinux"></a></p>
+<p>To get some of the required software packages, we will use the command line tools called <a href="http://www.gnu.org/software/wget/">wget</a> and <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git</a>.  <em>wget</em> is a popular tool for downloading things off of the internet.  <em>git</em> is a distributed version control system which we will use to checkout the NGSPipeDb code.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These tools are already pre-installed in most systems, but if you are unsure whether or not you have <em>wget</em> enter <code>wget</code> and if the return is <code>wget: command not found</code>, then you will have to install <em>wget</em>.  Do likewise for <em>git</em>.</p>
+</div>
+<p><strong>Install Miniconda3</strong> <a name="Miniconda"></a></p>
+<p>NGSPipeDb relies on the conda package manager for installation and dependency resolution, so you will need to <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">install conda</a> first.</p>
+<p>We will be using the <a href="http://conda.pydata.org/miniconda.html">Miniconda3</a> package management system (aka CONDA) to manage all of the software packages that NGSPipe is dependent on. </p>
+<p>Use following commands to retrieve and then run the Minicoda3 installation script:</p>
+<p>1.download miniconda3</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Linux &amp; WSL</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+</code></pre></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">MacOSX</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+</code></pre></div>
+</div>
+</div>
+<p>2.install miniconda3</p>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Linux &amp; WSL</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>bash Miniconda3-latest-Linux-x86_64.sh
+</code></pre></div>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">MacOSX</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>bash Miniconda3-latest-MacOSX-x86_64.sh
+</code></pre></div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>While running the installation script, follow the commands listed on screen, and press the <em>enter</em> key to scroll. Make sure to answer <code>yes</code> when asked if you want to prepend Miniconda3 to PATH. After that, close your terminal, open a new one and you should now have Conda working! You could, alternatively, run <code class="highlight"><span class="nb">source</span> ~/.bashrc</code> to initiate conda.</p>
+</div>
+<p>3.Test if conda is ready to work by entering: <code>conda update conda</code>. Press <code>y</code> to confirm the conda updates.</p>
+<p>4.Finally, <code>conda install mamba -c conda-forge</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Mamba is a reimplementation of the conda package manager in C++, the fast conda-alternative. Mamba is recommended but not necessary.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You will only have to install Minicoda3 once. If you face any conda problem, please <a href="../conda">learn</a> more about it.</p>
+</div>
 <h3 id="installation">Installation</h3>
 <ol>
-<li>Install from pipi: <code>pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple ngspipedb</code></li>
-<li>Install from conda: <code>use conda (developing...)</code></li>
+<li>
+<p>Install from pipi
+  <div class="highlight"><pre><span></span><code>pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple ngspipedb
+</code></pre></div></p>
+</li>
+<li>
+<p>Install from conda
+<div class="highlight"><pre><span></span><code>conda install
+</code></pre></div></p>
+</li>
 </ol>
 <h3 id="ngspipedb-command-line-interface">NGSPipeDb command line interface</h3>
 <p><code>ngspipedb -h</code></p>
@@ -724,7 +792,8 @@
                 <span class="l l-Scalar l-Scalar-Plain">project name in the current directory or optionally in the</span>
                 <span class="l l-Scalar l-Scalar-Plain">given directory.</span>
 </code></pre></div>
-<h3 id="usage-example-run-rna-seq-analysis-generate-report-and-build-rna-seq-database">Usage example: run RNA-Seq analysis, generate report, and build RNA-Seq database</h3>
+<h3 id="usage-example">Usage example</h3>
+<p><strong>run RNA-Seq analysis, generate report, and build RNA-Seq database</strong></p>
 <p>step1. download test data:</p>
 <div class="highlight"><pre><span></span><code>ngspipedb download -n ngspipe-rnaseq-basic -t testdata <span class="o">&amp;&amp;</span> tar -zxvf testdata-ngspipe-rnaseq-basic.tar.gz
 </code></pre></div>
@@ -734,6 +803,7 @@
 <p>step3. start ngsdb server:</p>
 <div class="highlight"><pre><span></span><code>ngspipedb rundb server -url <span class="m">0</span>.0.0.0:8000
 </code></pre></div>
+<p><strong>run resequencing analysis, generate report, and build RNA-Seq database</strong></p>
 <h2 id="tutorial">Tutorial</h2>
 <p>A more detailed tutorial of how to use this toolkit can be found here:: <a href="https://xuanblo.github.io/NGSPipeDb/">https://xuanblo.github.io/NGSPipeDb/</a></p>
 <p>Some demos:
@@ -742,6 +812,7 @@
 - Demo RNA-Seq database: <a href="http://ngsdb-rnaseq.liu-lab.com">http://ngsdb-rnaseq.liu-lab.com</a></p>
 <h2 id="change-logs">Change logs</h2>
 <ul>
+<li><em>[2021-10-1]</em> update to v0.0.17</li>
 <li><em>[2021-9-18]</em> update to v0.0.16</li>
 <li><em>[2021-9-3]</em> update to v0.0.13a</li>
 <li><em>[2021-9-3]</em> update to v0.0.13</li>

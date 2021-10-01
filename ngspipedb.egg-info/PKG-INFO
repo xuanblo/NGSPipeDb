@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ngspipedb
-Version: 0.0.16
+Version: 0.0.17
 Summary: NGSPipeDb is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation.
 Home-page: https://xuanblo.github.io/NGSPipeDb/
 Author: Xuan Zhang
@@ -22,10 +22,77 @@ __NGSPipeDb__ is an automated pipeline for parallel processing of huge next gene
 
 ## Quick start
 
+### 0. required
+
+Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the [nix command line interface](https://en.wikipedia.org/wiki/Command-line_interface). Also, it would be better if the user has basic knowledge about [snakemake](https://snakemake.readthedocs.io/en/stable/), [conda](https://docs.conda.io/en/latest/) and [best practice RNA sequence analysis](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8), but it is not required. You can also find some easy-to-learn matierals in our "Learning materials" page, for example [linux & shell](../linux) and [RNASeq background](../ngs#rnaseq) for beginers.
+
+**Install wget and git** <a name="BasicLinux"></a>
+
+To get some of the required software packages, we will use the command line tools called [wget](http://www.gnu.org/software/wget/) and [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).  *wget* is a popular tool for downloading things off of the internet.  *git* is a distributed version control system which we will use to checkout the NGSPipeDb code.
+
+!!! note
+    These tools are already pre-installed in most systems, but if you are unsure whether or not you have *wget* enter `wget` and if the return is `wget: command not found`, then you will have to install *wget*.  Do likewise for *git*.
+
+**Install Miniconda3** <a name="Miniconda"></a>
+
+NGSPipeDb relies on the conda package manager for installation and dependency resolution, so you will need to [install conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) first.
+
+We will be using the [Miniconda3](http://conda.pydata.org/miniconda.html) package management system (aka CONDA) to manage all of the software packages that NGSPipe is dependent on. 
+
+Use following commands to retrieve and then run the Minicoda3 installation script:
+
+1.download miniconda3
+
+=== "Linux & WSL"
+
+    ```shell
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    ```
+
+=== "MacOSX"
+
+    ```shell
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+    ```
+
+2.install miniconda3
+
+=== "Linux & WSL"
+
+    ```shell
+    bash Miniconda3-latest-Linux-x86_64.sh
+    ```
+
+=== "MacOSX"
+
+    ```shell
+    bash Miniconda3-latest-MacOSX-x86_64.sh
+    ```
+
+!!! important
+    While running the installation script, follow the commands listed on screen, and press the _enter_ key to scroll. Make sure to answer `yes` when asked if you want to prepend Miniconda3 to PATH. After that, close your terminal, open a new one and you should now have Conda working! You could, alternatively, run `#!shell source ~/.bashrc` to initiate conda.
+
+3.Test if conda is ready to work by entering: `conda update conda`. Press `y` to confirm the conda updates.
+
+4.Finally, `conda install mamba -c conda-forge`.
+
+!!! Note
+    Mamba is a reimplementation of the conda package manager in C++, the fast conda-alternative. Mamba is recommended but not necessary.
+
+!!! Info
+    You will only have to install Minicoda3 once. If you face any conda problem, please [learn](../conda) more about it.
+
 ### Installation
 
-1. Install from pipi: `pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple ngspipedb`
-2. Install from conda: `use conda (developing...)`
+1. Install from pipi
+  ```shell
+  pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple ngspipedb
+  ```
+
+2. Install from conda
+```shell
+conda install
+```
 
 ### NGSPipeDb command line interface
 
@@ -61,7 +128,9 @@ Commands:
                 given directory.
 ```
 
-### Usage example: run RNA-Seq analysis, generate report, and build RNA-Seq database
+### Usage example
+
+**run RNA-Seq analysis, generate report, and build RNA-Seq database**
 
 step1. download test data:
 
@@ -81,6 +150,8 @@ step3. start ngsdb server:
   ngspipedb rundb server -url 0.0.0.0:8000
   ```
 
+**run resequencing analysis, generate report, and build RNA-Seq database**
+
 ## Tutorial
 
 A more detailed tutorial of how to use this toolkit can be found here:: [https://xuanblo.github.io/NGSPipeDb/](https://xuanblo.github.io/NGSPipeDb/)
@@ -92,6 +163,7 @@ Some demos:
 
 ## Change logs
 
+- *[2021-10-1]* update to v0.0.17
 - *[2021-9-18]* update to v0.0.16
 - *[2021-9-3]* update to v0.0.13a
 - *[2021-9-3]* update to v0.0.13

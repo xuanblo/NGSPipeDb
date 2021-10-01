@@ -23,7 +23,7 @@ rule sampling_data_by_seqkit_proportion:
     conda:
         "envs/seqkit.yaml"
     params:
-        proportion = 0.01
+        proportion = config['sampling_value']
     shell:
         '''
         gunzip -c {input.read1} | seqkit sample -p {params.proportion} -j {threads} -o {output.read1} 1>{log} 2>&1;

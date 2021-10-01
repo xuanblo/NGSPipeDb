@@ -19,6 +19,10 @@ def modify_config_yaml(args, ngspipedb_configfile, new_configfile):
         modify_dict['sample_path'] = args['sample_path']
     if 'condition_path' in args.keys():
         modify_dict['condition_path'] = args['condition_path']
+    if 'database_gene_ontology_path' in args.keys():
+        modify_dict['database_gene_ontology_path'] = args['database_gene_ontology_path']
+    if 'database_eggnog_dir' in args.keys():
+        modify_dict['database_eggnog_dir'] = args['database_eggnog_dir']
     if 'results_name' in args.keys():
         modify_dict['results_name'] = args['results_name']
     if 'rawreads_dir' in args.keys():

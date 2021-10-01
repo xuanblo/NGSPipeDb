@@ -22,4 +22,4 @@ for htseq_count in htseq:
 df_all = pd.concat(df_arr, axis=1, sort=True)
 
 
-df_all.to_csv(resultfile, sep='\t')
+df_all.to_csv(resultfile, sep=',')

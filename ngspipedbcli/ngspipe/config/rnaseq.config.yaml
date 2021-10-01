@@ -1,29 +1,83 @@
-#---------------------------
+########################
 # rnaseq-basic
-#---------------------------
+########################
+
+# Please check the parameters, and adjust them according to your circumstance
+
+# ================== Basic input params for the workflow ==================
 
 ## 1.reference ##
-genomeAnno_path: "genome/GRCm38.83.chr19.gtf" # gene annotation file, can be gtf or gff format
-genomeFasta_path: "genome/chr19.fa" # genome sequence, fasta format
+genomeAnno_path: genome/GRCm38.83.chr19.gtf # gene annotation file, can be gtf or gff format
+genomeFasta_path: genome/chr19.fa # genome sequence, fasta format
 
 ## 2.raw reads data ##
-sample_path: "rawdata/sample.csv" # sample file
-rawreads_dir: "rawdata" # sample file directory
-read1Suffix: "_R1.fq.gz" # fastq suffix, read1
-read2Suffix: "_R2.fq.gz"
+sample_path: rawdata/sample.csv # sample file
+rawreads_dir: rawdata # sample file directory
+read1Suffix: _R1.fq.gz # fastq suffix, read1
+read2Suffix: _R2.fq.gz
 
 ## 3.condition for differential expression by deseq2 ##
-condition_path: "rawdata/condition.csv"
+condition_path: rawdata/condition.csv
+
+# ================== Optional output params for the workflow ==================
 
 ## 4.output directory ##
-results_name: "results"
+results_name: results
 
 ## 5.notice ##
 # if the string is 'nobody', ngspipe will not send email
 # modify 'noboby' to 'xxx@qq.com' or 'xxx@qq.com,yyy@qq.com' to send email
-email_addr: 'nobody'
+email_addr: nobody
 
+#----------------------------------
+# Configuration for pipeline stop site
+#----------------------------------
+# choose where to stop your pipeline
+target: all # all or rawReads_qc_by_trim_galore or 
+
+#----------------------------------
+# Configuration for sampling data
+#----------------------------------
+# for test the pipe, you can choose to the part of the input file
+# which sampling method do you want to use?
+sampling_method: links # links or head or tail or seqkit_number or seqkit_proportion
+# Default is links (ues the whole data of sample); head (use first sampling_range line in every sample),tail (use last sampling_range line in every sample); seqkit_number (number of reads); seqkit_proportion (percentage of reads)
+# and how many reads file line or reads number or reads proportion do you want to use?
+sampling_value: 40000 # for head and tail, this value is line number; for number, this value is reads number; for proportion, this value is percentage
+
+samples_num: all # all or interger
+# Default is all (use all samples), give a sample number, must less than real sample number, for example 6
+
+#----------------------------------
+# Configuration for Quality Control
+#----------------------------------
+# which qc method do you want to use?
+qc_method: trim-galore # trim-galore or trimmomatic or fastqc
+
+#----------------------------------
+# Configuration for align
+#----------------------------------
+# which transcript align method do you want to use?
+junction_align_method: hisat2 # hisat2 or star
+
+junction_align_rna_library: null # Default is null; "--rna-strandness RF" (fr-firststrand); "--rna-strandness FR" (fr-secondstrand)
+
+#----------------------------------
+# Configuration for assembly
+#----------------------------------
+# which transcript assembly method do you want to ues?
+transcript_assembly_method: stringtie # stringtie or star
+
+#----------------------------------
+# Configuration for quantification
+#----------------------------------
+# which quantification method do you want to use?
+quantify_method: stringtie # stringtie or htseqcounts or featurecounts
+
+#----------------------------------
+# Configuration for annotation
+#----------------------------------
 # database
-database_eggnog: "null"
+database_eggnog_dir: database/eggnog
 
-database_obo: "null"
+database_gene_ontology_path: database/gene_ontology/go-basic.obo

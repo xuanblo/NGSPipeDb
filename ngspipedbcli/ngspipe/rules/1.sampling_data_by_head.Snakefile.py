@@ -21,7 +21,7 @@ rule sampling_data_by_head:
     log:
         join(sampling_data_outdir, "logfile", "{sample}.log")
     params:
-        lines = 40000
+        lines = config['sampling_value']
     shell:
         '''
         gunzip -c {input.read1} | head -{params.lines} | gzip > {output.read1} || sleep 0.1 2>{log};
