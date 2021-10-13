@@ -37,6 +37,7 @@ SAMPLES = list(smpList.index)[0:] if config['samples_num'] == 'all' else list(sm
 os.makedirs(join(working_dir, '.ngspipedb'), exist_ok=True)
 
 flag_outdir = join(config["resultsDir"], "flag")
+os.makedirs(flag_outdir, exist_ok=True)
 
 # new condition file
 condition_df = pd.read_csv(config["condition_path"], index_col=0, header=0)
