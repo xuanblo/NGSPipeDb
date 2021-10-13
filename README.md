@@ -145,6 +145,7 @@ Some demos:
 
 ## Change logs
 
+- *[2021-10-13]* update to v0.0.18
 - *[2021-10-1]* update to v0.0.17
 - *[2021-9-18]* update to v0.0.16
 - *[2021-9-3]* update to v0.0.13a
