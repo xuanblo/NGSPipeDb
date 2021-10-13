@@ -21,3 +21,6 @@ email_addr: 'nobody'
 
 # database
 database_eggnog: "../database/eggnog"
+
+# choose where to stop your pipeline
+target: all #

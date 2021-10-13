@@ -25,8 +25,8 @@
       {% endblock extra_style %}
     </style>
 </head>
-<body class="{% if user.is_authenticated %}user-is-authenticated{% else %}user-is-anonymous{% endif %} hide">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+<body class="{% if user.is_authenticated %}user-is-authenticated{% else %}user-is-anonymous{% endif %}">
+    <nav class="navbar navbar-inverse navbar-fixed-top hide">
 {#    from http://www.bootply.com/3iSOTAyumP for brand centering #}
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->

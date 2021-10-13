@@ -19,3 +19,6 @@ results_name: "results"
 # if the string is 'nobody', ngspipe will not send email
 # modify 'noboby' to 'xxx@qq.com' or 'xxx@qq.com,yyy@qq.com' to send email
 email_addr: 'nobody'
+
+# choose where to stop your pipeline
+target: all #

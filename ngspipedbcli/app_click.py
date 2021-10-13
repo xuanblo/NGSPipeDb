@@ -220,8 +220,8 @@ def configure_ngsdb_group(args=None):
 
     @cli_ngsdb.command(name='serve', short_help='Starts a lightweight Web server for development.')
     @click.pass_context
-    @click.option('-m', '--managepy', type=click.Path(exists=True), help="manage.py path")
-    @click.option('-up', '--urlport', type=str, help="web url and port")
+    @click.option('-m', '--managepy', type=click.Path(exists=True), help="manage.py path", default='./manage.py')
+    @click.option('-up', '--urlport', type=str, help="web url and port", default='127.0.0.1:8000')
     @click.option('-ps', '--printshell', is_flag=True, help="print ngspipedb shell commands")
     def db_serve_cmd(ctx, **kargs):
         '''

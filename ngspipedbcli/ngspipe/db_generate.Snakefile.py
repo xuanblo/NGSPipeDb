@@ -22,7 +22,8 @@ django_dir = join(working_dir, config['results_name'], 'ngsdb_code')
 # 0. cp ngsdb to working directory
 
 if not os.path.exists(django_dir):
-    os.system('cp -r {} {}'.format(ngsdb_code_dir, django_dir))
+    os.makedirs(django_dir, exist_ok=True)
+    os.system('cp -r {}/* {}'.format(ngsdb_code_dir, django_dir))
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # detail parameters in pipe #
