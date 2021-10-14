@@ -21,8 +21,11 @@ In this lesson we will focus on the Reference genome-based type of RNA seq.
 
 ---
 
-??? note "A typical flow of transcriptome analysis with reference is shown in the figure below"
-    ![img](../imgs/RNA-seq-analysis-flow-chart-An-example-RNA-seq-analysis-workflow-is-depicted-for-a_W640.jpeg)
+!!! note "A typical flow of transcriptome analysis with reference is shown in the figure below"
+    <figure markdown> 
+        ![Dummy image](imgs/denovo.png){ width="800" }
+        <figcaption>Denovo RNA-Seq pipeline</figcaption>
+    </figure>
 
 ## NGSPipeDb runpipe command line interface
 

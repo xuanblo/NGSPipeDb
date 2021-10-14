@@ -13,14 +13,14 @@
         <meta name="author" content="Xuan Zhang">
       
       
-        <link rel="canonical" href="https://xuanblo.github.io/NGSPipeDb/Rference-based-NGSPipe-lncRNA-analysis/">
+        <link rel="canonical" href="https://xuanblo.github.io/NGSPipeDb/Reference-based-NGSPipe-lncRNA-analysis/">
       
       <link rel="icon" href="../imgs/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
     
     
       
-        <title>Reference-base lncRNA analysis - NGSPipeDb Document</title>
+        <title>NGSPipe Reference-based lncRNA - NGSPipeDb Document</title>
       
     
     
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Reference-base lncRNA analysis
+              NGSPipe Reference-based lncRNA
             
           </span>
         </div>
@@ -230,13 +230,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../Reference-based-NGSPipe-RNA-seq/" class="md-tabs__link">
+      <a href="../Reference-based-NGSPipe-RNA-seq/" class="md-tabs__link md-tabs__link--active">
         Pipelines
       </a>
     </li>
@@ -347,12 +349,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       <label class="md-nav__link" for="__nav_2">
         Pipelines
@@ -385,6 +389,131 @@
       <a href="../Reference-free-NGSPipe-RNA-seq/" class="md-nav__link">
         NGSPipe Denovo RNA-seq
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          NGSPipe Reference-based lncRNA
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        NGSPipe Reference-based lncRNA
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ngspipedb-runpipe-command-line-interface" class="md-nav__link">
+    NGSPipeDb runpipe command line interface
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rna-seq-basic-analysis-on-test-data" class="md-nav__link">
+    RNA-Seq basic analysis on test data 
+  </a>
+  
+    <nav class="md-nav" aria-label="RNA-Seq basic analysis on test data ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-download-test-files" class="md-nav__link">
+    1. Download test files 
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-run-lncrna-analysis-on-test-data" class="md-nav__link">
+    2. Run lncRNA analysis on test data 
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rna-seq-basic-analysis-on-custom-data" class="md-nav__link">
+    RNA-Seq basic analysis on custom data 
+  </a>
+  
+    <nav class="md-nav" aria-label="RNA-Seq basic analysis on custom data ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-a-project" class="md-nav__link">
+    1. start a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-modify-configfile" class="md-nav__link">
+    2. modify configfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-modify-samplefile" class="md-nav__link">
+    3. modify samplefile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-modify-conditionfile" class="md-nav__link">
+    4. modify conditionfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-run" class="md-nav__link">
+    5. run
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -634,7 +763,7 @@
               
   
                 
-                  <a href="https://github.com/xuanblo/NGSPipeDb/edit/master/mkdocs/markdowns/Rference-based-NGSPipe-lncRNA-analysis.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/xuanblo/NGSPipeDb/edit/master/mkdocs/markdowns/Reference-based-NGSPipe-lncRNA-analysis.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -647,8 +776,13 @@
 <p>Reference genome-based - an assembled genome exists for a species for which an RNAseq experiment is performed. It allows reads to be aligned against the reference genome and significantly improves our ability to reconstruct transcripts. </p>
 <p>A basic RNA-Seq analysis is ploy(A) selected RNA-Seq. This pipeline can be used for traditional transcriptome profiling, differential expression, and GO and KEGG annotation.</p>
 <hr />
-<details class="note"><summary>A typical flow of transcriptome analysis with reference is shown in the figure below</summary><p><img alt="img" src="../imgs/RNA-seq-analysis-flow-chart-An-example-RNA-seq-analysis-workflow-is-depicted-for-a_W640.jpeg" /></p>
-</details>
+<div class="admonition note">
+<p class="admonition-title">A typical flow of transcriptome analysis with reference is shown in the figure below</p>
+<p><figure markdown> 
+    <img alt="Dummy image" src="../imgs/lncRNA.png" width="800" />
+    <figcaption>RNA-Seq pipeline</figcaption>
+</figure></p>
+</div>
 <h2 id="ngspipedb-runpipe-command-line-interface">NGSPipeDb runpipe command line interface</h2>
 <p><code>ngspipedb runpipe -h</code></p>
 <div class="highlight"><pre><span></span><code><span class="nt">Usage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ngspipedb runpipe [OPTIONS] PROJECTNAME</span>
@@ -900,6 +1034,50 @@ xx directories
         
 
 <footer class="md-footer">
+  
+    <nav
+      class="md-footer__inner md-grid"
+      aria-label="Footer"
+    >
+      
+        <a
+          href="../Reference-free-NGSPipe-RNA-seq/"
+          class="md-footer__link md-footer__link--prev"
+          rel="prev"
+        >
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              NGSPipe Denovo RNA-seq
+            </div>
+          </div>
+        </a>
+      
+      
+        <a
+          href="../NGSPipe-ChIP-seq/"
+          class="md-footer__link md-footer__link--next"
+          rel="next"
+        >
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              NGSPipe ChIP-seq
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

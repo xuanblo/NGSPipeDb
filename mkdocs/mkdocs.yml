@@ -29,6 +29,7 @@ nav:
 - Pipelines:
     - NGSPipe Reference-based RNA-seq: Reference-based-NGSPipe-RNA-seq.md
     - NGSPipe Denovo RNA-seq: Reference-free-NGSPipe-RNA-seq.md
+    - NGSPipe Reference-based lncRNA: Reference-based-NGSPipe-lncRNA-analysis.md
     - NGSPipe ChIP-seq: NGSPipe-ChIP-seq.md
     - NGSPipe resequecing: NGSPipe-resequecing.md
 - Databases:
@@ -68,6 +69,7 @@ extra_javascript:
   - javascripts/material-extra-theme-7c147bb7.js
   - javascripts/extra-uml-51b11a9a.js
 
+
 markdown_extensions:
     - pymdownx.tabbed:
     - pymdownx.highlight:
@@ -81,6 +83,8 @@ markdown_extensions:
     - pymdownx.tasklist:
         custom_checkbox: true
         clickable_checkbox: true
+    - attr_list
+    - md_in_html
 
 extra:
   social:

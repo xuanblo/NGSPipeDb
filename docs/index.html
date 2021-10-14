@@ -482,6 +482,18 @@
   
   
     <li class="md-nav__item">
+      <a href="Reference-based-NGSPipe-lncRNA-analysis/" class="md-nav__link">
+        NGSPipe Reference-based lncRNA
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="NGSPipe-ChIP-seq/" class="md-nav__link">
         NGSPipe ChIP-seq
       </a>
@@ -702,6 +714,11 @@
                 
                 <h1 id="ngspipedb-ngs-pipelines-databases">NGSPipeDb: NGS Pipelines &amp; Databases</h1>
 <p><strong>NGSPipeDb</strong> is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation using <a href="https://snakemake.readthedocs.io/en/stable/index.html">snakemake workflow</a> which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users.</p>
+<figure>
+<p><img alt="Dummy image" src="imgs/fig1.png" width="800" />
+  </p>
+<figcaption>Overview of NGSPipeDb</figcaption>
+</figure>
 <h2 id="quick-start">Quick start</h2>
 <h3 id="0-required">0. required</h3>
 <p>Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the <a href="https://en.wikipedia.org/wiki/Command-line_interface">nix command line interface</a>. Also, it would be better if the user has basic knowledge about <a href="https://snakemake.readthedocs.io/en/stable/">snakemake</a>, <a href="https://docs.conda.io/en/latest/">conda</a> and <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8">best practice RNA sequence analysis</a>, but it is not required. You can also find some easy-to-learn matierals in our "Learning materials" page, for example <a href="../linux">linux &amp; shell</a> and <a href="../ngs#rnaseq">RNASeq background</a> for beginers.</p>
@@ -801,17 +818,18 @@
 <div class="highlight"><pre><span></span><code>ngspipedb runpipe mouse_rnaseq_analysis -n ngspipe-rnaseq-basic --genomeFasta testdata-ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno testdata-ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --samplefile testdata-ngspipe-rnaseq-basic/rawdata/sample.csv --conditionfile testdata-ngspipe-rnaseq-basic/rawdata/condition.csv --rawreadsdir testdata-ngspipe-rnaseq-basic/rawdata -j <span class="m">10</span> --report -db
 </code></pre></div>
 <p>step3. start ngsdb server:</p>
-<div class="highlight"><pre><span></span><code>ngspipedb rundb server -url <span class="m">0</span>.0.0.0:8000
+<div class="highlight"><pre><span></span><code>ngspipedb rundb serve -m mouse_rnaseq_analysis/result/ngsdb_code/manage.py -up <span class="m">127</span>.0.0.1:8000
 </code></pre></div>
 <p><strong>run resequencing analysis, generate report, and build RNA-Seq database</strong></p>
 <h2 id="tutorial">Tutorial</h2>
 <p>A more detailed tutorial of how to use this toolkit can be found here:: <a href="https://xuanblo.github.io/NGSPipeDb/">https://xuanblo.github.io/NGSPipeDb/</a></p>
 <p>Some demos:
-- Demo RNA-Seq results: <a href="http://rnaseq-result.liu-lab.com">http://rnaseq-result.liu-lab.com</a>
-- Demo report: <a href="http://rnaseq-report.liu-lab.com">http://rnaseq-report.liu-lab.com</a>
+- Demo RNA-Seq report: <a href="http://rnaseq-report.liu-lab.com">http://rnaseq-report.liu-lab.com</a>
 - Demo RNA-Seq database: <a href="http://ngsdb-rnaseq.liu-lab.com">http://ngsdb-rnaseq.liu-lab.com</a></p>
 <h2 id="change-logs">Change logs</h2>
 <ul>
+<li><em>[2021-10-14]</em> update to v0.0.19</li>
+<li><em>[2021-10-13]</em> update to v0.0.18</li>
 <li><em>[2021-10-1]</em> update to v0.0.17</li>
 <li><em>[2021-9-18]</em> update to v0.0.16</li>
 <li><em>[2021-9-3]</em> update to v0.0.13a</li>

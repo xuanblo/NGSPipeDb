@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ngspipedb
-Version: 0.0.18
+Version: 0.0.19
 Summary: NGSPipeDb is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation.
 Home-page: https://xuanblo.github.io/NGSPipeDb/
 Author: Xuan Zhang
@@ -19,6 +19,11 @@ License-File: LICENSE
 # NGSPipeDb: NGS Pipelines & Databases
 
 __NGSPipeDb__ is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation using [snakemake workflow](https://snakemake.readthedocs.io/en/stable/index.html) which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users.
+
+<figure markdown> 
+  ![Dummy image](imgs/fig1.png){ width="800" }
+  <figcaption>Overview of NGSPipeDb</figcaption>
+</figure>
 
 ## Quick start
 
@@ -147,7 +152,7 @@ step2. run rnaseq analysis on test data:
 step3. start ngsdb server:
 
   ```shell
-  ngspipedb rundb server -url 0.0.0.0:8000
+  ngspipedb rundb serve -m mouse_rnaseq_analysis/result/ngsdb_code/manage.py -up 127.0.0.1:8000
   ```
 
 **run resequencing analysis, generate report, and build RNA-Seq database**
@@ -157,12 +162,13 @@ step3. start ngsdb server:
 A more detailed tutorial of how to use this toolkit can be found here:: [https://xuanblo.github.io/NGSPipeDb/](https://xuanblo.github.io/NGSPipeDb/)
 
 Some demos:
-- Demo RNA-Seq results: [http://rnaseq-result.liu-lab.com](http://rnaseq-result.liu-lab.com)
-- Demo report: [http://rnaseq-report.liu-lab.com](http://rnaseq-report.liu-lab.com)
+- Demo RNA-Seq report: [http://rnaseq-report.liu-lab.com](http://rnaseq-report.liu-lab.com)
 - Demo RNA-Seq database: [http://ngsdb-rnaseq.liu-lab.com](http://ngsdb-rnaseq.liu-lab.com)
 
 ## Change logs
 
+- *[2021-10-14]* update to v0.0.19
+- *[2021-10-13]* update to v0.0.18
 - *[2021-10-1]* update to v0.0.17
 - *[2021-9-18]* update to v0.0.16
 - *[2021-9-3]* update to v0.0.13a
