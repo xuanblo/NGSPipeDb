@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-from ruamel.yaml import YAML
+from ruamel_yaml import YAML
 import pathlib
 import sys
 
@@ -31,6 +31,8 @@ def modify_config_yaml(args, ngspipedb_configfile, new_configfile):
         modify_dict['email_addr'] = args['email_addr']
     if 'exp_path' in args.keys():
         modify_dict['exp_path'] = args['exp_path']
+    if 'target' in args.keys():
+        modify_dict['target'] = args['target']
     if 'reads_prefix' in args.keys():
         modify_dict['read1Suffix'] = args['reads_prefix'].format('1')
         modify_dict['read2Suffix'] = args['reads_prefix'].format('2')

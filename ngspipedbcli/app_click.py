@@ -8,7 +8,7 @@ from click.decorators import version_option
 from ngspipedbcli.download import download_main
 from ngspipedbcli.runpipe import run_ngsdb, run_ngspipe, run_ngspipedb_one_step, run_server
 from ngspipedbcli.project import start_project_main
-from ngspipedbcli.env import env_create, env_list, env_pack, env_remove, env_unpack
+from ngspipedbcli.env import env_create, env_list, env_pack, env_remove, env_unpack, env_update
 from ngspipedbcli.common import *
 
 def configure_env_group(args=None):
@@ -86,6 +86,18 @@ def configure_env_group(args=None):
         #click.echo("ctx: {}, param".format(ctx.params))
         env_unpack(ctx.params)
     
+    @cli_env.command(name='update', help='update conda environment')
+    @click.pass_context
+    @click.option('-n', '--name', help='env name')
+    @click.option('-p', '--path', help="env path")
+    @click.option('--pipename', help='pipeline name')
+    @click.option('-ps', '--printshell', is_flag=True, help="print ngspipedb shell commands")
+    def update_cmd(ctx, **kargs):
+        if args:
+            click.echo(ctx.get_help())
+        #click.echo("ctx: {}, param".format(ctx.params))
+        env_update(ctx.params)
+
     return cli_env
 
 def configure_download_group(args=None):
@@ -154,6 +166,7 @@ def configure_ngspipe_group(args=None):
     @click.option('--snaketype', help="`p`: print snakemake shell commands. `np`: Enable the dry run.", type=click.Choice(['np', 'p']), default='p')
     @click.option('-r', '--report', help="generate html report", is_flag=True)
     @click.option('-db', '--database', help="generate database", is_flag=True)
+    @click.option('--target', help="choose where to stop your pipeline", default='all')
     @click.option('-c', '--configfile', help="config file path", type=click.Path(exists=True))
     @click.option('--otherparams', help="other snakemake params", default='')
     @click.option('-ps', '--printshell', is_flag=True, help="print ngspipedb shell commands")
@@ -310,7 +323,7 @@ def configure_info_group(args=None):
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
-@click.version_option(version='0.0.19')
+@click.version_option(version='0.0.20')
 @click.pass_context
 def cli(ctx, args=None):
     """

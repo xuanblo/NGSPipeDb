@@ -34,7 +34,7 @@ email_addr: nobody
 #----------------------------------
 
 # choose where to stop your pipeline
-target: enrich # sampling_reads -> rawreads_qc -> mapping -> transcript_assembly -> quantification -> differential_expression -> protein_annotation -> enrich -> network -> all
+target: all # sampling_reads -> rawreads_qc -> mapping -> transcript_assembly -> quantification -> differential_expression -> protein_annotation -> enrich -> network -> all
 
 #----------------------------------
 # Configuration for sampling data
@@ -78,7 +78,7 @@ transcript_assembly_method: stringtie # stringtie
 
 # which quantification method do you want to use?
 quantify_method: stringtie # stringtie or htseqcount or featurecounts or salmon
-quantify_ref: new_annotation # genome_annotation or new_annotation (with novel transcript)
+quantify_ref: genome_annotation # genome_annotation (transcript_assembly will pass) or new_annotation (with novel transcript)
 
 #----------------------------------
 # Configuration for differential expression

@@ -5,7 +5,7 @@ channels:
   - default
   - r
 dependencies:
-  - snakemake=5.30.2
+  - snakemake=6.9.1
   - python=3.8
   - seqkit=0.14.0
   - trim-galore=0.6.6
@@ -34,6 +34,7 @@ dependencies:
   - eggnog-mapper=2.1.5
   - bioconductor-clusterprofiler=3.14.0
   - r-dplyr=0.8.5
+  - r-readr
   - gffcompare
   - feelnc=0.2
   - bedtools

@@ -150,6 +150,7 @@ rule mapping:
         mapping result
         '''
     input:
+        rawreads_qc_ok = join(flag_outdir, 'rawreads_qc.ok'),
         sorted_bam = expand(join(junction_align_outdir, junction_align_method, 'align', "{sample}", "{sample}.sorted.bam"), sample=SAMPLES),
         bam_report = expand(join(config['reportsDir'], '4.mapping_stat', "{sample}.bam_stat.txt"), sample=SAMPLES)
     output:

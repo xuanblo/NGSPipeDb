@@ -40,6 +40,18 @@ pipes_dict = {
         'testdata': 'testdata-ngspipe-rnaseq-basic.tar.gz',
         'database': ['eggnog.tar.gz', 'kegg.tar.gz'],
         'packenv': ['ngspipe-rnaseq-basic_linux.tar.gz', 'ngspipe-rnaseq-basic_osx.tar.gz'],
+        'steps': {
+            'sampling_reads': [0, 'sample_path', 'rawreads_dir'],
+            'rawreads_qc': [1],
+            'mapping': [2, 'genomeAnno_path', 'genomeFasta_path'],
+            'transcript_assembly': [3],
+            'quantification': [4],
+            'differential_expression': [5, 'condition_path'],
+            'protein_annotation': [6, 'database_eggnog_dir', 'database_gene_ontology_path'],
+            'enrich': [7],
+            'network': [8],
+            'all': [9]
+        },
     }, 
     'ngspipe-rnaseq-lncRNA': {
         'snakefile': os.path.join(ngspipe_dir, '1.3.rnaseq_analysis_reference_novelrna.Snakefile.py'),

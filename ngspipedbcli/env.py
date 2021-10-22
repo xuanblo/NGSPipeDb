@@ -101,5 +101,19 @@ def env_remove(args):
         else:
             call_status_remove_conda_env_command = subprocess.call(remove_conda_env_command, shell=True, encoding='utf-8')
 
+def env_update(args):
+    if args['name']:
+        update_conda_env_command = 'mamba env update -n {name} -f {yaml}'.format(name=args['name'], yaml=pipes_dict[args['pipename']]['env_path'])
+        if args['printshell']:
+            ngspipedb_print_command('update conda name...', update_conda_env_command)
+        else:
+            call_status_remove_conda_env_command = subprocess.call(update_conda_env_command, shell=True, encoding='utf-8')
+    if args['path']:
+        update_conda_env_command = 'mamba env update -p {path} -f {yaml}'.format(name=args['path'], yaml=pipes_dict[args['pipename']]['env_path'])
+        if args['printshell']:
+            ngspipedb_print_command('remove conda path...', update_conda_env_command)
+        else:
+            call_status_remove_conda_env_command = subprocess.call(update_conda_env_command, shell=True, encoding='utf-8')
+
 if __name__ == '__main__':
     pass

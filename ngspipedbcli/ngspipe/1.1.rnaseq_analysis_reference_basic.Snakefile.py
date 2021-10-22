@@ -11,8 +11,18 @@ from utils.message import message_success,message_error
 #version = '0.0.3'
 #message = parse_with_urllib("http://www.liu-lab.com/ngspipedb/changelog.md", version)
 #sys.stderr.write(message)
+#print(version)
 #ask_if_update_auto()
 #time.sleep(5)
+
+def list_basename(directory_path, remove_pattern):
+    '''
+    get file pattern in report directory
+    '''
+    import glob
+    files = glob.glob(directory_path + '/*.pdf')
+    basenames = [os.path.basename(i) for i in files]
+    return [i.replace(remove_pattern, '') for i in basenames]
 
 shell.executable("bash")
 
@@ -112,7 +122,9 @@ rule all:
         # 9. network
         #network = join(coexp_outdir, 'co_exp.network.tsv'),
 
-
+onstart:
+    shell('echo 0.0.19')
+    
 onsuccess:
     print(message_success)
     shell("python {}/scripts/sendmail.py -r {} -t {} -l {}".format(snake_dir, config['email_addr'], "success", "{log}"))

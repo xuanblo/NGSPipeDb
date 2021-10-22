@@ -4,17 +4,33 @@ quantify_outdir = join(config["resultsDir"], "quantify")
 
 quantify_ref = config["genomeAnno"] if config['quantify_ref'] == 'genome_annotation' else join(transcript_assembly_outdir, "merged.gtf")
 
+rule tx2gene:
+    input:
+        quantify_ref = quantify_ref,
+    output:
+        tx2gene_out = join(quantify_outdir, 'tx2gene', 'tx2gene.tsv'),
+    params:
+        outdir = join(quantify_outdir, 'tx2gene'),
+    log: join(quantify_outdir, 'tx2gene', 'run.log.txt')
+    shell:
+        '''
+        gffread {input.quantify_ref} -T -o {params.outdir}/transcript.tmp.gtf 1>{log} 2>&1;
+        python {snake_dir}/scripts/tx2gene.py {params.outdir}/transcript.tmp.gtf >{output.tx2gene_out} 2>&1;
+        '''
+
 rule reStringtie_by_stringtie:
     message:
         '''
         stringtie was used to assemble transcript
         '''
     input:
+        mapping_ok = join(flag_outdir, 'mapping.ok'),
         sorted_bam = join(junction_align_outdir, junction_align_method, 'align', "{sample}", "{sample}.sorted.bam"),
         quantify_ref = quantify_ref,
     output:
         gtf = join(quantify_outdir, 'stringtie', 'restringtie', "{sample}", "{sample}.gtf"),
         expr = join(quantify_outdir, 'stringtie', 'restringtie', "{sample}", "{sample}.tab"),
+        ctab = join(quantify_outdir, 'stringtie', 'restringtie', "{sample}", "t_data.ctab"),
         gene_count = join(quantify_outdir, 'stringtie', 'restringtie', "{sample}", "{sample}_gene_count_piece.csv")
     threads:
         4
@@ -35,6 +51,7 @@ rule countMatrix_by_tximport_stringtie:
         '''
     input:
         ctab = expand(join(quantify_outdir, 'stringtie', 'restringtie', "{sample}", "t_data.ctab"), sample = SAMPLES),
+        tx2gene_out = join(quantify_outdir, 'tx2gene', 'tx2gene.tsv'),
     output:
         gene_count = join(quantify_outdir, 'stringtie', 'quant', "gene.counts.csv"),
     log:
@@ -45,19 +62,22 @@ rule countMatrix_by_tximport_stringtie:
         join(quantify_outdir, 'stringtie', 'quant', "benchmark.txt")
     shell:
         '''
-        Rscript {snake_dir}/scripts/tximport_stringtie_gene_counts.R --stringtie_quant_outdir {params.restringtie_dir} --conditionfile {new_conditionpath} --output {output.gene_count} 1>{log} 2>&1;
+        Rscript {snake_dir}/scripts/tximport_stringtie_gene_counts.R --stringtie_quant_outdir {params.restringtie_dir} --conditionfile {new_conditionpath} --tx2gene {input.tx2gene_out} --output {output.gene_count} 1>{log} 2>&1;
         '''
 
+"""
 rule countMatrix_by_stringtie:
     message:
         '''
         stringtie was used to calculate fpkm, tpm, counts
+        sed on macOX https://stackoverflow.com/questions/19456518/error-when-using-sed-with-find-command-on-os-x-invalid-command-code
         '''
     input:
         gene_count = expand(join(quantify_outdir, 'stringtie', 'restringtie', "{sample}", "{sample}_gene_count_piece.csv"), sample = SAMPLES),
         expr = expand(join(quantify_outdir, 'stringtie', 'restringtie', "{sample}", "{sample}.tab"), sample = SAMPLES)
     output:
         gene_count = join(quantify_outdir, 'stringtie', 'quant', "gene.counts.csv"),
+        gene_count_gname = join(quantify_outdir, 'stringtie', 'quant', "gene.counts.with_gene_name.csv"),
         transcript_count = join(quantify_outdir, 'stringtie', 'quant', "transcript.csv"),
         transcript_fpkm = join(quantify_outdir, 'stringtie', 'quant', "transcript_fpkm_all_samples.tsv"),
         gene_fpkm = join(quantify_outdir, 'stringtie', 'quant', "gene_fpkm_all_samples.tsv")
@@ -68,9 +88,10 @@ rule countMatrix_by_stringtie:
     shell:
         '''
         cat {input.gene_count} >{quantify_outdir}/gtflist.txt 2>{log};
-        prepDE.py -i {quantify_outdir}/gtflist.txt -t {output.transcript_count} -g {output.gene_count} -l 150 >>{log} 2>&1;
-        sed -i 's#|[^,]*,#,#' {output.gene_count};
-        # TPM
+        prepDE.py -i {quantify_outdir}/gtflist.txt -t {output.transcript_count} -g {output.gene_count_gname} -l 150 >>{log} 2>&1;
+        # remove gene name added by stringtie
+        python {snake_dir}/scripts/stringtie_remove_gene_name.py {output.gene_count_gname} {output.gene_count} >>{log} 2>&1;
+        # TPM 
         python {snake_dir}/scripts/stringtie_expression_matrix.py -m tpm -s {quantify_outdir}/stringtie/restringtie -t {quantify_outdir}/stringtie/quant/transcript_tpm_all_samples.tsv -g {quantify_outdir}/stringtie/quant/gene_tpm_all_samples.tsv >>{log} 2>&1;
         # FPKM
         python {snake_dir}/scripts/stringtie_expression_matrix.py -m fpkm -s {quantify_outdir}/stringtie/restringtie -t {quantify_outdir}/stringtie/quant/transcript_fpkm_all_samples.tsv -g {quantify_outdir}/stringtie/quant/gene_fpkm_all_samples.tsv >>{log} 2>&1;
@@ -78,6 +99,7 @@ rule countMatrix_by_stringtie:
         '''
 
 ruleorder: countMatrix_by_tximport_stringtie > countMatrix_by_stringtie
+"""
 
 if config["junction_align_rna_library"] == "fr-firststrand" or config["junction_align_rna_library"] == "--rna-strandness RF":
     featureCounts_library = "-s 2"
@@ -92,6 +114,7 @@ rule quant_counts_by_feature_counts:
         featurecounts
         '''
     input:
+        mapping_ok = join(flag_outdir, 'mapping.ok'),
         quantify_ref = quantify_ref,
         sorted_bam = expand(join(junction_align_outdir, junction_align_method, 'align', "{sample}", "{sample}.sorted.bam"), sample=SAMPLES)
     output:
@@ -122,12 +145,13 @@ elif config["junction_align_rna_library"] == "fr-secondstrand" or config["juncti
 elif config["junction_align_rna_library"] == None:
     htseq_library = "-s no"
 
-rule feature_quant_step1_by_htseq_counts:
+rule feature_quant_by_htseq_counts:
     message:
         '''
         htseq counts
         '''
     input:
+        mapping_ok = join(flag_outdir, 'mapping.ok'),
         quantify_ref = quantify_ref,
         sorted_bam = join(junction_align_outdir, junction_align_method, 'align', "{sample}", "{sample}.sorted.bam")
     output:
@@ -217,6 +241,7 @@ rule salmon_index:
 
 rule salmon_quant:
     input:
+        rawreads_qc_ok = join(flag_outdir, 'rawreads_qc.ok'),
         read1 = join(qc_outdir, qc_method, "{sample}", "{sample}.cleanR1.fq.gz"),
         read2 = join(qc_outdir, qc_method,"{sample}", "{sample}.cleanR2.fq.gz"),
         salmon_index = join(quantify_outdir, 'salmon', 'index', 'index.ok'),

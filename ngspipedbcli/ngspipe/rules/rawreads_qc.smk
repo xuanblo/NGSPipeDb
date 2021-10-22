@@ -130,6 +130,7 @@ rule rawreads_qc:
         -------------------
         '''
     input:
+        sampling_reads_ok = join(flag_outdir, 'sampling_reads.ok'),
         read1 = expand(join(qc_outdir, qc_method, "{sample}", "{sample}.cleanR1.fq.gz"), sample=SAMPLES),
         read2 = expand(join(qc_outdir, qc_method, "{sample}", "{sample}.cleanR2.fq.gz"), sample=SAMPLES),
         cleandata_report = join(config['reportsDir'], '3.cleanreads_stat', "cleanreads_product.csv")

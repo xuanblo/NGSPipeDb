@@ -796,6 +796,7 @@ ngspipedbcli/ngspipe/reports/fig1.rst
 ngspipedbcli/ngspipe/reports/fig1.svg
 ngspipedbcli/ngspipe/reports/fig2.png
 ngspipedbcli/ngspipe/reports/fig2.rst
+ngspipedbcli/ngspipe/reports/hisat2_mapping_stat.rst
 ngspipedbcli/ngspipe/reports/rawreads_stat.rst
 ngspipedbcli/ngspipe/reports/test.csv
 ngspipedbcli/ngspipe/reports/workflow.rst
@@ -948,6 +949,7 @@ ngspipedbcli/ngspipe/scripts/sample4trinity_read_condition.py
 ngspipedbcli/ngspipe/scripts/sendmail.py
 ngspipedbcli/ngspipe/scripts/stat.py
 ngspipedbcli/ngspipe/scripts/stringtie_expression_matrix.py
+ngspipedbcli/ngspipe/scripts/stringtie_remove_gene_name.py
 ngspipedbcli/ngspipe/scripts/test2.sqlite3
 ngspipedbcli/ngspipe/scripts/tx2gene.py
 ngspipedbcli/ngspipe/scripts/tximport_salmon_gene_counts.R

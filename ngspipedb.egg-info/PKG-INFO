@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ngspipedb
-Version: 0.0.19
+Version: 0.0.20
 Summary: NGSPipeDb is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation.
 Home-page: https://xuanblo.github.io/NGSPipeDb/
 Author: Xuan Zhang
