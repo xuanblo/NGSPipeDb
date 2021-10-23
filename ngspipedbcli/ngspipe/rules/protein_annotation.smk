@@ -1,9 +1,9 @@
 
 
-anno_method = 'eggnog' # eggnog or interproscan
+anno_method = config['anno_method'] # eggnog or interproscan
 protein_anno_outdir = join(config["resultsDir"], "protein_anno")
 
-rule eggnog_mapper:
+rule protein_anno_by_eggnog_mapper:
     '''
     Document: https://github.com/eggnogdb/eggnog-mapper/wiki/eggNOG-mapper-v2.1.5
     Database:
@@ -72,13 +72,23 @@ rule gokegg_addname:
         Rscript {snake_dir}/scripts/add_kegg_ontology_name.R --k_anno {input.eggnog_k} --output {output.eggnog_kegg_addname} 1>{log.kegg_addname_log} 2>&1;
         '''
 
+rule protein_anno_by_touch_empty:
+    input:
+        genomeFasta = config["genomeFasta"],
+        genomeAnno = quantify_ref,
+        differential_expression_ok = join(flag_outdir, 'differential_expression.ok')
+    output:
+        eggnog_go_addname = touch(join(protein_anno_outdir, 'touch_empty', 'eggnog.go.addname.txt')),
+        eggnog_kegg_addname = touch(join(protein_anno_outdir, 'touch_empty', 'eggnog.kegg.addname.txt')),
+
 rule protein_annotation:
     message:
         '''
-        differential_expression ok
+        protein_annotation ok
         '''
     input:
         eggnog_go_addname = join(protein_anno_outdir, anno_method, 'eggnog.go.addname.txt'),
         eggnog_kegg_addname = join(protein_anno_outdir, anno_method, 'eggnog.kegg.addname.txt'),
+        differential_expression_ok = join(flag_outdir, 'differential_expression.ok'),
     output:
         protein_annotation_ok = touch(join(flag_outdir, 'protein_annotation.ok'))

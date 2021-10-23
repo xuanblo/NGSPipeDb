@@ -5,7 +5,11 @@
 ## test command line get parameters
 python -m ngspipedbcli runpipe ngspipe-rnaseq-basic -d ../test_pipeline -n ngspipe-rnaseq-basic --resultdirname result --genomeFasta ../testdata_ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --conditionfile ../testdata_ngspipe-rnaseq-basic/rawdata/condition.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --target differential_expression --snaketype p -j 1
 ## test get parameters from configfile
-python -m ngspipedbcli runpipe ngspipe-rnaseq-basic -d ../test_pipeline -n ngspipe-rnaseq-basic -c ../test_pipeline/ngspipe-rnaseq-basic/ngspipe_config.yaml --resultdirname result --target differential_expression --snaketype p -j 1 -r
+python -m ngspipedbcli runpipe ngspipe-rnaseq-basic -d ../test_pipeline -n ngspipe-rnaseq-basic -c ../test_pipeline/ngspipe-rnaseq-basic/ngspipe_config.yaml --resultdirname result --snaketype p -j 1 -r
+
+# medicago tnt
+
+python -m ngspipedbcli runpipe ngspipe-tnt-medicago -d ../test_pipeline -n ngspipe-tnt --resultdirname result --genomeFasta ../test_pipeline/ngspipe-tnt-medicago/genome/chr19_tnt1.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --resultdirname result --snaketype p -j 1
 
 # trinity
 

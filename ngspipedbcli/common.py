@@ -52,6 +52,21 @@ pipes_dict = {
             'network': [8],
             'all': [9]
         },
+    },
+    'ngspipe-tnt': {
+        'snakefile': os.path.join(ngspipe_dir, 'medicago_tnt1_itis.smk'),
+        'configfile': os.path.join(ngspipe_dir, 'config/tnt.config.yaml'),
+        'env_path': os.path.join(ngspipe_dir, 'envs/requirements_tnt.yaml'),
+        'env_name': 'ngspipe-tnt',
+        'testdata': 'testdata-ngspipe-rnaseq-basic.tar.gz',
+        'database': ['', ''],
+        'packenv': ['', ''],
+        'steps': {
+            'sampling_reads': [0, 'sample_path', 'rawreads_dir'],
+            'rawreads_qc': [1],
+            'tnt_merge': [2, 'genomeAnno_path', 'genomeFasta_path'],
+            'all': [3]
+        },
     }, 
     'ngspipe-rnaseq-lncRNA': {
         'snakefile': os.path.join(ngspipe_dir, '1.3.rnaseq_analysis_reference_novelrna.Snakefile.py'),

@@ -50,10 +50,12 @@ flag_outdir = join(config["resultsDir"], "flag")
 os.makedirs(flag_outdir, exist_ok=True)
 
 # new condition file
+
 condition_df = pd.read_csv(config["condition_path"], index_col=0, header=0)
 condition_df = condition_df.loc[SAMPLES, :]
 new_conditionpath = join(flag_outdir, 'condition.csv')
-condition_df.to_csv(new_conditionpath)
+if not os.path.exists(new_conditionpath):
+    condition_df.to_csv(new_conditionpath)
 
 
 # 6. statistic
@@ -120,10 +122,10 @@ rule all:
         enrich                                   = join(flag_outdir, 'enrich.ok'),
         #
         # 9. network
-        #network = join(coexp_outdir, 'co_exp.network.tsv'),
+        network                                 = join(flag_outdir, 'network.ok'),
 
 onstart:
-    shell('echo 0.0.19')
+    shell('echo 0.0.20')
     
 onsuccess:
     print(message_success)
@@ -143,7 +145,6 @@ include: join("rules", "sampling_reads.smk")
 #include: join("rules", "9.differential_expression.deseq2.Snakefile.py")
 #include: join("rules", "annotation_protein_by_{}.Snakefile.py".format(anno_method))
 #include: join("rules", "differential_expressed_gene_enrich.Snakefile.py")
-#include: join("rules", "network_analysis_by_gcen.Snakefile.py")
 include: join("rules", "rawreads_qc.smk")
 include: join("rules", "transcriptome_mapping.smk")
 include: join("rules", "transcript_assembly.smk")
@@ -151,3 +152,4 @@ include: join("rules", "expression_quantification.smk")
 include: join("rules", "differential_expression.smk")
 include: join("rules", "protein_annotation.smk")
 include: join("rules", "enrich.smk")
+include: join("rules", "network_analysis.smk")

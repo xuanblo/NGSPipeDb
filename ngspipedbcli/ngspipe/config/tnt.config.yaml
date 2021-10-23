@@ -1,0 +1,44 @@
+#---------------------------
+# resequencing
+#---------------------------
+
+## 1.reference ##
+genomeAnno_path: "genome/GRCm38.83.chr19.gtf" # gene annotation file, can be gtf or gff format
+genomeFasta_path: "genome/chr19.fa" # genome sequence, fasta format
+
+## 2.raw reads data ##
+sample_path: "rawdata/sample.csv" # sample file
+rawreads_dir: "rawdata" # sample file directory
+read1Suffix: "_R1.fq.gz" # fastq suffix, read1
+read2Suffix: "_R2.fq.gz"
+
+## 3.output directory ##
+results_name: "results"
+
+## 4.notice ##
+# if the string is 'nobody', ngspipe will not send email
+# modify 'noboby' to 'xxx@qq.com' or 'xxx@qq.com,yyy@qq.com' to send email
+email_addr: 'nobody'
+
+# choose where to stop your pipeline
+target: all #
+
+#----------------------------------
+# Configuration for sampling data
+#----------------------------------
+
+# for test the pipe, you can choose to the part of the input file
+# which sampling method do you want to use?
+sampling_method: links # links or head or tail or seqkit_number or seqkit_proportion
+# Default is links (ues the whole data of sample); head (use first sampling_range line in every sample),tail (use last sampling_range line in every sample); seqkit_number (number of reads); seqkit_proportion (percentage of reads)
+# and how many reads file line or reads number or reads proportion do you want to use?
+sampling_value: 80000 # for head and tail, this value is line number; for number, this value is reads number; for proportion, this value is percentage
+
+samples_num: all # all or interger
+# Default is all (use all samples), give a sample number, must less than real sample number, for example 6
+
+#----------------------------------
+# Configuration for Quality Control
+#----------------------------------
+# which qc method do you want to use?
+qc_method: trim-galore # trim-galore or trimmomatic or fastqc

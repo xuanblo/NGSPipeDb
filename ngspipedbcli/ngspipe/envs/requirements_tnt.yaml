@@ -1,0 +1,22 @@
+name: resequencing
+channels:
+  - bioconda
+  - conda-forge
+  - default
+dependencies:
+  - python=3.8
+  - seqkit=0.14.0
+  - trimmomatic=0.39
+  - trim-galore=0.6.6
+  - snakemake=6.9
+  - samtools=0.1.19
+  - bowtie2=2.4.2 # need libtdd on macOS
+  - bwa=0.7.17
+  - bcftools=1.11
+  - snpeff=5.0
+  - rseqc=4.0.0
+  - perl-bioperl
+  - r
+  - blast
+  - markdown
+  - bs4

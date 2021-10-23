@@ -81,7 +81,9 @@ def check_config_paths(workding_directory, configfile, steps_dict, target):
                 if os.listdir(v):
                     pass
                 else:
-                    sys.stderr.write('param: {k} is required, however no fastq file in dir: {v} is not exists\n'.format(k=k, v=v))
+                    # this is for rawdata
+                    sys.stderr.write('param: {k} is required, however no files in {v}\n'.format(k=k, v=v))
+                    sys.exit(-1)
             else:
                 sys.stderr.write('param: {k} is required, however its dir: {v} is not exists\n'.format(k=k, v=v))
                 sys.exit(-1)
