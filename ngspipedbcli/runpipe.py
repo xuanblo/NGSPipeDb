@@ -193,6 +193,13 @@ template configfile: {}
         else:
             run_status_install_env_command = subprocess.run(install_env_command, shell=True, encoding='utf-8')
 
+    # update environment
+    update_env_command = 'python -m ngspipedbcli env update -n {}'.format(conda_env)
+    if args['printshell']:
+        ngspipedb_print_command('update environment', update_env_command)
+    else:
+        run_status_update_env_command = subprocess.run(update_env_command, shell=True, encoding='utf-8')
+
     # configfile
     ngspipedb_configfile = '{working_dir}/ngspipe_config.yaml'.format(working_dir=workding_directory)
 
@@ -323,6 +330,13 @@ demo_configfile: {}
         else:
             run_status_install_env_command = subprocess.run(install_env_command, shell=True, encoding='utf-8')
 
+    # update environment
+    update_env_command = 'python -m ngspipedbcli env update -n {}'.format(conda_env)
+    if args['printshell']:
+        ngspipedb_print_command('update environment', update_env_command)
+    else:
+        run_status_update_env_command = subprocess.run(update_env_command, shell=True, encoding='utf-8')
+        
     # modify configfile
     ngspipedb_configfile = '{working_dir}/ngsdb_config.yaml'.format(working_dir=workding_directory)
 

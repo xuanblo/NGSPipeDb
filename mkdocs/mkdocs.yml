@@ -42,6 +42,7 @@ nav:
 #    - NGS analysis: ngs.md
 #    - Conda: conda.md
 - Change logs: changelog.md
+- trouble shooting: trouble_shooting.md
 - Todo: todo.md
 
 # Theme
