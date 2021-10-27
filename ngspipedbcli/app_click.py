@@ -11,6 +11,14 @@ from ngspipedbcli.project import start_project_main
 from ngspipedbcli.env import env_create, env_list, env_pack, env_remove, env_unpack, env_update
 from ngspipedbcli.common import *
 
+import requests
+import json
+try:
+    from packaging.version import parse
+except ImportError:
+    from pip._vendor.packaging.version import parse
+from versions_comparison import Comparison
+
 def configure_env_group(args=None):
     '''
     TODO: @click.option('--log_level', type=click.Choice(['debug', 'info']), default='info', help='can be info debug error')
@@ -320,10 +328,10 @@ def configure_info_group(args=None):
 # sub-parsers
 #
 # #############################################################################################
-
+current_version = '0.0.21'
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
-@click.version_option(version='0.0.20')
+@click.version_option(version=current_version, prog_name='NGSPipeDb', message='%(prog)s, version %(version)s')
 @click.pass_context
 def cli(ctx, args=None):
     """
@@ -342,6 +350,36 @@ def cli(ctx, args=None):
     if args:
         click.echo(ctx.get_help())
 
+def get_last_version_from_pypi(package, url_pattern):
+    """Return version of package on pypi.python.org using json."""
+    req = requests.get(url_pattern.format(package=package))
+    version = parse('0')
+    if req.status_code == requests.codes.ok:
+        j = json.loads(req.text.encode(req.encoding))
+        releases = j.get('releases', [])
+        for release in releases:
+            ver = parse(release)
+            if not ver.is_prerelease:
+                version = max(version, ver)
+    return str(version)
+
+def new_version_check():
+    URL_PATTERN = 'https://test.pypi.org/pypi/{package}/json'
+    last_version = get_last_version_from_pypi('NGSPipeDb', URL_PATTERN)
+    update_message = '''
+WARNING: You are using NGSPipeDb version {current_version}; however, version {last_version} is available.
+You should consider upgrading via the 'pip install -i https://test.pypi.org/simple/ ngspipedb={last_version}' command.
+Please see Changelog for the latest changes: https://xuanblo.github.io/NGSPipeDb/changelog/
+    '''.format(current_version=current_version, last_version=last_version)
+    last_version_message = '''
+You are using the lastest version {}
+    '''.format(last_version)
+    versions = Comparison(current_version, last_version)
+    if versions.get_greater() == current_version or versions.get_greater() == None:
+        print(last_version_message)
+    else:
+        print(update_message)
+
 def ngspipedb_cli_main():
     cli.add_command(configure_env_group(args=None if sys.argv[3:] else ['-h']))
     cli.add_command(configure_download_group(args=None if sys.argv[2:] else ['-h']))
@@ -350,6 +388,7 @@ def ngspipedb_cli_main():
     cli.add_command(configure_startproject_group(args=None if sys.argv[3:] else ['-h']))
     #cli.add_command(configure_runserver_group(args=None if sys.argv[3:] else ['-h']))
     #cli.add_command(configure_info_group(args=None if sys.argv[3:] else ['-h']))
+    new_version_check()
     cli(obj={}, args=None if sys.argv[1:] else ['-h'])
 
 if __name__ == '__main__':

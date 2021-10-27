@@ -32,6 +32,7 @@ nav:
     - NGSPipe Reference-based lncRNA: Reference-based-NGSPipe-lncRNA-analysis.md
     - NGSPipe ChIP-seq: NGSPipe-ChIP-seq.md
     - NGSPipe resequecing: NGSPipe-resequecing.md
+    - NGSPipe medicago tnt insertion: NGSPipe-medicago-tnt1.md
 - Databases:
     - NGSDb with genome: NGSDb.md
     - NGSDb without genome: NGSDb.md

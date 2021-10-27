@@ -73,6 +73,7 @@ Use following commands to retrieve and then run the Minicoda3 installation scrip
 
 1. Install from pipi
   ```shell
+  conda install pip
   pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple ngspipedb
   ```
 
@@ -149,9 +150,4 @@ Some demos:
 
 ## Change logs
 
-- *[2021-10-14]* update to v0.0.19
-- *[2021-10-13]* update to v0.0.18
-- *[2021-10-1]* update to v0.0.17
-- *[2021-9-18]* update to v0.0.16
-- *[2021-9-3]* update to v0.0.13a
-- *[2021-9-3]* update to v0.0.13
+- https://xuanblo.github.io/NGSPipeDb/changelog/

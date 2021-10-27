@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/Reference-based-NGSPipe-RNA-seq/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/Reference-free-NGSPipe-RNA-seq/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/Reference-based-NGSPipe-lncRNA-analysis/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/NGSPipe-ChIP-seq/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/NGSPipe-resequecing/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://xuanblo.github.io/NGSPipeDb/NGSPipe-medicago-tnt1/</loc>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/NGSDb/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/NGSDb/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/NGSDb/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/changelog/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://xuanblo.github.io/NGSPipeDb/todo/</loc>
-     <lastmod>2021-10-14</lastmod>
+     <lastmod>2021-10-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
