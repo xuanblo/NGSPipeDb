@@ -20,7 +20,7 @@
     
     
       
-        <title>NGSPipe medicago tnt insertion - NGSPipeDb Document</title>
+        <title>medicago tnt insertion - NGSPipeDb Document</title>
       
     
     
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              NGSPipe medicago tnt insertion
+              medicago tnt insertion
             
           </span>
         </div>
@@ -250,22 +250,6 @@
   
 
 
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../NGSDb/" class="md-tabs__link">
-        Databases
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-
-
   <li class="md-tabs__item">
     <a href="../changelog/" class="md-tabs__link">
       Change logs
@@ -375,7 +359,7 @@
   
     <li class="md-nav__item">
       <a href="../Reference-based-NGSPipe-RNA-seq/" class="md-nav__link">
-        NGSPipe Reference-based RNA-seq
+        Reference-based RNA-seq
       </a>
     </li>
   
@@ -387,7 +371,7 @@
   
     <li class="md-nav__item">
       <a href="../Reference-free-NGSPipe-RNA-seq/" class="md-nav__link">
-        NGSPipe Denovo RNA-seq
+        Denovo RNA-seq
       </a>
     </li>
   
@@ -399,7 +383,7 @@
   
     <li class="md-nav__item">
       <a href="../Reference-based-NGSPipe-lncRNA-analysis/" class="md-nav__link">
-        NGSPipe Reference-based lncRNA
+        Reference-based lncRNA
       </a>
     </li>
   
@@ -411,7 +395,7 @@
   
     <li class="md-nav__item">
       <a href="../NGSPipe-ChIP-seq/" class="md-nav__link">
-        NGSPipe ChIP-seq
+        ChIP-seq
       </a>
     </li>
   
@@ -423,7 +407,7 @@
   
     <li class="md-nav__item">
       <a href="../NGSPipe-resequecing/" class="md-nav__link">
-        NGSPipe resequecing
+        resequecing
       </a>
     </li>
   
@@ -443,75 +427,9 @@
       
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        NGSPipe medicago tnt insertion
+        medicago tnt insertion
       </a>
       
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
-      
-      <label class="md-nav__link" for="__nav_3">
-        Databases
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Databases" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          Databases
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../NGSDb/" class="md-nav__link">
-        NGSDb with genome
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../NGSDb/" class="md-nav__link">
-        NGSDb without genome
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../NGSDb/" class="md-nav__link">
-        NGSDb with multi genomes
-      </a>
     </li>
   
 
@@ -597,6 +515,62 @@
 <p>Example:
 <div class="highlight"><pre><span></span><code>python -m ngspipedbcli runpipe ngspipe-tnt-medicago -n ngspipe-tnt --resultdirname result -d ../ --genomeFasta ../genome/scf003.fa --genomeAnno ../genome/scf003.sorted.gff --samplefile ../rawdata/sample.csv --rawreadsdir ../rawdata --snaketype p --reads_prefix _R{}_paired.fastq.gz -j 20
 </code></pre></div></p>
+<ul>
+<li><code>ngspipe-tnt-medicago</code> your project name</li>
+<li><code>-n ngspipe-tnt</code> pipeline name</li>
+<li><code>--genomeFasta ../genome/scf003.fa</code> give a genome fasta file path, see file format <a href="https://en.wikipedia.org/wiki/FASTA_format">fasta</a></li>
+<li><code>--genomeAnno ../genome/scf003.sorted.gff</code> give a genome annotaion file path <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format4">gtf</a>/<a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format3">gff</a></li>
+<li><code>--samplefile ../rawdata/sample.csv</code> give a sample file path, which has one column</li>
+</ul>
+<p>samplefile:
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">XTD-6</span>
+</code></pre></div></p>
+<p>configfile:
+<div class="highlight"><pre><span></span><code><span class="c1">#---------------------------</span>
+<span class="c1"># medicago tnt1</span>
+<span class="c1">#---------------------------</span>
+
+<span class="c1">## 1.reference ##</span>
+<span class="nt">genomeAnno_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/zhangxuan/Work/Project/hehua/test_ngspipedb/genome/scf003.sorted.gff</span> <span class="c1"># gene annotation file, can be gtf or gff format</span>
+<span class="nt">genomeFasta_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/zhangxuan/Work/Project/hehua/test_ngspipedb/genome/scf003.fa</span> <span class="c1"># genome sequence, fasta format</span>
+
+<span class="c1">## 2.raw reads data ##</span>
+<span class="nt">sample_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/zhangxuan/Work/Project/hehua/test_ngspipedb/rawdata/sample.csv</span> <span class="c1"># sample file</span>
+<span class="nt">rawreads_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/zhangxuan/Work/Project/hehua/test_ngspipedb/rawdata</span> <span class="c1"># sample file directory</span>
+<span class="nt">read1Suffix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_R1_paired.fastq.gz</span> <span class="c1"># fastq suffix, read1</span>
+<span class="nt">read2Suffix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_R2_paired.fastq.gz</span>
+
+<span class="c1">## 3.output directory ##</span>
+<span class="nt">results_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result</span>
+
+<span class="c1">## 4.notice ##</span>
+<span class="c1"># if the string is &#39;nobody&#39;, ngspipe will not send email</span>
+<span class="c1"># modify &#39;noboby&#39; to &#39;xxx@qq.com&#39; or &#39;xxx@qq.com,yyy@qq.com&#39; to send email</span>
+<span class="nt">email_addr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nobody</span>
+
+<span class="c1"># choose where to stop your pipeline</span>
+<span class="nt">target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span> <span class="c1">#</span>
+
+<span class="c1">#----------------------------------</span>
+<span class="c1"># Configuration for sampling data</span>
+<span class="c1">#----------------------------------</span>
+
+<span class="c1"># for test the pipe, you can choose to the part of the input file</span>
+<span class="c1"># which sampling method do you want to use?</span>
+<span class="nt">sampling_method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">links</span> <span class="c1"># links or head or tail or seqkit_number or seqkit_proportion</span>
+<span class="c1"># Default is links (ues the whole data of sample); head (use first sampling_range line in every sample),tail (use last sampling_range line in every sample); seqkit_number (number of reads); seqkit_proportion (percentage of reads)</span>
+<span class="c1"># and how many reads file line or reads number or reads proportion do you want to use?</span>
+<span class="nt">sampling_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80000</span> <span class="c1"># for head and tail, this value is line number; for number, this value is reads number; for proportion, this value is percentage</span>
+
+<span class="nt">samples_num</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span> <span class="c1"># all or interger</span>
+<span class="c1"># Default is all (use all samples), give a sample number, must less than real sample number, for example 6</span>
+
+<span class="c1">#----------------------------------</span>
+<span class="c1"># Configuration for Quality Control</span>
+<span class="c1">#----------------------------------</span>
+<span class="c1"># which qc method do you want to use?</span>
+<span class="nt">qc_method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">trim-galore</span> <span class="c1"># trim-galore or trimmomatic or fastqc</span>
+</code></pre></div></p>
                 
               
   <!--
@@ -644,14 +618,14 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              NGSPipe resequecing
+              resequecing
             </div>
           </div>
         </a>
       
       
         <a
-          href="../NGSDb/"
+          href="../changelog/"
           class="md-footer__link md-footer__link--next"
           rel="next"
         >
@@ -660,7 +634,7 @@
               <span class="md-footer__direction">
                 Next
               </span>
-              NGSDb with genome
+              Change logs
             </div>
           </div>
           <div class="md-footer__button md-icon">

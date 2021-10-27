@@ -1,4 +1,4 @@
 # todo
 
-[ ] conda package
-[ ] ngsdb tools page
+- [ ] conda package
+- [ ] ngsdb tools page

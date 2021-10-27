@@ -27,16 +27,16 @@ plugins:
 nav:
 - Home: index.md
 - Pipelines:
-    - NGSPipe Reference-based RNA-seq: Reference-based-NGSPipe-RNA-seq.md
-    - NGSPipe Denovo RNA-seq: Reference-free-NGSPipe-RNA-seq.md
-    - NGSPipe Reference-based lncRNA: Reference-based-NGSPipe-lncRNA-analysis.md
-    - NGSPipe ChIP-seq: NGSPipe-ChIP-seq.md
-    - NGSPipe resequecing: NGSPipe-resequecing.md
-    - NGSPipe medicago tnt insertion: NGSPipe-medicago-tnt1.md
-- Databases:
-    - NGSDb with genome: NGSDb.md
-    - NGSDb without genome: NGSDb.md
-    - NGSDb with multi genomes: NGSDb.md
+    - Reference-based RNA-seq: Reference-based-NGSPipe-RNA-seq.md
+    - Denovo RNA-seq: Reference-free-NGSPipe-RNA-seq.md
+    - Reference-based lncRNA: Reference-based-NGSPipe-lncRNA-analysis.md
+    - ChIP-seq: NGSPipe-ChIP-seq.md
+    - resequecing: NGSPipe-resequecing.md
+    - medicago tnt insertion: NGSPipe-medicago-tnt1.md
+#- Databases:
+#    - NGSDb with genome: NGSDb.md
+#    - NGSDb without genome: NGSDb.md
+#    - NGSDb with multi genomes: NGSDb.md
 #- Learning materials:
 #    - Linux & shell basic: linux.md
 #    - NGS analysis: ngs.md

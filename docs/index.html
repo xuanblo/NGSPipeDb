@@ -250,22 +250,6 @@
   
 
 
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="NGSDb/" class="md-tabs__link">
-        Databases
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-
-
   <li class="md-tabs__item">
     <a href="changelog/" class="md-tabs__link">
       Change logs
@@ -375,8 +359,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#0-required" class="md-nav__link">
-    0. required
+  <a href="#required" class="md-nav__link">
+    Required
   </a>
   
 </li>
@@ -389,8 +373,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ngspipedb-command-line-interface" class="md-nav__link">
-    NGSPipeDb command line interface
+  <a href="#command-line-interface" class="md-nav__link">
+    Command line interface
   </a>
   
 </li>
@@ -459,7 +443,7 @@
   
     <li class="md-nav__item">
       <a href="Reference-based-NGSPipe-RNA-seq/" class="md-nav__link">
-        NGSPipe Reference-based RNA-seq
+        Reference-based RNA-seq
       </a>
     </li>
   
@@ -471,7 +455,7 @@
   
     <li class="md-nav__item">
       <a href="Reference-free-NGSPipe-RNA-seq/" class="md-nav__link">
-        NGSPipe Denovo RNA-seq
+        Denovo RNA-seq
       </a>
     </li>
   
@@ -483,7 +467,7 @@
   
     <li class="md-nav__item">
       <a href="Reference-based-NGSPipe-lncRNA-analysis/" class="md-nav__link">
-        NGSPipe Reference-based lncRNA
+        Reference-based lncRNA
       </a>
     </li>
   
@@ -495,7 +479,7 @@
   
     <li class="md-nav__item">
       <a href="NGSPipe-ChIP-seq/" class="md-nav__link">
-        NGSPipe ChIP-seq
+        ChIP-seq
       </a>
     </li>
   
@@ -507,7 +491,7 @@
   
     <li class="md-nav__item">
       <a href="NGSPipe-resequecing/" class="md-nav__link">
-        NGSPipe resequecing
+        resequecing
       </a>
     </li>
   
@@ -519,73 +503,7 @@
   
     <li class="md-nav__item">
       <a href="NGSPipe-medicago-tnt1/" class="md-nav__link">
-        NGSPipe medicago tnt insertion
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
-      
-      <label class="md-nav__link" for="__nav_3">
-        Databases
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Databases" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          Databases
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="NGSDb/" class="md-nav__link">
-        NGSDb with genome
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="NGSDb/" class="md-nav__link">
-        NGSDb without genome
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="NGSDb/" class="md-nav__link">
-        NGSDb with multi genomes
+        medicago tnt insertion
       </a>
     </li>
   
@@ -660,8 +578,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#0-required" class="md-nav__link">
-    0. required
+  <a href="#required" class="md-nav__link">
+    Required
   </a>
   
 </li>
@@ -674,8 +592,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ngspipedb-command-line-interface" class="md-nav__link">
-    NGSPipeDb command line interface
+  <a href="#command-line-interface" class="md-nav__link">
+    Command line interface
   </a>
   
 </li>
@@ -732,7 +650,7 @@
 <figcaption>Overview of NGSPipeDb</figcaption>
 </figure>
 <h2 id="quick-start">Quick start</h2>
-<h3 id="0-required">0. required</h3>
+<h3 id="required">Required</h3>
 <p>Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the <a href="https://en.wikipedia.org/wiki/Command-line_interface">nix command line interface</a>. Also, it would be better if the user has basic knowledge about <a href="https://snakemake.readthedocs.io/en/stable/">snakemake</a>, <a href="https://docs.conda.io/en/latest/">conda</a> and <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8">best practice RNA sequence analysis</a>, but it is not required. You can also find some easy-to-learn matierals in our "Learning materials" page, for example <a href="../linux">linux &amp; shell</a> and <a href="../ngs#rnaseq">RNASeq background</a> for beginers.</p>
 <p><strong>Install wget and git</strong> <a name="BasicLinux"></a></p>
 <p>To get some of the required software packages, we will use the command line tools called <a href="http://www.gnu.org/software/wget/">wget</a> and <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git</a>.  <em>wget</em> is a popular tool for downloading things off of the internet.  <em>git</em> is a distributed version control system which we will use to checkout the NGSPipeDb code.</p>
@@ -792,7 +710,7 @@ pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https:/
 </code></pre></div></p>
 </li>
 </ol>
-<h3 id="ngspipedb-command-line-interface">NGSPipeDb command line interface</h3>
+<h3 id="command-line-interface">Command line interface</h3>
 <p><code>ngspipedb -h</code></p>
 <div class="highlight"><pre><span></span><code><span class="nt">Usage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ngspipedb [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -888,7 +806,7 @@ pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https:/
               <span class="md-footer__direction">
                 Next
               </span>
-              NGSPipe Reference-based RNA-seq
+              Reference-based RNA-seq
             </div>
           </div>
           <div class="md-footer__button md-icon">

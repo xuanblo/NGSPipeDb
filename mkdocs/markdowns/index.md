@@ -9,7 +9,7 @@ __NGSPipeDb__ is an automated pipeline for parallel processing of huge next gene
 
 ## Quick start
 
-### 0. required
+### Required
 
 Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the [nix command line interface](https://en.wikipedia.org/wiki/Command-line_interface). Also, it would be better if the user has basic knowledge about [snakemake](https://snakemake.readthedocs.io/en/stable/), [conda](https://docs.conda.io/en/latest/) and [best practice RNA sequence analysis](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8), but it is not required. You can also find some easy-to-learn matierals in our "Learning materials" page, for example [linux & shell](../linux) and [RNASeq background](../ngs#rnaseq) for beginers.
 
@@ -82,7 +82,7 @@ Use following commands to retrieve and then run the Minicoda3 installation scrip
 conda install
 ```
 
-### NGSPipeDb command line interface
+### Command line interface
 
 `ngspipedb -h`
 
