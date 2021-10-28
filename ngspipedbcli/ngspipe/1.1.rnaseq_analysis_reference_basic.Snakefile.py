@@ -124,9 +124,6 @@ rule all:
         # 9. network
         network                                 = join(flag_outdir, 'network.ok'),
 
-onstart:
-    shell('echo 0.0.20')
-    
 onsuccess:
     print(message_success)
     shell("python {}/scripts/sendmail.py -r {} -t {} -l {}".format(snake_dir, config['email_addr'], "success", "{log}"))

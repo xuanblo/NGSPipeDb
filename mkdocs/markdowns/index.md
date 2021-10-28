@@ -137,17 +137,3 @@ step3. start ngsdb server:
   ```shell
   ngspipedb rundb serve -m mouse_rnaseq_analysis/result/ngsdb_code/manage.py -up 127.0.0.1:8000
   ```
-
-**run resequencing analysis, generate report, and build RNA-Seq database**
-
-## Tutorial
-
-A more detailed tutorial of how to use this toolkit can be found here:: [https://xuanblo.github.io/NGSPipeDb/](https://xuanblo.github.io/NGSPipeDb/)
-
-Some demos:
-- Demo RNA-Seq report: [http://rnaseq-report.liu-lab.com](http://rnaseq-report.liu-lab.com)
-- Demo RNA-Seq database: [http://ngsdb-rnaseq.liu-lab.com](http://ngsdb-rnaseq.liu-lab.com)
-
-## Change logs
-
-- https://xuanblo.github.io/NGSPipeDb/changelog/

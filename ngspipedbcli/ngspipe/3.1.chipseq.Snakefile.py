@@ -108,9 +108,6 @@ rule all:
         # 6. report #
         report_result    = join(config['reportsDir'], "report.ok"),
         #
-    output:
-        touch(join(working_dir, '.ngspipedb', 'run_all.runned'))
-
 
 onsuccess:
     print(message_success)

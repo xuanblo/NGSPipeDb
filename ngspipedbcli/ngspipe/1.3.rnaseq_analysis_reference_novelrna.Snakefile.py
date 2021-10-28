@@ -138,7 +138,6 @@ rule all:
         # 8. protein annotation
         #protein_anno                       = join(protein_anno_outdir, anno_method)
 
-
 onsuccess:
     print(message_success)
     shell("python {}/scripts/sendmail.py -r {} -t {} -l {}".format(snake_dir, config['email_addr'], "success", "{log}"))

@@ -73,7 +73,6 @@ rule all:
         # 6. add script to wooey
         addscript                       = join(addscript_outdir, "addscript.ok"),
         
-
 onsuccess:
     print(message_success)
     shell("python {}/scripts/sendmail.py -r {} -t {} -l {}".format(snake_dir, config['email_addr'], "success", "{log}"))

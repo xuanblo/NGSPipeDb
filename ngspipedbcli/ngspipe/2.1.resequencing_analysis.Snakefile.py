@@ -108,9 +108,6 @@ rule all:
         statistic_result                   = expand(join(stat_outdir, "statistic_data_of_{statistic_data}", 'statistic.completed'), statistic_data=statistic_data_choose),
         # 6. report #
         report_result    = join(config['reportsDir'], "report.ok"),
-    output:
-        mark_runned = touch(join(working_dir, '.ngspipedb', 'run_all.runned')),
-
 
 onsuccess:
     print(message_success)

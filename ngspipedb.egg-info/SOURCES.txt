@@ -8,6 +8,7 @@ mkdocs/readthedocs.yml
 mkdocs/markdowns/.DS_Store
 mkdocs/markdowns/NGSDb.md
 mkdocs/markdowns/NGSPipe-ChIP-seq.md
+mkdocs/markdowns/NGSPipe-medicago-tnt1.md
 mkdocs/markdowns/NGSPipe-resequecing.md
 mkdocs/markdowns/NGSPipeDb.md
 mkdocs/markdowns/Reference-based-NGSPipe-RNA-seq.md
@@ -20,6 +21,7 @@ mkdocs/markdowns/index.md
 mkdocs/markdowns/ngs.md
 mkdocs/markdowns/requirements.txt
 mkdocs/markdowns/todo.md
+mkdocs/markdowns/trouble_shooting.md
 mkdocs/markdowns/.pheasant_cache/NGSDb.md.cache
 mkdocs/markdowns/.pheasant_cache/NGSPipe-RNA-seq.md.cache
 mkdocs/markdowns/.pheasant_cache/NGSPipeDb.md.cache
@@ -726,11 +728,13 @@ ngspipedbcli/ngspipe/1.4.rnaseq_analysis_denovo_trinity.Snakefile.py
 ngspipedbcli/ngspipe/2.1.resequencing_analysis.Snakefile.py
 ngspipedbcli/ngspipe/3.1.chipseq.Snakefile.py
 ngspipedbcli/ngspipe/db_generate.Snakefile.py
+ngspipedbcli/ngspipe/medicago_tnt1_itis.smk
 ngspipedbcli/ngspipe/config/chipseq.config.yaml
 ngspipedbcli/ngspipe/config/lncRNA.config.yaml
 ngspipedbcli/ngspipe/config/ngsdb.config.yaml
 ngspipedbcli/ngspipe/config/resequencing.config.yaml
 ngspipedbcli/ngspipe/config/rnaseq.config.yaml
+ngspipedbcli/ngspipe/config/tnt.config.yaml
 ngspipedbcli/ngspipe/config/trinity.config.yaml
 ngspipedbcli/ngspipe/envs/.com-apple-bird-noname-C0C27666-3DD6-4CC9-A57B-77E0F604F22F
 ngspipedbcli/ngspipe/envs/2.trim_galore.yaml
@@ -775,6 +779,7 @@ ngspipedbcli/ngspipe/envs/requirements_ngspipe_trinity.yaml
 ngspipedbcli/ngspipe/envs/requirements_resequencing.yaml
 ngspipedbcli/ngspipe/envs/requirements_rnaseq.yaml
 ngspipedbcli/ngspipe/envs/requirements_rnaseq的副本.yaml
+ngspipedbcli/ngspipe/envs/requirements_tnt.yaml
 ngspipedbcli/ngspipe/envs/rnaphoenix.yaml
 ngspipedbcli/ngspipe/envs/rseqc.yaml
 ngspipedbcli/ngspipe/envs/seqkit.yaml
@@ -789,6 +794,8 @@ ngspipedbcli/ngspipe/envs/trinity.yaml
 ngspipedbcli/ngspipe/envs/trinity的副本.yaml
 ngspipedbcli/ngspipe/imgs/dag.png
 ngspipedbcli/ngspipe/imgs/workflow.png
+ngspipedbcli/ngspipe/metadata/medicago_mere1.fa
+ngspipedbcli/ngspipe/metadata/medicago_tnt1.fa
 ngspipedbcli/ngspipe/metadata/report.html
 ngspipedbcli/ngspipe/reports/cleanreads_stat.rst
 ngspipedbcli/ngspipe/reports/expression.rst
@@ -858,7 +865,8 @@ ngspipedbcli/ngspipe/rules/enrich.smk
 ngspipedbcli/ngspipe/rules/expression_quantification.smk
 ngspipedbcli/ngspipe/rules/gffrepaire.py
 ngspipedbcli/ngspipe/rules/identify.lncRNA.Snakefile.py
-ngspipedbcli/ngspipe/rules/network_analysis_by_gcen.Snakefile.py
+ngspipedbcli/ngspipe/rules/medicago_tnt1.smk
+ngspipedbcli/ngspipe/rules/network_analysis.smk
 ngspipedbcli/ngspipe/rules/protein_annotation.smk
 ngspipedbcli/ngspipe/rules/quant.HtSeqCount.Snakefile.py
 ngspipedbcli/ngspipe/rules/quant.featureCounts.Snakefile.py

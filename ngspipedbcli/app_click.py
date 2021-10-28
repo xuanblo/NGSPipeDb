@@ -361,7 +361,13 @@ def get_last_version_from_pypi(package, url_pattern):
             ver = parse(release)
             if not ver.is_prerelease:
                 version = max(version, ver)
-    return str(version)
+    if 'a' in str(version):
+        dot_numbers_version = str(version).split('a')[0] # test alf version
+    elif 'b' in str(version):
+        dot_numbers_version = str(version).split('b')[0] # test beta version
+    else:
+        dot_numbers_version = str(version) # stable version 
+    return dot_numbers_version
 
 def new_version_check():
     URL_PATTERN = 'https://test.pypi.org/pypi/{package}/json'

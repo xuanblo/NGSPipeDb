@@ -65,9 +65,6 @@ rule all:
         # 3. tnt1 #
         tnt1                               = join(flag_outdir, 'tnt_merge.ok'),
 
-onstart:
-    shell('echo 0.0.20')
-    
 onsuccess:
     print(message_success)
     shell("python {}/scripts/sendmail.py -r {} -t {} -l {}".format(snake_dir, config['email_addr'], "success", "{log}"))

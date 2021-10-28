@@ -133,9 +133,6 @@ rule all:
         # 10. protein annotation
         #protein_anno                       = join(protein_anno_outdir, anno_method)
         lncRNA_anno                         = chenwen GNAD
-    output:
-        touch(join(working_dir, '.ngspipedb', 'run_all.runned'))
-
 
 onsuccess:
     print(message_success)
