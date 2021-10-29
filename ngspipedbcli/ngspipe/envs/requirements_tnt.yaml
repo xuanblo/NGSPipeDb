@@ -21,3 +21,5 @@ dependencies:
   - markdown
   - bs4
   - bedtools
+  - pip:
+    - biopython

@@ -58,6 +58,7 @@ rule all:
         # 1. sampling data #
         #sampling_data_result                = expand(join(sampling_data_outdir, "{sample}"+config["read1Suffix"]), sample=SAMPLES),
         sampling_reads                      = join(flag_outdir, 'sampling_reads.ok'),
+        sub_genome =                        join(flag_outdir, 'merge_sub_genome.ok'),
         #
         # 2. raw reads qc #
         rawreads_qc                        = join(flag_outdir, 'rawreads_qc.ok'),
@@ -73,6 +74,7 @@ onerror:
     print(message_error)
     shell("python {}/scripts/sendmail.py -r {} -t {} -l {}".format(snake_dir, config['email_addr'], "error", "{log}"))
 
+include: join("rules", "sub_genome.smk")
 include: join("rules", "sampling_reads.smk")
 include: join("rules", "rawreads_qc.smk")
 include: join("rules", "medicago_tnt1.smk")

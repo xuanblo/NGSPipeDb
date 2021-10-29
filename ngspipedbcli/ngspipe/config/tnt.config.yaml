@@ -41,4 +41,11 @@ samples_num: all # all or interger
 # Configuration for Quality Control
 #----------------------------------
 # which qc method do you want to use?
+
 qc_method: trim-galore # trim-galore or trimmomatic or fastqc
+
+#----------------------------------
+# Configuration for Genome cut
+#----------------------------------
+# which part of genome do you want to use?
+sub_genome: all # all (whole genome) or chr1:10000-20000 (seq name:start position-end position) or chr1 (seq name)

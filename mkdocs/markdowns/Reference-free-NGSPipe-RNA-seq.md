@@ -21,7 +21,7 @@ In this lesson we will focus on the Reference genome-based type of RNA seq.
 
 ---
 
-!!! note "A typical flow of transcriptome analysis with reference is shown in the figure below"
+!!! note "A typical flow of denovo transcriptome analysis with reference is shown in the figure below"
     <figure markdown> 
         ![Dummy image](imgs/denovo.png){ width="800" }
         <figcaption>Denovo RNA-Seq pipeline</figcaption>

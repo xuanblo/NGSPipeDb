@@ -10,6 +10,7 @@ python -m ngspipedbcli runpipe ngspipe-rnaseq-basic -d ../test_pipeline -n ngspi
 # medicago tnt
 
 python -m ngspipedbcli runpipe ngspipe-tnt-medicago -n ngspipe-tnt --resultdirname result -d ../ --genomeFasta ../genome/scf003.fa --genomeAnno ../genome/scf003.sorted.gff --samplefile ../rawdata/sample.csv --rawreadsdir ../rawdata --snaketype p --reads_prefix _R{}_paired.fastq.gz -j 20
+python -m ngspipedbcli runpipe ngspipe-tnt-medicago -n ngspipe-tnt --resultdirname result -d ../test_pipeline --genomeFasta ../testdata_ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --snaketype p --reads_prefix _R{}.fq.gz -j 20
 
 # trinity
 

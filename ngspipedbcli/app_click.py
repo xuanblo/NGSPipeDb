@@ -96,9 +96,8 @@ def configure_env_group(args=None):
     
     @cli_env.command(name='update', help='update conda environment')
     @click.pass_context
-    @click.option('-n', '--name', help='env name')
+    @click.option('-n', '--name', help='pipeline/env name')
     @click.option('-p', '--path', help="env path")
-    @click.option('--pipename', help='pipeline name')
     @click.option('-ps', '--printshell', is_flag=True, help="print ngspipedb shell commands")
     def update_cmd(ctx, **kargs):
         if args:

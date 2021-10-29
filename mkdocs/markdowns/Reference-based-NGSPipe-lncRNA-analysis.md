@@ -9,7 +9,7 @@ A basic RNA-Seq analysis is ploy(A) selected RNA-Seq. This pipeline can be used 
 
 ---
 
-!!! note "A typical flow of transcriptome analysis with reference is shown in the figure below"
+!!! note "A typical flow of lncRNA analysis with reference is shown in the figure below"
     <figure markdown> 
         ![Dummy image](imgs/lncRNA.png){ width="800" }
         <figcaption>RNA-Seq pipeline</figcaption>
