@@ -173,7 +173,8 @@ def configure_ngspipe_group(args=None):
     @click.option('--snaketype', help="`p`: print snakemake shell commands. `np`: Enable the dry run.", type=click.Choice(['np', 'p']), default='p')
     @click.option('-r', '--report', help="generate html report", is_flag=True)
     @click.option('-db', '--database', help="generate database", is_flag=True)
-    @click.option('--target', help="choose where to stop your pipeline", default='all')
+    @click.option('--update_env', help="install and update env auto", is_flag=True)
+    @click.option('--target', help="choose where to stop your pipeline")
     @click.option('-c', '--configfile', help="config file path", type=click.Path(exists=True))
     @click.option('--otherparams', help="other snakemake params", default='')
     @click.option('-ps', '--printshell', is_flag=True, help="print ngspipedb shell commands")
@@ -327,7 +328,7 @@ def configure_info_group(args=None):
 # sub-parsers
 #
 # #############################################################################################
-current_version = '0.0.21'
+current_version = '0.0.22'
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
 @click.version_option(version=current_version, prog_name='NGSPipeDb', message='%(prog)s, version %(version)s')

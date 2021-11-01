@@ -28,7 +28,7 @@ ngspipedb_dir = os.path.dirname(__file__)
 ngspipe_dir = os.path.join(ngspipedb_dir, 'ngspipe')
 ngsdb_dir = os.path.join(ngspipedb_dir, 'ngsdb')
 
-dataurl = 'http://www.liu-lab.com'
+#dataurl = 'http://www.liu-lab.com'
 dataurl = 'http://crisprlnc.org/static/download' # /home/crisprlnc/crisprlnc_website/static/download
 
 pipes_dict = {
@@ -38,7 +38,7 @@ pipes_dict = {
         'env_path': os.path.join(ngspipe_dir, 'envs/requirements_rnaseq.yaml'),
         'env_name': 'ngspipe-rnaseq-basic',
         'testdata': 'testdata-ngspipe-rnaseq-basic.tar.gz',
-        'database': ['eggnog.tar.gz', 'kegg.tar.gz'],
+        'database': ['eggnog.tar.gz', 'gene_ontology.tar.gz'],
         'packenv': ['ngspipe-rnaseq-basic_linux.tar.gz', 'ngspipe-rnaseq-basic_osx.tar.gz'],
         'steps': {
             'sampling_reads': [0, 'sample_path', 'rawreads_dir'],

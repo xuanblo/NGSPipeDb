@@ -1,3 +1,0 @@
-[console_scripts]
-ngspipedb = ngspipedbcli.__main__:main
-

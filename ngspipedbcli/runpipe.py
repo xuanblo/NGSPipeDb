@@ -66,8 +66,8 @@ def check_config_paths(workding_directory, configfile, steps_dict, target):
             if os.path.isfile(v) and os.path.getsize(v) > 0:
                 pass
             else:
-                sys.stderr.write('param: {k} is required, however its path: {v} is not exists or empty!\n'.format(k=k, v=v))
-                sys.exit(-1)
+                sys.stderr.write('[Warning] param: {k} is required, however its path: {v} is not exists or empty!\n'.format(k=k, v=v))
+                #sys.exit(-1)
         # check dir exists and empty
         if k.endswith('_dir') and k in path_needed:
             # check path exists and empty
@@ -82,11 +82,11 @@ def check_config_paths(workding_directory, configfile, steps_dict, target):
                     pass
                 else:
                     # this is for rawdata
-                    sys.stderr.write('param: {k} is required, however no files in {v}\n'.format(k=k, v=v))
-                    sys.exit(-1)
+                    sys.stderr.write('[Warning] param: {k} is required, however no files in {v}\n'.format(k=k, v=v))
+                    #sys.exit(-1)
             else:
-                sys.stderr.write('param: {k} is required, however its dir: {v} is not exists\n'.format(k=k, v=v))
-                sys.exit(-1)
+                sys.stderr.write('[Warning] param: {k} is required, however its dir: {v} is not exists\n'.format(k=k, v=v))
+                #sys.exit(-1)
 
 def read_target(workding_directory, configfile):
     '''
@@ -198,7 +198,8 @@ template configfile: {}
     if args['printshell']:
         ngspipedb_print_command('update environment', update_env_command)
     else:
-        run_status_update_env_command = subprocess.run(update_env_command, shell=True, encoding='utf-8')
+        if args['update_env']:
+            run_status_update_env_command = subprocess.run(update_env_command, shell=True, encoding='utf-8')
 
     # configfile
     ngspipedb_configfile = '{working_dir}/ngspipe_config.yaml'.format(working_dir=workding_directory)

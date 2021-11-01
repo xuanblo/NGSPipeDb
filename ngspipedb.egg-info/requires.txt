@@ -1,8 +1,0 @@
-rich
-click
-conda-pack
-ruamel.yaml
-pandas
-version-comparison
-requests
-simplejson
