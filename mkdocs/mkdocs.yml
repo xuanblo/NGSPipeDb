@@ -33,6 +33,7 @@ nav:
     - ChIP-seq: NGSPipe-ChIP-seq.md
     - resequecing: NGSPipe-resequecing.md
     - medicago tnt insertion: NGSPipe-medicago-tnt1.md
+- Datasets: datasets.md
 #- Databases:
 #    - NGSDb with genome: NGSDb.md
 #    - NGSDb without genome: NGSDb.md
