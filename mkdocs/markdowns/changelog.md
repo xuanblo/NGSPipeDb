@@ -1,5 +1,9 @@
 # Change logs
 
+## [0.0.24] - 2021-11-2
+
+- fix from ruamel_yaml or ruamel.yaml import YAML
+
 ## [0.0.23] - 2021-11-2
 
 - add datasets page in documents

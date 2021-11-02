@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-from ruamel_yaml import YAML
+try:
+    from ruamel_yaml import YAML
+except:
+    from ruamel.yaml import YAML
 import pathlib
 import sys
 
