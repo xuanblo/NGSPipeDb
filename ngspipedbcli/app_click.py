@@ -328,7 +328,7 @@ def configure_info_group(args=None):
 # sub-parsers
 #
 # #############################################################################################
-current_version = '0.0.22'
+current_version = '0.0.23'
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
 @click.version_option(version=current_version, prog_name='NGSPipeDb', message='%(prog)s, version %(version)s')

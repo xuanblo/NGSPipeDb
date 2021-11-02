@@ -261,7 +261,10 @@ template configfile: {}
     if args['configfile']:
         target = read_target(workding_directory, configfile)
     else:
-        target = args['target']
+        if args['target']:
+            target = args['target']
+        else:
+            target = 'all'
 
     otherparams = '--until {target} {otherparams}'.format(target=target, otherparams=args['otherparams'])
 

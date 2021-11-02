@@ -1,5 +1,9 @@
 # Change logs
 
+## [0.0.23] - 2021-11-2
+
+- add datasets page in documents
+
 ## [0.0.22] - 2021-11-1
 
 - fix bugs
