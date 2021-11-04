@@ -13,14 +13,14 @@
         <meta name="author" content="Xuan Zhang">
       
       
-        <link rel="canonical" href="https://xuanblo.github.io/NGSPipeDb/NGSPipe-medicago-tnt1/">
+        <link rel="canonical" href="https://xuanblo.github.io/NGSPipeDb/NGSPipe-exogenous-insertion/">
       
       <link rel="icon" href="../imgs/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
     
     
       
-        <title>medicago tnt insertion - NGSPipeDb Document</title>
+        <title>exogenous insertion - NGSPipeDb Document</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#medicago-tnt1-insertion" class="md-skip">
+        <a href="#exogenous-te-insertion" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              medicago tnt insertion
+              exogenous insertion
             
           </span>
         </div>
@@ -451,7 +451,7 @@
       
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        medicago tnt insertion
+        exogenous insertion
       </a>
       
     </li>
@@ -553,12 +553,12 @@
               
   
                 
-                  <a href="https://github.com/xuanblo/NGSPipeDb/edit/master/mkdocs/markdowns/NGSPipe-medicago-tnt1.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/xuanblo/NGSPipeDb/edit/master/mkdocs/markdowns/NGSPipe-exogenous-insertion.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="medicago-tnt1-insertion">Medicago tnt1 insertion</h1>
+                <h1 id="exogenous-te-insertion">Exogenous TE insertion</h1>
 <blockquote>
 <ul>
 <li>ITIS: tool to Identify TE Insertion Sites in genome</li>
@@ -566,9 +566,10 @@
 <li>https://pubmed.ncbi.nlm.nih.gov/25887332/</li>
 </ul>
 </blockquote>
-<p>Example:
-<div class="highlight"><pre><span></span><code>python -m ngspipedbcli runpipe ngspipe-tnt-medicago -n ngspipe-tnt --resultdirname result -d ../ --genomeFasta ../genome/scf003.fa --genomeAnno ../genome/scf003.sorted.gff --samplefile ../rawdata/sample.csv --rawreadsdir ../rawdata --snaketype p --reads_prefix _R{}_paired.fastq.gz -j 20
-</code></pre></div></p>
+<p>Two way to run:</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">multi-parameter way</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>ngspipedb runpipe ngspipe-tnt-medicago -n ngspipe-tnt --resultdirname result -d ../ --genomeFasta ../genome/scf003.fa --genomeAnno ../genome/scf003.sorted.gff --samplefile ../rawdata/sample.csv --rawreadsdir ../rawdata --snaketype p --reads_prefix _R{}_paired.fastq.gz -j 20
+</code></pre></div>
 <ul>
 <li><code>ngspipe-tnt-medicago</code> your project name</li>
 <li><code>-n ngspipe-tnt</code> pipeline name</li>
@@ -576,31 +577,82 @@
 <li><code>--genomeAnno ../genome/scf003.sorted.gff</code> give a genome annotaion file path <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format4">gtf</a>/<a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format3">gff</a></li>
 <li><code>--samplefile ../rawdata/sample.csv</code> give a sample file path, which has one column</li>
 </ul>
-<p>samplefile:
-<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">XTD-6</span>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">use configfile way</label><div class="tabbed-content">
+<ol>
+<li>
+<p>start a project in current directory:
+    <div class="highlight"><pre><span></span><code>ngspipedb startproject medicago_tnt_zhao -n ngspipe-tnt
 </code></pre></div></p>
-<p>configfile:
+<ul>
+<li>PROJECTNAME: medicago_tnt_zhao</li>
+<li>pipeline: ngspipe-tnt</li>
+<li><code>tree medicago_tnt_zhao</code>
+    <div class="highlight"><pre><span></span><code>├── database
+├── genome
+├── ngsdb_config.yaml
+├── ngspipe_config.yaml
+└── rawdata
+    └── sample.csv
+3 directories, 3 files
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>copy your file to directory:
+    <div class="highlight"><pre><span></span><code>├── database
+│   ├── exogenous
+│   │   ├── medicago_mere1.fa
+│   │   └── medicago_tnt1.fa
+├── genome
+│   ├── GRCm38.83.chr19.gtf
+│   ├── chr19.fa
+│   └── chr19.fa.fai
+└── rawdata
+    ├── control-0_R1.fq.gz
+    ├── control-0_R2.fq.gz
+    ├── control-1_R1.fq.gz
+    ├── control-1_R2.fq.gz
+    ├── control-2_R1.fq.gz
+    ├── control-2_R2.fq.gz
+    ├── sample.csv
+    ├── treated-0_R1.fq.gz
+    ├── treated-0_R2.fq.gz
+    ├── treated-1_R1.fq.gz
+    ├── treated-1_R2.fq.gz
+    ├── treated-2_R1.fq.gz
+    └── treated-2_R2.fq.gz
+</code></pre></div></p>
+<ul>
+<li>database/exogenous: the directory of exogenous sequence</li>
+<li>genome: the genome file</li>
+<li>rawdata: resequencing data</li>
+</ul>
+</li>
+<li>
+<p>modify configfile file <code>medicago_tnt_zhao/ngspipe_config.yaml</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">#---------------------------</span>
 <span class="c1"># medicago tnt1</span>
 <span class="c1">#---------------------------</span>
 
 <span class="c1">## 1.reference ##</span>
-<span class="nt">genomeAnno_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/zhangxuan/Work/Project/hehua/test_ngspipedb/genome/scf003.sorted.gff</span> <span class="c1"># gene annotation file, can be gtf or gff format</span>
-<span class="nt">genomeFasta_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/zhangxuan/Work/Project/hehua/test_ngspipedb/genome/scf003.fa</span> <span class="c1"># genome sequence, fasta format</span>
+<span class="nt">genomeAnno_path</span><span class="p">:</span> <span class="s">&quot;genome/GRCm38.83.chr19.gtf&quot;</span> <span class="c1"># gene annotation file, can be gtf or gff format</span>
+<span class="nt">genomeFasta_path</span><span class="p">:</span> <span class="s">&quot;genome/chr19.fa&quot;</span> <span class="c1"># genome sequence, fasta format</span>
+<span class="nt">exogenous_seq_path</span><span class="p">:</span> <span class="s">&quot;database/exogenous/medicago_tnt1.fa&quot;</span> <span class="c1"># medicago_mere1.fa or medicago_tnt1.fa</span>
 
 <span class="c1">## 2.raw reads data ##</span>
-<span class="nt">sample_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/zhangxuan/Work/Project/hehua/test_ngspipedb/rawdata/sample.csv</span> <span class="c1"># sample file</span>
-<span class="nt">rawreads_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/zhangxuan/Work/Project/hehua/test_ngspipedb/rawdata</span> <span class="c1"># sample file directory</span>
-<span class="nt">read1Suffix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_R1_paired.fastq.gz</span> <span class="c1"># fastq suffix, read1</span>
-<span class="nt">read2Suffix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_R2_paired.fastq.gz</span>
+<span class="nt">sample_path</span><span class="p">:</span> <span class="s">&quot;rawdata/sample.csv&quot;</span> <span class="c1"># sample file</span>
+<span class="nt">rawreads_dir</span><span class="p">:</span> <span class="s">&quot;rawdata&quot;</span> <span class="c1"># sample file directory</span>
+<span class="nt">read1Suffix</span><span class="p">:</span> <span class="s">&quot;_R1.fq.gz&quot;</span> <span class="c1"># fastq suffix, read1</span>
+<span class="nt">read2Suffix</span><span class="p">:</span> <span class="s">&quot;_R2.fq.gz&quot;</span>
 
 <span class="c1">## 3.output directory ##</span>
-<span class="nt">results_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result</span>
+<span class="nt">results_name</span><span class="p">:</span> <span class="s">&quot;results&quot;</span>
 
 <span class="c1">## 4.notice ##</span>
 <span class="c1"># if the string is &#39;nobody&#39;, ngspipe will not send email</span>
 <span class="c1"># modify &#39;noboby&#39; to &#39;xxx@qq.com&#39; or &#39;xxx@qq.com,yyy@qq.com&#39; to send email</span>
-<span class="nt">email_addr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nobody</span>
+<span class="nt">email_addr</span><span class="p">:</span> <span class="s">&#39;nobody&#39;</span>
 
 <span class="c1"># choose where to stop your pipeline</span>
 <span class="nt">target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span> <span class="c1">#</span>
@@ -623,8 +675,24 @@
 <span class="c1"># Configuration for Quality Control</span>
 <span class="c1">#----------------------------------</span>
 <span class="c1"># which qc method do you want to use?</span>
+
 <span class="nt">qc_method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">trim-galore</span> <span class="c1"># trim-galore or trimmomatic or fastqc</span>
+
+<span class="c1">#----------------------------------</span>
+<span class="c1"># Configuration for Genome cut</span>
+<span class="c1">#----------------------------------</span>
+<span class="c1"># which part of genome do you want to use?</span>
+<span class="nt">sub_genome</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span> <span class="c1"># all (whole genome) or chr1:10000-20000 (seq name:start position-end position) or chr1 (seq name)</span>
+</code></pre></div>
+</li>
+<li>
+<p>run command:
+    <div class="highlight"><pre><span></span><code>ngspipedb runpipe medicago_tnt_zhao -n ngspipe-tnt -c medicago_tnt_zhao/ngspipe_config.yaml -j <span class="m">1</span>
 </code></pre></div></p>
+</li>
+</ol>
+</div>
+</div>
                 
               
   <!--

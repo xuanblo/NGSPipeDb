@@ -73,7 +73,6 @@ Use following commands to retrieve and then run the Minicoda3 installation scrip
 
 1. Install from pipi
   ```shell
-  conda install pip
   pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple ngspipedb
   ```
 

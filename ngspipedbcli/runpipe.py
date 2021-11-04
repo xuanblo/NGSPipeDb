@@ -16,6 +16,8 @@ def make_parmas_flat(args):
         flat_params_list.append('genomeFasta_path={}'.format(abspath(args['genomefasta'])))
     if 'genomeanno' in args.keys() and args['genomeanno']:
         flat_params_list.append('genomeAnno_path={}'.format(abspath(args['genomeanno'])))
+    if 'exogenous_seq' in args.keys() and args['exogenous_seq']:
+        flat_params_list.append('exogenous_seq_path={}'.format(abspath(args['exogenous_seq'])))
     if 'samplefile' in args.keys() and args['samplefile']:
         flat_params_list.append('sample_path={}'.format(abspath(args['samplefile'])))
     if 'rawreadsdir' in args.keys() and args['rawreadsdir']:
@@ -98,7 +100,7 @@ def read_target(workding_directory, configfile):
     ngspipedb_configfile_path = pathlib.Path(configfile)
     doc = yaml.load(ngspipedb_configfile_path, )
     # target is where to stop your pipeline
-    return doc['target']
+    return (doc['target'], doc['results_name'])
 
 def save_command(workshpath):
     '''
@@ -259,12 +261,16 @@ template configfile: {}
     
     # check path in configfile
     if args['configfile']:
-        target = read_target(workding_directory, configfile)
+        target, resultdirname = read_target(workding_directory, configfile)
     else:
         if args['target']:
             target = args['target']
         else:
             target = 'all'
+        if args['resultdirname']:
+            resultdirname = args['resultdirname']
+        else:
+            resultdirname = '{name}_{date}'.format(name='result', date=current_date(4))
 
     otherparams = '--until {target} {otherparams}'.format(target=target, otherparams=args['otherparams'])
 

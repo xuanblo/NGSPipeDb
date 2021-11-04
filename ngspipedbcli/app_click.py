@@ -162,6 +162,7 @@ def configure_ngspipe_group(args=None):
     @click.option('-j', '--jobs', type=int, help="how many cpu to use", default=1)
     @click.option('--genomeFasta', help="genome sequence file (fasta)", default='')
     @click.option('--genomeAnno', help="genome annotation file (gff/gtf)", default='')
+    @click.option('--exogenous_seq', help="exogenous sequence, only support for ngspipe-tnt pipeline", default='')
     @click.option('--samplefile', help="samplefile", default='')
     @click.option('--conditionfile', help="conditionfile", default='')
     @click.option('--rawreadsdir', help="raw reads directory", default='')
@@ -169,7 +170,7 @@ def configure_ngspipe_group(args=None):
     @click.option('--ontologyfile', help="gene ontology database file (obo)", default='')
     @click.option('-e', '--email_addr', help="result directory name (under project directory)", default='')
     @click.option('--reads_prefix', help="reads prefix (Example: _R{}.fq.gz )", default='')
-    @click.option('--resultdirname', help="result directory name under proect name directory", default='{name}_{date}'.format(name='result', date=current_date(4)))
+    @click.option('--resultdirname', help="result directory name under proect name directory", default='')
     @click.option('--snaketype', help="`p`: print snakemake shell commands. `np`: Enable the dry run.", type=click.Choice(['np', 'p']), default='p')
     @click.option('-r', '--report', help="generate html report", is_flag=True)
     @click.option('-db', '--database', help="generate database", is_flag=True)
@@ -328,27 +329,6 @@ def configure_info_group(args=None):
 # sub-parsers
 #
 # #############################################################################################
-current_version = '0.0.24'
-CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
-@click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
-@click.version_option(version=current_version, prog_name='NGSPipeDb', message='%(prog)s, version %(version)s')
-@click.pass_context
-def cli(ctx, args=None):
-    """
-    ngspipedb is a snakemake-based tool for reproducible next generation sequencing (NGS) data analysis and interactive web application auto-build.
-
-    \b
-    Example:
-    ngspipedb env create -n ngspipe-rnaseq-basic
-    ngspipedb download -n ngspipe-rnaseq-basic -t testdata
-    ngspipedb startproject myprojectname -n ngspipe-rnaseq-basic
-    ngspipedb runpipe myprojectname ngspipe-rnaseq-basic --report -db
-    ngspipedb rundb server -url 0.0.0.0:8000
-    
-    A more detailed tutorial of how to use this toolkit can be found here: https://xuanblo.github.io/NGSPipeDb/
-    """
-    if args:
-        click.echo(ctx.get_help())
 
 def get_last_version_from_pypi(package, url_pattern):
     """Return version of package on pypi.python.org using json."""
@@ -374,7 +354,7 @@ def new_version_check():
     last_version = get_last_version_from_pypi('NGSPipeDb', URL_PATTERN)
     update_message = '''
 WARNING: You are using NGSPipeDb version {current_version}; however, version {last_version} is available.
-You should consider upgrading via the 'pip install -i https://test.pypi.org/simple/ ngspipedb={last_version}' command.
+You should consider upgrading via the 'pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple ngspipedb=={last_version}' command.
 Please see Changelog for the latest changes: https://xuanblo.github.io/NGSPipeDb/changelog/
     '''.format(current_version=current_version, last_version=last_version)
     last_version_message = '''
@@ -382,9 +362,35 @@ You are using the lastest version {}
     '''.format(last_version)
     versions = Comparison(current_version, last_version)
     if versions.get_greater() == current_version or versions.get_greater() == None:
-        print(last_version_message)
+        #print(last_version_message)
+        return last_version_message
     else:
-        print(update_message)
+        #print(update_message)
+        return update_message
+
+current_version = '0.0.25'
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+@click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
+#@click.version_option(version=current_version, prog_name='NGSPipeDb', message='%(prog)s, version %(version)s')
+@click.version_option(version=current_version, prog_name='NGSPipeDb', message='{}'.format(new_version_check()))
+
+@click.pass_context
+def cli(ctx, args=None):
+    """
+    ngspipedb is a snakemake-based tool for reproducible next generation sequencing (NGS) data analysis and interactive web application auto-build.
+
+    \b
+    Example:
+    ngspipedb env create -n ngspipe-rnaseq-basic
+    ngspipedb download -n ngspipe-rnaseq-basic -t testdata
+    ngspipedb startproject myprojectname -n ngspipe-rnaseq-basic
+    ngspipedb runpipe myprojectname ngspipe-rnaseq-basic --report -db
+    ngspipedb rundb server -url 0.0.0.0:8000
+    
+    A more detailed tutorial of how to use this toolkit can be found here: https://xuanblo.github.io/NGSPipeDb/
+    """
+    if args:
+        click.echo(ctx.get_help())
 
 def ngspipedb_cli_main():
     cli.add_command(configure_env_group(args=None if sys.argv[3:] else ['-h']))
@@ -394,7 +400,7 @@ def ngspipedb_cli_main():
     cli.add_command(configure_startproject_group(args=None if sys.argv[3:] else ['-h']))
     #cli.add_command(configure_runserver_group(args=None if sys.argv[3:] else ['-h']))
     #cli.add_command(configure_info_group(args=None if sys.argv[3:] else ['-h']))
-    new_version_check()
+    #new_version_check()
     cli(obj={}, args=None if sys.argv[1:] else ['-h'])
 
 if __name__ == '__main__':

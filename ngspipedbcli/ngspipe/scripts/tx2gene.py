@@ -30,8 +30,9 @@ with open(gtf_file, 'r') as f:
             gid = matObj_rev.group(2)
             tid = matObj_rev.group(1)
         else:
-            sys.stderr.write('ERROR format in {}\n'.format(items[8]))
-            sys.exit(-1)
+            #sys.stderr.write('ERROR format in {}\n'.format(items[8]))
+            #sys.exit(-1)
+            continue
         tx2gene[tid] = gid
 
 for t,g in tx2gene.items():

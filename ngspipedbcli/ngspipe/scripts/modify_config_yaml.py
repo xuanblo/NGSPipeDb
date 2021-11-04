@@ -18,6 +18,8 @@ def modify_config_yaml(args, ngspipedb_configfile, new_configfile):
         modify_dict['genomeFasta_path'] = args['genomeFasta_path']
     if 'genomeAnno_path' in args.keys():
         modify_dict['genomeAnno_path'] = args['genomeAnno_path']
+    if 'exogenous_seq_path' in args.keys():
+        modify_dict['exogenous_seq_path'] = args['exogenous_seq_path']
     if 'sample_path' in args.keys():
         modify_dict['sample_path'] = args['sample_path']
     if 'condition_path' in args.keys():
