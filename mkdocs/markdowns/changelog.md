@@ -1,5 +1,9 @@
 # Change logs
 
+## [0.0.26] - 2021-11-5
+
+- fix kegg annotation failed when merge dataframe
+
 ## [0.0.25] - 2021-11-4
 
 - fix bugs

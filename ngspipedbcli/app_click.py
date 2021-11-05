@@ -368,7 +368,7 @@ You are using the lastest version {}
         #print(update_message)
         return update_message
 
-current_version = '0.0.25'
+current_version = '0.0.26'
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
 #@click.version_option(version=current_version, prog_name='NGSPipeDb', message='%(prog)s, version %(version)s')

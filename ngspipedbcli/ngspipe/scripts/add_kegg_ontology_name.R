@@ -48,11 +48,11 @@ k <- read.table(args$k_anno, sep="\t", quote="")
 
 bitr_kegg(k$V2, "kegg", "Path", "ko") -> x
 
-ko2name(x$Path) -> y
+unique(ko2name(x$Path)) -> y
 
 kegg <- merge(x, y, by.x='Path', by.y='ko')
 
-anno_finnal <- merge(k, kegg, by.k='V2', by.kegg='kegg')
+anno_finnal <- unique(merge(k, kegg, by.k='V2', by.kegg='kegg'))
 
 write.table(unique(anno_finnal[c('V1', 'Path', 'name')]), file=args$output, col.names = FALSE, sep='\t', quote = FALSE, row.names = FALSE)
 
