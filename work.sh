@@ -10,11 +10,15 @@ python -m ngspipedbcli runpipe ngspipe-rnaseq-basic -d ../test_pipeline -n ngspi
 # medicago tnt
 
 ## parameters
-python -m ngspipedbcli runpipe ngspipe-tnt-medicago -n ngspipe-tnt --resultdirname result -d ../test_pipeline --genomeFasta ../testdata_ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --exogenous_seq ../testdata_ngspipe-rnaseq-basic/database/exogenous/medicago_tnt1.fa --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --snaketype np --reads_prefix _R{}.fq.gz -j 20
+python -m ngspipedbcli runpipe ngspipe-tnt-medicago -n ngspipe-tnt --resultdirname result -d ../test_pipeline --genomeFasta ../testdata_ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --exogenous_seq ../testdata_ngspipe-rnaseq-basic/database/exogenous/medicago_tnt1.fa --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --snaketype np --readsprefix _R{}.fq.gz -j 20
 ## config
 python -m ngspipedbcli startproject ngspipe-tnt-medicago -n ngspipe-tnt -d ../test_pipeline
 vi ../test_pipelines/ngspipe-tnt-medicago/
-python -m ngspipedbcli runpipe ngspipe-tnt-medicago -n ngspipe-tnt -d ../test_pipeline -c ../test_pipeline/ngspipe-tnt-medicago/ngspipe_config.yaml --snaketype np --reads_prefix _R{}.fq.gz -j 1
+python -m ngspipedbcli runpipe ngspipe-tnt-medicago -n ngspipe-tnt -d ../test_pipeline -c ../test_pipeline/ngspipe-tnt-medicago/ngspipe_config.yaml --snaketype np --readsprefix _R{}.fq.gz -j 1
+
+## resequencing
+python -m ngspipedbcli runpipe ngspipe-resequencing -n ngspipe-resequencing -d ../test_pipeline --genomeFasta ../testdata_ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --snaketype np --readsprefix _R{}.fq.gz -j 1
+
 
 # trinity
 

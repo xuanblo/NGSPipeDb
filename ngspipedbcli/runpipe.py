@@ -4,7 +4,10 @@
 import os
 from os.path import abspath, join, exists
 import sys
-from typing import OrderedDict
+try:
+    from collections import OrderedDict
+except:
+    from typing import OrderedDict
 from ngspipedbcli.common import *
 
 def make_parmas_flat(args):
@@ -16,8 +19,8 @@ def make_parmas_flat(args):
         flat_params_list.append('genomeFasta_path={}'.format(abspath(args['genomefasta'])))
     if 'genomeanno' in args.keys() and args['genomeanno']:
         flat_params_list.append('genomeAnno_path={}'.format(abspath(args['genomeanno'])))
-    if 'exogenous_seq' in args.keys() and args['exogenous_seq']:
-        flat_params_list.append('exogenous_seq_path={}'.format(abspath(args['exogenous_seq'])))
+    if 'exogenousseq' in args.keys() and args['exogenousseq']:
+        flat_params_list.append('exogenous_seq_path={}'.format(abspath(args['exogenousseq'])))
     if 'samplefile' in args.keys() and args['samplefile']:
         flat_params_list.append('sample_path={}'.format(abspath(args['samplefile'])))
     if 'rawreadsdir' in args.keys() and args['rawreadsdir']:
@@ -28,14 +31,14 @@ def make_parmas_flat(args):
         flat_params_list.append('database_eggnog_dir={}'.format(abspath(args['eggnogdir'])))
     if 'ontologyfile' in args.keys() and args['ontologyfile']:
         flat_params_list.append('database_gene_ontology_path={}'.format(abspath(args['ontologyfile'])))
-    if 'email_addr' in args.keys() and args['email_addr']:
-        flat_params_list.append('email_addr={}'.format(args['email_addr']))
+    if 'emailaddr' in args.keys() and args['emailaddr']:
+        flat_params_list.append('email_addr={}'.format(args['emailaddr']))
     if 'resultdirname' in args.keys() and args['resultdirname']:
         flat_params_list.append('results_name={}'.format(args['resultdirname']))
-    if 'exp_profile' in args.keys() and args['exp_profile']:
-        flat_params_list.append('exp_path={}'.format(abspath(args['exp_profile'])))
-    if 'reads_prefix' in args.keys() and args['reads_prefix']:
-        flat_params_list.append('reads_prefix={}'.format(args['reads_prefix']))
+    if 'expprofile' in args.keys() and args['expprofile']:
+        flat_params_list.append('exp_path={}'.format(abspath(args['expprofile'])))
+    if 'readsprefix' in args.keys() and args['readsprefix']:
+        flat_params_list.append('reads_prefix={}'.format(args['readsprefix']))
     if 'target' in args.keys() and args['target']:
         flat_params_list.append('target={}'.format(args['target']))
     return ' '.join(flat_params_list)
@@ -44,7 +47,10 @@ def check_config_paths(workding_directory, configfile, steps_dict, target):
     '''
     all path in configfile exists and file_size>0
     '''
-    from ruamel_yaml import YAML
+    try:
+        from ruamel_yaml import YAML
+    except:
+        from ruamel.yaml import YAML
     import pathlib
     yaml = YAML()
     ngspipedb_configfile_path = pathlib.Path(configfile)
@@ -94,7 +100,10 @@ def read_target(workding_directory, configfile):
     '''
     all path in configfile exists and file_size>0
     '''
-    from ruamel_yaml import YAML
+    try:
+        from ruamel_yaml import YAML
+    except:
+        from ruamel.yaml import YAML
     import pathlib
     yaml = YAML()
     ngspipedb_configfile_path = pathlib.Path(configfile)
@@ -123,6 +132,7 @@ def check_ngspipedb_conda_env(conda_env):
         #    print(matObj.groups())
         #else:
         #    print('------')
+        # todo: what is env in path
         if matObj:
             env_dict[matObj.group(1)] = matObj.group(2)
     if conda_env in env_dict.keys():
@@ -163,7 +173,13 @@ def run_ngspipe(args):
     conda_env = pipe_dict['env_name']
 
     project_name = args['projectname']
-    workding_directory = abspath(join(args['directory'], project_name))
+    if join(args['directory'], project_name).startswith('~'):
+        homeuser = os.path.expanduser("~")
+        rel_home_user = args['directory']
+        rel_home_user = rel_home_user.lstrip('~/')
+        workding_directory = join(homeuser, rel_home_user, project_name)
+    else:
+        workding_directory = abspath(join(args['directory'], project_name))
 
     run_info = '''
 #-------------------------------------------#
@@ -200,7 +216,7 @@ template configfile: {}
     if args['printshell']:
         ngspipedb_print_command('update environment', update_env_command)
     else:
-        if args['update_env']:
+        if args['updateenv']:
             run_status_update_env_command = subprocess.run(update_env_command, shell=True, encoding='utf-8')
 
     # configfile
@@ -233,10 +249,14 @@ template configfile: {}
         ngspipedb_print_rich_stdout('current configfile is: {}'.format(configfile))
 
     # reference based or reference free
-    is_ref_based = args['genomefasta'] or args['genomeanno'] or args['email_addr'] or args['reads_prefix'] or args['rawreadsdir'] or args['resultdirname'] or args['eggnogdir'] or args['ontologyfile']
-    is_ref_free = args['email_addr'] or args['reads_prefix'] or args['rawreadsdir'] or args['resultdirname'] or args['eggnogdir'] or args['ontologyfile']
-    ref_free_bool = True if args['pipename'] == "ngspipe-rnaseq-trinity" else False
-    check_pipe_params = is_ref_free if args['pipename'] == "ngspipe-rnaseq-trinity" else is_ref_based
+    if args['pipename'] == "ngspipe-rnaseq-trinity":
+        check_pipe_params = args['emailaddr'] or args['readsprefix'] or args['rawreadsdir'] or args['resultdirname'] or args['eggnogdir'] or args['ontologyfile']
+    elif args['pipename'] == "ngspipe-rnaseq-basic" or args['pipename'] == "ngspipe-rnaseq-lncRNA":
+        check_pipe_params = args['genomefasta'] or args['genomeanno'] or args['emailaddr'] or args['readsprefix'] or args['rawreadsdir'] or args['resultdirname'] or args['eggnogdir'] or args['ontologyfile']
+    elif args['pipename'] == "ngspipe-tnt" or args['pipename'] == "ngspipe-resequencing" or args['pipename'] == "ngspipe-chipseq":
+        check_pipe_params = args['genomefasta'] or args['genomeanno'] or args['emailaddr'] or args['readsprefix'] or args['rawreadsdir'] or args['resultdirname']
+    else:
+        print('other pipelines')
 
     # copy configfile to working directory
     if check_pipe_params:
@@ -286,7 +306,7 @@ template configfile: {}
         call_status_activate_conda_env_command = subprocess.call(run_ngspipe_rnaseq_basic_command, shell=True, encoding='utf-8')
             
     # step2 ngspipe rnaseq basic report
-    if args['report']:
+    if 'report' in args.keys() and args['report']:
         report_ngspipe_rnaseq_basic_command = 'source activate {env_name} && snakemake -s {snakefile} --configfile {configfile} --directory {working_dir} --report {report} --until {target} -{snaketype} && conda deactivate'.format(env_name=conda_env, snakefile = pipe_dict['snakefile'], configfile=configfile, working_dir=workding_directory, report=join(workding_directory, args['resultdirname'], 'report', 'index.html'), target=target, snaketype=args['snaketype'])
         
         if args['printshell']:
@@ -299,11 +319,11 @@ template configfile: {}
                 print('report could not dry run')
     
     # step3 generate database
-    if args['database']:
+    if 'database' in args.keys() and args['database']:
         if args['directory']:
-            run_ngsdb_rnaseq_basic_command = 'python -m ngspipedbcli rundb build {projectname} -d {directory} --resultdirname {resultname} -exp {exp_path} --genomeFasta {genomeFasta} --genomeAnno {genomeAnno} --snaketype {snaketype}'.format(projectname=args['projectname'], directory=args['directory'], resultname=args['resultdirname'], exp_path=join(workding_directory, args['resultdirname'], 'ngspipe_result', 'quantify/quantify_by_stringtie/gene_fpkm_all_samples.tsv'), snaketype=args['snaketype'], genomeFasta=args['genomefasta'], genomeAnno=args['genomeanno'])
+            run_ngsdb_rnaseq_basic_command = 'python -m ngspipedbcli rundb build {projectname} -d {directory} --resultdirname {resultname} -exp {exp_path} --genomeFasta {genomeFasta} --genomeAnno {genomeAnno} --snaketype {snaketype}'.format(projectname=args['projectname'], directory=args['directory'], resultname=args['resultdirname'], exp_path=join(workding_directory, args['resultdirname'], 'ngspipe_result', 'diff/DESeq2/normalized.counts.csv'), snaketype=args['snaketype'], genomeFasta=args['genomefasta'], genomeAnno=args['genomeanno'])
         else:
-            run_ngsdb_rnaseq_basic_command = 'python -m ngspipedbcli rundb build {projectname} --resultdirname {resultname} -exp {exp_path} --genomeFasta {genomeFasta} --genomeAnno {genomeAnno} --snaketype {snaketype}'.format(projectname=args['projectname'], directory=args['directory'], resultname=args['resultdirname'], exp_path=join(workding_directory, args['resultdirname'], 'ngspipe_result', 'quantify/quantify_by_stringtie/gene_fpkm_all_samples.tsv'), snaketype=args['snaketype'], genomeFasta=args['genomefasta'], genomeAnno=args['genomeanno'])
+            run_ngsdb_rnaseq_basic_command = 'python -m ngspipedbcli rundb build {projectname} --resultdirname {resultname} -exp {exp_path} --genomeFasta {genomeFasta} --genomeAnno {genomeAnno} --snaketype {snaketype}'.format(projectname=args['projectname'], directory=args['directory'], resultname=args['resultdirname'], exp_path=join(workding_directory, args['resultdirname'], 'ngspipe_result', 'diff/DESeq2/normalized.counts.csv'), snaketype=args['snaketype'], genomeFasta=args['genomefasta'], genomeAnno=args['genomeanno'])
         if args['printshell']:
             ngspipedb_print_command('build database', run_ngsdb_rnaseq_basic_command)
         else:
@@ -319,7 +339,13 @@ def run_ngsdb(args):
     conda_env = pipe_dict['env_name']
 
     project_name = args['projectname']
-    workding_directory = abspath(join(args['directory'], project_name))
+    if join(args['directory'], project_name).startswith('~'):
+        homeuser = os.path.expanduser("~")
+        rel_home_user = args['directory']
+        rel_home_user = rel_home_user.lstrip('~/')
+        workding_directory = join(homeuser, rel_home_user, project_name)
+    else:
+        workding_directory = abspath(join(args['directory'], project_name))
 
     run_info = '''
 #-------------------------------------------#
@@ -329,7 +355,12 @@ workding_directory: {}
 conda_env_name: {}
 demo_configfile: {}
 #-------------------------------------------#
-    '''.format(pipename, project_name, workding_directory, conda_env, abspath(pipe_dict['configfile']))
+    '''.format(
+        pipename, project_name, 
+        workding_directory, 
+        conda_env, 
+        abspath(pipe_dict['configfile'])
+    )
     ngspipedb_print_rich_stdout(run_info)
 
     # check environment
@@ -345,40 +376,40 @@ demo_configfile: {}
     if args['printshell']:
         ngspipedb_print_command('update environment', update_env_command)
     else:
-        run_status_update_env_command = subprocess.run(update_env_command, shell=True, encoding='utf-8')
+        if args['updateenv']:
+            run_status_update_env_command = subprocess.run(update_env_command, shell=True, encoding='utf-8')
         
     # modify configfile
     ngspipedb_configfile = '{working_dir}/ngsdb_config.yaml'.format(working_dir=workding_directory)
 
     # create directory
-    if not args['directory']:
+    if exists(join(workding_directory, '.ngspipedb')) and exists(ngspipedb_configfile):
+        print('use a project directory pre-created')
+    elif not args['directory']:
         print('using current directory')
         create_project_command = 'python -m ngspipedbcli startproject {projectname} -n {pipe_name}'.format(projectname=args['projectname'], pipe_name=pipename)
         if args['printshell']:
             ngspipedb_print_command('create a rnaseq-basic project directory structure', create_project_command)
         else:
             run_status_create_project_command = subprocess.run(create_project_command, shell=True, encoding='utf-8')
-    elif exists(join(workding_directory, '.ngspipedb')) and exists(ngspipedb_configfile):
-        print('use a project directory pre-created')
     else:
         print('use a giving directory')
         create_project_command = 'python -m ngspipedbcli startproject {projectname} -n {pipe_name} -d {project_dir}'.format(projectname=args['projectname'], pipe_name=pipename, project_dir=args['directory'])
         if args['printshell']:
-            ngspipedb_print_command('create a rnaseq-basic project directory structure', create_project_command)
+            ngspipedb_print_command('create a {} project directory structure'.format(args['pipename']), create_project_command)
         else:
             run_status_create_project_command = subprocess.run(create_project_command, shell=True, encoding='utf-8')
 
     if not args['configfile']:
-        print('using basic configfile')
-        if exists(ngspipedb_configfile):
-            configfile = ngspipedb_configfile
-        else:
-            configfile = abspath(pipes_dict['ngsdb']['configfile'])
+        print('modify configfile from command parameters')
+        configfile = ngspipedb_configfile
     else:
-        print('using custom configfile')
+        print('using giving configfile')
         configfile = abspath(args['configfile'])
+        ngspipedb_print_rich_stdout('current configfile is: {}'.format(configfile))
 
-    if args['genomefasta'] or args['genomeanno'] or args['email_addr'] or args['exp_profile'] or args['resultdirname']:
+    # copy configfile to working directory
+    if args['genomefasta'] or args['genomeanno'] or args['emailaddr'] or args['expprofile'] or args['resultdirname']:
         from tempfile import NamedTemporaryFile
         tmp_configfile = NamedTemporaryFile(mode="w+", delete=True)
         tmp_configfile.write('for temp configfile')
@@ -390,21 +421,39 @@ demo_configfile: {}
 
         move_comfigfile_command = 'mv {tmp_configfile} {ngspipedb_configfile}'.format(tmp_configfile=tmp_configfile.name, ngspipedb_configfile=ngspipedb_configfile)
 
-        run_ngsdb_command = 'source activate {env_name} && snakemake -s {snakefile} --configfile {config} --directory {working_dir} --rerun-incomplete --scheduler greedy --nolock --jobs {cores} -{snaketype} {otherparams} && conda deactivate'.format(env_name=conda_env, snakefile = pipe_dict['snakefile'], config=ngspipedb_configfile, working_dir=workding_directory, cores=args['jobs'], snaketype=args['snaketype'], otherparams=args['otherparams'])
-
-        # step1 runpipe
         if args['printshell']:
             ngspipedb_print_command('modify configfile', modify_configfile_command)
             ngspipedb_print_command('update configfile', move_comfigfile_command)
-            ngspipedb_print_command('run pipeline', run_ngsdb_command)
         else:
+            print('copy configfile')
             call_status_modify_configfile_command = subprocess.call(modify_configfile_command, shell=True, encoding='utf-8')
             call_status_move_comfigfile_command = subprocess.call(move_comfigfile_command, shell=True, encoding='utf-8')
-            # check configfile
-            check_config_paths(workding_directory, ngspipedb_configfile)
-            print('run {pipeline} build'.format(pipeline=pipename))
-            call_status_activate_conda_env_command = subprocess.call(run_ngsdb_command, shell=True, encoding='utf-8')
-            
+
+    # check path in configfile
+    if args['configfile']:
+        target, resultdirname = read_target(workding_directory, configfile)
+    else:
+        if args['target']:
+            target = args['target']
+        else:
+            target = 'all'
+        if args['resultdirname']:
+            resultdirname = args['resultdirname']
+        else:
+            resultdirname = '{name}_{date}'.format(name='result', date=current_date(4))
+
+    otherparams = '--until {target} {otherparams}'.format(target=target, otherparams=args['otherparams'])
+
+    # step1 rundb
+    run_ngsdb_command = 'source activate {env_name} && snakemake -s {snakefile} --configfile {config} --directory {working_dir} --rerun-incomplete --scheduler greedy --nolock --jobs {cores} -{snaketype} {otherparams} && conda deactivate'.format(env_name=conda_env, snakefile = pipe_dict['snakefile'], config=ngspipedb_configfile, working_dir=workding_directory, cores=args['jobs'], snaketype=args['snaketype'], otherparams=args['otherparams'])
+
+    if args['printshell']:
+        ngspipedb_print_command('run pipeline', run_ngsdb_command)
+    else:
+        print('run {pipeline} build'.format(pipeline=pipename))
+        steps_dict = pipe_dict['steps']
+        check_config_paths(workding_directory, ngspipedb_configfile, steps_dict, target)
+        call_status_activate_conda_env_command = subprocess.call(run_ngsdb_command, shell=True, encoding='utf-8')
 
 def run_ngspipedb_one_step(args):
     '''

@@ -9,6 +9,7 @@ from ngspipedbcli.download import download_main
 from ngspipedbcli.runpipe import run_ngsdb, run_ngspipe, run_ngspipedb_one_step, run_server
 from ngspipedbcli.project import start_project_main
 from ngspipedbcli.env import env_create, env_list, env_pack, env_remove, env_unpack, env_update
+from ngspipedbcli.gui import gui_main
 from ngspipedbcli.common import *
 
 import requests
@@ -162,19 +163,19 @@ def configure_ngspipe_group(args=None):
     @click.option('-j', '--jobs', type=int, help="how many cpu to use", default=1)
     @click.option('--genomeFasta', help="genome sequence file (fasta)", default='')
     @click.option('--genomeAnno', help="genome annotation file (gff/gtf)", default='')
-    @click.option('--exogenous_seq', help="exogenous sequence, only support for ngspipe-tnt pipeline", default='')
+    @click.option('--exogenousseq', help="exogenous sequence, only support for ngspipe-tnt pipeline", default='')
     @click.option('--samplefile', help="samplefile", default='')
     @click.option('--conditionfile', help="conditionfile", default='')
     @click.option('--rawreadsdir', help="raw reads directory", default='')
     @click.option('--eggnogdir', help="eggnog database directory", default='')
     @click.option('--ontologyfile', help="gene ontology database file (obo)", default='')
-    @click.option('-e', '--email_addr', help="result directory name (under project directory)", default='')
-    @click.option('--reads_prefix', help="reads prefix (Example: _R{}.fq.gz )", default='')
+    @click.option('-e', '--emailaddr', help="result directory name (under project directory)", default='')
+    @click.option('--readsprefix', help="reads prefix (Example: _R{}.fq.gz )", default='')
     @click.option('--resultdirname', help="result directory name under proect name directory", default='')
     @click.option('--snaketype', help="`p`: print snakemake shell commands. `np`: Enable the dry run.", type=click.Choice(['np', 'p']), default='p')
     @click.option('-r', '--report', help="generate html report", is_flag=True)
     @click.option('-db', '--database', help="generate database", is_flag=True)
-    @click.option('--update_env', help="install and update env auto", is_flag=True)
+    @click.option('--updateenv', help="install and update env auto", is_flag=True)
     @click.option('--target', help="choose where to stop your pipeline")
     @click.option('-c', '--configfile', help="config file path", type=click.Path(exists=True))
     @click.option('--otherparams', help="other snakemake params", default='')
@@ -218,13 +219,15 @@ def configure_ngsdb_group(args=None):
     @click.argument('projectname')
     @click.option('--genomeFasta', help="genome sequence file (fasta)", default='')
     @click.option('--genomeAnno', help="genome annotation file (gff/gtf)", default='')
-    @click.option('-exp', '--exp_profile', help="expression matrix, csv")
+    @click.option('-exp', '--expprofile', help="expression matrix, csv")
     @click.option('-c', '--configfile', help="config file path", type=click.Path(exists=True))
     @click.option('--resultdirname', help="result directory name under proect name directory", default='{name}_{date}'.format(name='result', date=current_date(4)))
     @click.option('-d', '--directory', required=True, help="working directory")
-    @click.option('-e', '--email_addr', help="result directory name (under project directory)", default='')
+    @click.option('-e', '--emailaddr', help="result directory name (under project directory)", default='')
     @click.option('-j', '--jobs', type=int, help="how many cpu to use", default=1)
     @click.option('--otherparams', help="other snakemake params", default='')
+    @click.option('--updateenv', help="install and update env auto", is_flag=True)
+    @click.option('--target', help="choose where to stop your pipeline")
     @click.option('--snaketype', help="`p`: print snakemake shell commands. `np`: Enable the dry run.", type=click.Choice(['np', 'p']), default='p')
     @click.option('-ps', '--printshell', is_flag=True, help="print ngspipedb shell commands")
     def db_build_cmd(ctx, **kargs):
@@ -324,6 +327,27 @@ def configure_info_group(args=None):
 
     return cli_info
 
+def configure_gui_group(args=None):
+    '''
+    gui
+    '''
+
+    @click.command(name='gui', short_help='lanch web gui')
+    @click.option('-i', '--ip', required=False, help="ip address", default='127.0.0.1')
+    @click.option('-p', '--port', required=False, help="web inteface port", default='5000')
+    @click.option('-ps', '--printshell', is_flag=True, help="print ngspipedb shell commands")
+    @click.pass_context
+    def cli_gui(ctx, **kargs):
+        '''
+        Example:
+
+        ngspipedb gui --ip 0.0.0.0 --port 5000
+        '''
+        #print(ctx.params)
+        gui_main(ctx.params)
+
+    return cli_gui
+
 # #############################################################################################
 #
 # sub-parsers
@@ -368,11 +392,11 @@ You are using the lastest version {}
         #print(update_message)
         return update_message
 
-current_version = '0.0.26'
+current_version = '0.0.27'
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
-#@click.version_option(version=current_version, prog_name='NGSPipeDb', message='%(prog)s, version %(version)s')
-@click.version_option(version=current_version, prog_name='NGSPipeDb', message='{}'.format(new_version_check()))
+@click.version_option(version=current_version, prog_name='NGSPipeDb', message='%(prog)s, version %(version)s')
+#@click.version_option(version=current_version, prog_name='NGSPipeDb', message='{}'.format(new_version_check()))
 
 @click.pass_context
 def cli(ctx, args=None):
@@ -398,6 +422,7 @@ def ngspipedb_cli_main():
     cli.add_command(configure_ngspipe_group(args=None if sys.argv[3:] else ['-h']))
     cli.add_command(configure_ngsdb_group(args=None if sys.argv[3:] else ['-h']))
     cli.add_command(configure_startproject_group(args=None if sys.argv[3:] else ['-h']))
+    cli.add_command(configure_gui_group(args=None if sys.argv[2:] else ['-h']))
     #cli.add_command(configure_runserver_group(args=None if sys.argv[3:] else ['-h']))
     #cli.add_command(configure_info_group(args=None if sys.argv[3:] else ['-h']))
     #new_version_check()

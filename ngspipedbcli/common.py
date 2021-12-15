@@ -27,6 +27,7 @@ __version__ = "0.0.8"
 ngspipedb_dir = os.path.dirname(__file__)
 ngspipe_dir = os.path.join(ngspipedb_dir, 'ngspipe')
 ngsdb_dir = os.path.join(ngspipedb_dir, 'ngsdb')
+guiwebapp_dir = os.path.join(ngspipedb_dir, 'guiwebapp')
 
 #dataurl = 'http://www.liu-lab.com'
 dataurl = 'http://crisprlnc.org/static/download' # /home/crisprlnc/crisprlnc_website/static/download
@@ -76,6 +77,9 @@ pipes_dict = {
         'testdata': 'testdata-ngspipe-rnaseq-basic.tar.gz',
         'database': ['eggnog.tar.gz', 'kegg.tar.gz'],
         'packenv': ['ngspipe-rnaseq-basic_linux.tar.gz', 'ngspipe-rnaseq-basic_osx.tar.gz'],
+        'steps': {
+            'all': [0]
+        },
     }, 
     'ngspipe-rnaseq-trinity': {
         'snakefile': os.path.join(ngspipe_dir, '1.4.rnaseq_analysis_denovo_trinity.Snakefile.py'),
@@ -85,6 +89,9 @@ pipes_dict = {
         'testdata': 'testdata-ngspipe-rnaseq-basic.tar.gz',
         'database': ['eggnog.tar.gz', 'kegg.tar.gz'],
         'packenv': ['ngspipe-rnaseq-trinity_linux.tar.gz', 'ngspipe-rnaseq-trinity_osx.tar.gz'],
+        'steps': {
+            'all': [0]
+        },
     }, 
     'ngspipe-chipseq': {
         'snakefile': os.path.join(ngspipe_dir, '3.1.chipseq.Snakefile.py'),
@@ -94,6 +101,9 @@ pipes_dict = {
         'testdata': 'testdata-ngspipe-rnaseq-basic.tar.gz',
         'database': [],
         'packenv': ['ngspipe-chipseq_linux.tar.gz', 'ngspipe-chipseq_osx.tar.gz'],
+        'steps': {
+            'all': [0]
+        },
     }, 
     'ngspipe-resequencing': {
         'snakefile': os.path.join(ngspipe_dir, '2.1.resequencing_analysis.Snakefile.py'),
@@ -103,6 +113,9 @@ pipes_dict = {
         'testdata': 'testdata-ngspipe-rnaseq-basic.tar.gz',
         'database': [],
         'packenv': ['ngspipe-resequencing_linux.tar.gz', 'ngspipe-resequencing_linux.osx.gz'],
+        'steps': {
+            'all': [0]
+        },
     },
     'ngsdb': {
         'snakefile': os.path.join(ngspipe_dir, 'db_generate.Snakefile.py'),
@@ -112,6 +125,9 @@ pipes_dict = {
         'testdata': 'preparing',
         'database': [],
         'packenv': ['ngsdb_linux.tar.gz', 'ngsdb_osx.tar.gz'],
+        'steps': {
+            'all': [0]
+        },
     },
 }
 

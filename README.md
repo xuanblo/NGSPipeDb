@@ -13,7 +13,6 @@ __NGSPipeDb__ is an automated pipeline for parallel processing of huge next gene
 
 1. Install from pipi
   ```shell
-  conda install pip
   pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple ngspipedb
   ```
 

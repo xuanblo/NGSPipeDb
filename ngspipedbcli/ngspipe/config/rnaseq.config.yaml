@@ -91,7 +91,7 @@ diff_method: DESeq2 # DESeq2
 # Configuration for annotation
 #----------------------------------
 
-anno_method: eggnog # eggnog or touch_empty
+anno_method: touch_empty # eggnog or touch_empty
 
 # database
 database_eggnog_dir: database/eggnog
@@ -102,7 +102,7 @@ database_gene_ontology_path: database/gene_ontology/go-basic.obo
 # Configuration for go kegg enrichment analysis
 #----------------------------------
 
-enrich_method: clusterprofiler # clusterprofiler or touch_empty
+enrich_method: touch_empty # clusterprofiler or touch_empty
 
 
 #----------------------------------

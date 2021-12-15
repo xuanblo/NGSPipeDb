@@ -1,15 +1,19 @@
-#---------------------------
-# denovo trinity ranseq
-#---------------------------
+########################
+# denovo trinity rnaseq
+########################
+
+# Please check the parameters, and adjust them according to your circumstance
+
+# ================== Basic input params for the workflow ==================
 
 ## 1.raw reads data ##
-sample_path: "../rawdata/sample.csv" # sample file
-rawreads_dir: "../rawdata" # sample file directory
+sample_path: "rawdata/sample.csv" # sample file
+rawreads_dir: "rawdata" # sample file directory
 read1Suffix: "_R1.fq.gz" # fastq suffix, read1
 read2Suffix: "_R2.fq.gz"
 
 ## 2.condition for differential expression by deseq2 ##
-condition_path: "../rawdata/condition.csv"
+condition_path: "rawdata/condition.csv"
 
 ## 3.output directory ##
 results_name: "results_trinity"
@@ -19,8 +23,60 @@ results_name: "results_trinity"
 # modify 'noboby' to 'xxx@qq.com' or 'xxx@qq.com,yyy@qq.com' to send email
 email_addr: 'nobody'
 
-# database
-database_eggnog: "../database/eggnog"
+#----------------------------------
+# Configuration for pipeline stop site
+#----------------------------------
 
 # choose where to stop your pipeline
-target: all #
+target: all
+
+#----------------------------------
+# Configuration for sampling data
+#----------------------------------
+
+# for test the pipe, you can choose to the part of the input file
+# which sampling method do you want to use?
+sampling_method: links # links or head or tail or seqkit_number or seqkit_proportion
+# Default is links (ues the whole data of sample); head (use first sampling_range line in every sample),tail (use last sampling_range line in every sample); seqkit_number (number of reads); seqkit_proportion (percentage of reads)
+# and how many reads file line or reads number or reads proportion do you want to use?
+sampling_value: 80000 # for head and tail, this value is line number; for number, this value is reads number; for proportion, this value is percentage
+
+samples_num: all # all or interger
+# Default is all (use all samples), give a sample number, must less than real sample number, for example 6
+
+#----------------------------------
+# Configuration for Quality Control
+#----------------------------------
+# which qc method do you want to use?
+qc_method: trim-galore # trim-galore or trimmomatic or fastqc
+
+#----------------------------------
+# Configuration for trinity
+#----------------------------------
+# trinity max_memory
+max_memory: 2G
+
+#----------------------------------
+# Configuration for annotation
+#----------------------------------
+
+anno_method: touch_empty # eggnog or touch_empty
+
+# database
+database_eggnog_dir: database/eggnog
+
+database_gene_ontology_path: database/gene_ontology/go-basic.obo
+
+#----------------------------------
+# Configuration for go kegg enrichment analysis
+#----------------------------------
+
+enrich_method: touch_empty # clusterprofiler or touch_empty
+
+
+#----------------------------------
+# Configuration for network analysis
+#----------------------------------
+
+network_method: gcen # gcen
+# TODO WGCNA
