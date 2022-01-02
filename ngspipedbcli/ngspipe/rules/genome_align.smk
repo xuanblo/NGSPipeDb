@@ -1,7 +1,10 @@
 # ----------------------------------------------------------------------------
 # step1 bowtie2 build
+mapping_outdir = join(config["resultsDir"], "mapping")
 genome_index_outdir = join(mapping_outdir, "genome_index")
+genome_index_prefix = 'genome'
 genome_index_path = join(mapping_outdir, "genome_index", genome_index_prefix)
+
 # ----------------------------------------------------------------------------
 rule index_genome_by_bwa_index:
     message:
@@ -34,8 +37,8 @@ rule align_genome_by_bwa:
         bowtie2 mapping
         '''
     input:
-        read1 = join(qc_outdir, "{sample}", "{sample}.cleanR1.fq.gz"),
-        read2 = join(qc_outdir, "{sample}", "{sample}.cleanR2.fq.gz"),
+        read1 = join(qc_outdir, qc_method, "{sample}", "{sample}.cleanR1.fq.gz"),
+        read2 = join(qc_outdir, qc_method, "{sample}", "{sample}.cleanR2.fq.gz"),
         indexok = join(genome_index_outdir, "index.ok"),
     output:
         sorted_bam = join(mapping_outdir, "{sample}", "{sample}.sorted.bam")
@@ -51,3 +54,9 @@ rule align_genome_by_bwa:
         '''
         bwa mem -t {threads} {genome_index_path} {input.read1} {input.read2} 2>{log} | samtools sort -o {output.sorted_bam} - 1>>{log} 2>&1;
         '''
+
+rule genome_align_merge:
+    input:
+        sorted_bam = expand(join(mapping_outdir, "{sample}", "{sample}.sorted.bam"), sample=SAMPLES)
+    output:
+        genome_align_merge_ok = touch(join(flag_outdir, 'genome_align_merge.ok'))

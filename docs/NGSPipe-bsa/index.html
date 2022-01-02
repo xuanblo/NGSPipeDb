@@ -20,7 +20,7 @@
     
     
       
-        <title>NGSPipe bsa - NGSPipeDb Document</title>
+        <title>bsa - NGSPipeDb Document</title>
       
     
     
@@ -76,6 +76,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#bsa-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -111,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              NGSPipe bsa
+              bsa
             
           </span>
         </div>
@@ -225,13 +230,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../Reference-based-NGSPipe-RNA-seq/" class="md-tabs__link">
+      <a href="../Reference-based-NGSPipe-RNA-seq/" class="md-tabs__link md-tabs__link--active">
         Pipelines
       </a>
     </li>
@@ -350,12 +357,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       <label class="md-nav__link" for="__nav_2">
         Pipelines
@@ -440,6 +449,27 @@
   
 
           
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        bsa
+      </a>
+      
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -513,6 +543,22 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -524,21 +570,20 @@
                   </a>
                 
                 
-                  <h1>NGSPipe bsa</h1>
-                
-                <p>perl DMAP_M2.pl &ndash;vcf ./Example/allsnp.vcf  &ndash;BulkMut PM &ndash;BulkWild PW &ndash;win 1000000 &ndash;step 500000 &ndash;out ./Example/pp2a
-解压后，里面有一个DMAP_M2.pl的脚本，就是分析用的脚本。运行命令，就是上面这句话。</p>
-<p>allsnp.vcf 就是样本的变异信息文件。
- &ndash;BulkMut PM &ndash;BulkWild PW 对应突变体和野生型池的名字。
-&ndash;win 1000000 &ndash;step 500000 计算平均值的窗口大小和滑窗步进大小</p>
-<p>allsnp.vcf 就是样本的变异信息文件。
- &ndash;BulkMut PM &ndash;BulkWild PW 对应突变体和野生型池的名字。
-&ndash;win 1000000 &ndash;step 500000 计算平均值的窗口大小和滑窗步进大小</p>
-<p>程序只能在Linux下运行，要安装好perl、R和ggplot2包。</p>
-<p>一般都要修改这个子函数sub filter_step2{｝
-修改过滤条件，如两个池中index值大小。</p>
-                
-                  
+                <h1 id="bsa-analysis">bsa analysis</h1>
+<div class="admonition note">
+<p class="admonition-title">A typical flow of bsa analysis with reference is shown in the figure below</p>
+<p><figure markdown> 
+    <img alt="Dummy image" src="imgs/bsa.png" width="800" />
+    <figcaption>bsa pipeline</figcaption>
+</figure></p>
+</div>
+<p>Two way to run:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">multi-parameter way</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>ngspipedb runpipe ngspipe-bsa-medicago -n ngspipe-bsa --resultdirname result -d ../test_pipeline --genomeFasta ../testdata_ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --snaketype p --readsprefix _R{}.fq.gz -j 1
+</code></pre></div>
+</div>
+</div>
                 
               
   <!--
@@ -567,6 +612,50 @@
         
 
 <footer class="md-footer">
+  
+    <nav
+      class="md-footer__inner md-grid"
+      aria-label="Footer"
+    >
+      
+        <a
+          href="../NGSPipe-exogenous-insertion/"
+          class="md-footer__link md-footer__link--prev"
+          rel="prev"
+        >
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              exogenous insertion
+            </div>
+          </div>
+        </a>
+      
+      
+        <a
+          href="../datasets/"
+          class="md-footer__link md-footer__link--next"
+          rel="next"
+        >
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Datasets
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

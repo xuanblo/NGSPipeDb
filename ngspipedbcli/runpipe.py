@@ -253,7 +253,7 @@ template configfile: {}
         check_pipe_params = args['emailaddr'] or args['readsprefix'] or args['rawreadsdir'] or args['resultdirname'] or args['eggnogdir'] or args['ontologyfile']
     elif args['pipename'] == "ngspipe-rnaseq-basic" or args['pipename'] == "ngspipe-rnaseq-lncRNA":
         check_pipe_params = args['genomefasta'] or args['genomeanno'] or args['emailaddr'] or args['readsprefix'] or args['rawreadsdir'] or args['resultdirname'] or args['eggnogdir'] or args['ontologyfile']
-    elif args['pipename'] == "ngspipe-tnt" or args['pipename'] == "ngspipe-resequencing" or args['pipename'] == "ngspipe-chipseq":
+    elif args['pipename'] in ["ngspipe-tnt", "ngspipe-resequencing", "ngspipe-chipseq", "ngspipe-bsa"]:
         check_pipe_params = args['genomefasta'] or args['genomeanno'] or args['emailaddr'] or args['readsprefix'] or args['rawreadsdir'] or args['resultdirname']
     else:
         print('other pipelines')

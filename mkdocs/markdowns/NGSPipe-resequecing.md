@@ -29,7 +29,7 @@ Two way to run:
 
     1. start a project in current directory:
         ```shell
-        ngspipedb startproject ngspipe-run-resequencing -n ngspipe-resequencing
+        ngspipedb startproject ngspipe-run-resequencing2 -n ngspipe-resequencing -d ../test_pipeline
         ```
         - PROJECTNAME: ngspipe-run-resequencing
         - pipeline: ngspipe-resequencing

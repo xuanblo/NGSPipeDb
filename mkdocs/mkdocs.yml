@@ -33,6 +33,7 @@ nav:
     - ChIP-seq: NGSPipe-ChIP-seq.md
     - resequecing: NGSPipe-resequecing.md
     - exogenous insertion: NGSPipe-exogenous-insertion.md
+    - bsa: NGSPipe-bsa.md
 - Datasets: datasets.md
 #- Databases:
 #    - NGSDb with genome: NGSDb.md

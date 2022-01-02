@@ -1,10 +1,11 @@
 #---------------------------
-# resequencing
+# medicago tnt1
 #---------------------------
 
 ## 1.reference ##
 genomeAnno_path: "genome/GRCm38.83.chr19.gtf" # gene annotation file, can be gtf or gff format
 genomeFasta_path: "genome/chr19.fa" # genome sequence, fasta format
+exogenous_seq_path: "database/medicago_tnt1.fa" # medicago_mere1.fa or medicago_tnt1.fa
 
 ## 2.raw reads data ##
 sample_path: "rawdata/sample.csv" # sample file

@@ -19,6 +19,11 @@ python -m ngspipedbcli runpipe ngspipe-tnt-medicago -n ngspipe-tnt -d ../test_pi
 ## resequencing
 python -m ngspipedbcli runpipe ngspipe-resequencing -n ngspipe-resequencing -d ../test_pipeline --genomeFasta ../testdata_ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --snaketype np --readsprefix _R{}.fq.gz -j 1
 
+## config
+python -m ngspipedbcli startproject ngspipe-run-resequencing2 -n ngspipe-resequencing -d ../test_pipeline
+
+# medicago bsa
+python -m ngspipedbcli runpipe ngspipe-bsa-medicago -n ngspipe-bsa --resultdirname result -d ../test_pipeline --genomeFasta ../testdata_ngspipe-rnaseq-basic/genome/chr19.fa --genomeAnno ../testdata_ngspipe-rnaseq-basic/genome/GRCm38.83.chr19.gtf --samplefile ../testdata_ngspipe-rnaseq-basic/rawdata/sample.csv --rawreadsdir ../testdata_ngspipe-rnaseq-basic/rawdata --snaketype p --readsprefix _R{}.fq.gz -j 1
 
 # trinity
 
